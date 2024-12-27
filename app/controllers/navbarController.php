@@ -1,6 +1,6 @@
 <?php
-require_once('navbarModel.php');
-require_once('navbarView.php');
+require_once DIR . '/../views/userView/navbarView.php';
+require_once DIR . '/../models/navbarModel.php';
 
 class MenuController {
     private $model;

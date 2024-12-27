@@ -1,6 +1,8 @@
 <?php
-require_once('diapoModel.php');
-require_once('diapoView.php');
+
+
+require_once DIR . '/../views/userview/diapoView.php';
+require_once DIR . '/../models/diapoModel.php';
 
 class diaporamaController {
     private $model;
