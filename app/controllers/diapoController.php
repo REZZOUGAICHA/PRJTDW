@@ -1,20 +1,15 @@
 <?php
+require_once __DIR__ . '/../models/diapoModel.php';
 
-
-require_once DIR . '/../views/userview/diapoView.php';
-require_once DIR . '/../models/diapoModel.php';
-
-class diaporamaController {
+class DiaporamaController {
     private $model;
 
     public function __construct() {
-        $this->model = new diapoModel();
+        $this->model = new DiapoModel();
     }
 
-    public function displayDiaporama() {
-        $images = $this->model->getImages(); 
-        $view = new diapoView();
-        $view->display($images); 
+    public function getDiaporama() {
+        return $this->model->getImages();
     }
 }
 ?>

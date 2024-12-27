@@ -1,6 +1,6 @@
 <?php
 
-require_once DIR . '/../helpers/Database.php';
+require_once __DIR__ . '/../helpers/Database.php';
 
 class MenuModel {
     private $db;

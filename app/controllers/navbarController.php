@@ -1,6 +1,6 @@
 <?php
-require_once DIR . '/../views/userView/navbarView.php';
-require_once DIR . '/../models/navbarModel.php';
+
+require_once __DIR__ . '/../models/navbarModel.php';
 
 class MenuController {
     private $model;
@@ -10,9 +10,6 @@ class MenuController {
     }
 
     public function getMenu() {
-        $menuItems = $this->model->getMenuItems();
-        $view = new MenuView();
-        $view->display($menuItems);
-    }
+        return $this->model->getMenuItems();  
 }
-?>
+}

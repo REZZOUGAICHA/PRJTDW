@@ -6,7 +6,6 @@ class Database {
     private $password = "";
     private $connection;
 
-    // Fonction de connexion
     public function connexion() {
         $dsn = "mysql:dbname=$this->dbname;host=$this->host;";
         try {
@@ -19,13 +18,22 @@ class Database {
         return $this->connection;
     }
 
-    public function request($conn, $sql, $params = []) {
+    public function request($conn, $sql, $params = [], $types = []) {
         $stmt = $conn->prepare($sql);
-        $stmt->execute($params);
+        
+        // Bind each parameter with its specific type if provided
+        foreach ($params as $key => $value) {
+            $paramType = PDO::PARAM_STR; // default to string
+            if (isset($types[$key])) {
+                $paramType = $types[$key];
+            }
+            $stmt->bindValue($key, $value, $paramType);
+        }
+        
+        $stmt->execute();
         return $stmt;
     }
 
-    // Fonction de déconnexion
     public function deconnexion() {
         $this->connection = null; 
     }
