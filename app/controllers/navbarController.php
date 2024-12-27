@@ -12,4 +12,7 @@ class MenuController {
     public function getMenu() {
         return $this->model->getMenuItems();  
 }
+    function getMainMenuItems() {
+        return $this->model->getMainMenuItems();
+    }
 }

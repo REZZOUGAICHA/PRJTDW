@@ -31,9 +31,9 @@ class MenuModel {
     public function getSubMenuItems() {
         $c = $this->db->connexion();
 
-        // Use the request method to execute the query
+        
         $sql = "SELECT * FROM menu_sub ORDER BY main_id";
-        $stmt = $this->db->request($c, $sql); // Call request from Database class
+        $stmt = $this->db->request($c, $sql); 
         $subItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $this->db->deconnexion();
@@ -53,5 +53,8 @@ class MenuModel {
 
         return $menu;
     }
+
+    
+
 }
 ?>
