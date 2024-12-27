@@ -11,9 +11,13 @@ require_once __DIR__ . '/../helpers/Database.php';class DiscountModel {
        $sql = "SELECT d.name as discount_name, 
                       p.name as partner_name,
                       cp.name as category_name, 
-                      d.card_type_id,
+                    ct.name as card_name,
+                      d.percentage,
                       p.city
+
+
                FROM discount d
+               JOIN cardtype ct ON d.card_type_id = ct.id
                JOIN partner p ON d.partner_id = p.id 
                JOIN PartnerCategory cp ON p.category_id = cp.id";
                

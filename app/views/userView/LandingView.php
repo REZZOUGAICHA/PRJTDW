@@ -141,8 +141,9 @@ class LandingView {
     $columns = [
     ['field' => 'partner_name', 'label' => 'Partner'],
     ['field' => 'category_name', 'label' => 'Category'],
-    ['field' => 'card_type_id', 'label' => 'Card Type'],
+    ['field' => 'card_name', 'label' => 'Card Type'],
     ['field' => 'city', 'label' => 'City'],
+    ['field' => 'percentage', 'label' => 'percentage'],
     
 
     ];
