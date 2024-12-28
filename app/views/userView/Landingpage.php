@@ -23,7 +23,9 @@ $footer = new FooterView();
     $landing->diaporamaView();
     $landing->eventsView();
     $landing->discountsView();
+    $landing->offersView();
     $footer->displayFooterMenu();
+
 
     ?>
 </body>

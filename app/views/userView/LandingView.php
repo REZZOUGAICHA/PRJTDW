@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../controllers/navbarController.php';
 require_once __DIR__ . '/../../controllers/diapoController.php';
 require_once __DIR__ . '/../../controllers/eventController.php';
 require_once __DIR__ . '/../../controllers/discountController.php';
+require_once __DIR__ . '/../../controllers/offerController.php';
 
 class LandingView {
 
@@ -156,7 +157,33 @@ class LandingView {
     $tableView = new TableView();
     $tableView->displayTable($data, $columns);
 }
+
+//------------------------------------------------------------------------------------------------------
+public function offersView() {
+        $offerController = new offerController();
+        $data = $offerController->getOffersData();
+    $columns = [
+    ['field' => 'offer_name', 'label' => 'Offer'],
+    ['field' => 'partner_name', 'label' => 'Partner'],
+    ['field' => 'category_name', 'label' => 'Category'],
+    ['field' => 'card_name', 'label' => 'Card Type'],
+    ['field' => 'start_date', 'label' => 'Start Date'],
+    
+    
+
+    ];
+
+ if (!class_exists('TableView')) {
+        echo 'TableView class not found';
+        return;
+    }
+
+    $tableView = new TableView();
+    $tableView->displayTable($data, $columns);
 }
 
 
-?>
+
+
+
+}?>
