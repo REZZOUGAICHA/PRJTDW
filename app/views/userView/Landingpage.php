@@ -19,12 +19,13 @@ $footer = new FooterView();
 </head>
 <body>
     <?php
-    $landing->navbarView();
+    $landing->displayTopbar();
     $landing->diaporamaView();
     $landing->eventsView();
     $landing->discountsView();
     $landing->offersView();
     $footer->displayFooterMenu();
+    
 
 
     ?>

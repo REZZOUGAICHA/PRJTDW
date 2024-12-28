@@ -1,52 +1,16 @@
 <?php
 
 require_once "TableView.php";
-require_once __DIR__ . '/../../controllers/navbarController.php';
 require_once __DIR__ . '/../../controllers/diapoController.php';
 require_once __DIR__ . '/../../controllers/eventController.php';
 require_once __DIR__ . '/../../controllers/discountController.php';
 require_once __DIR__ . '/../../controllers/offerController.php';
+require_once __DIR__ . '/../../controllers/topbarController.php';
+require_once __DIR__ . '/../../controllers/navbarController.php';
 
 class LandingView {
 
-    public function navbarView() {
-        try {
-            $menuController = new MenuController();
-            $menuItems = $menuController->getMenu();  
-            
-            if (!is_array($menuItems) && !is_object($menuItems)) {
-                throw new Exception('Menu items must be an array or object');
-            }
-            ?>
-            <nav class="bg-blue-600 p-4 shadow-md">
-                <ul class="flex space-x-6 text-white">
-                    <?php
-                    foreach ($menuItems as $item) {
-                        
-                        if (!empty($item['sub_items'])) {
-                            echo '<li class="relative group">';  
-                            echo '<a href="' . htmlspecialchars($item['link']) . '" class="hover:text-yellow-400 transition duration-300">' . htmlspecialchars($item['name']) . '</a>';
-                            
-                            echo '<ul class="absolute left-0 hidden mt-2 space-y-2 bg-white text-gray-800 shadow-lg group-hover:block">';
-                            foreach ($item['sub_items'] as $subItem) {
-                                echo '<li><a href="' . htmlspecialchars($subItem['link']) . '" class="block px-4 py-2 hover:bg-gray-200 transition duration-200">' . htmlspecialchars($subItem['name']) . '</a></li>';
-                            }
-                            echo '</ul>';
-                            echo '</li>';
-                        } else {
-                            echo '<li><a href="' . htmlspecialchars($item['link']) . '" class="hover:text-yellow-400 transition duration-300">' . htmlspecialchars($item['name']) . '</a></li>';
-                        }
-                    }
-                    ?>
-                </ul>
-            </nav>
-            <?php
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            echo '<nav class="bg-blue-600 p-4 shadow-md"><ul class="flex space-x-6 text-white"><li>Menu unavailable</li></ul></nav>';
-        }
-    }
-
+  
     //------------------------------------------------------------------------------------------------------
     public function diaporamaView() {
     $diaporamaController = new DiaporamaController();
@@ -183,7 +147,72 @@ public function offersView() {
 }
 
 
+public function displayTopbar() {
+    // controllers
+    $topbarController = new topbarController();
+    $menuController = new MenuController();
 
+    $topbarData = $topbarController->getTopbarData();
+    $socialMediaLinks = $topbarController->getSocialMediaLinks();
+    $menuItems = $menuController->getMenu();
+    ?>
+    <!-- Main topbar container -->
+    <div class=" sticky top-0 z-50 bg-white text-gray-800 shadow-lg border-b border-gray-100">
+        <div class="  container mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo  -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="block">
+                        <img src="<?php echo htmlspecialchars($topbarData['logo_link']); ?>" 
+                             alt="Logo" 
+                             class="h-12 w-auto object-contain">
+                    </a>
+                </div>
 
+                <!-- Navigation-->
+                <nav class="hidden md:flex space-x-8">
+                    <?php foreach ($menuItems as $item): ?>
+                        <a href="<?php echo htmlspecialchars($item['link']); ?>" 
+                           class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 
+                                  transition-all duration-200 ease-in-out relative group">
+                            <?php echo htmlspecialchars($item['name']); ?>
+                            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-800 transform scale-x-0 
+                                       group-hover:scale-x-100 transition-transform duration-200 ease-in-out"></span>
+                        </a>
+                    <?php endforeach; ?>
+                </nav>
+
+                <!-- Social Media Icons  -->
+                <div class="flex items-center space-x-4">
+                    <?php foreach ($socialMediaLinks as $link): ?>
+                        <a href="<?php echo htmlspecialchars($link['social_media_link']); ?>" 
+                           target="_blank"
+                           class="p-2 rounded-full hover:bg-gray-100 transition-all duration-200 ease-in-out
+                                  transform hover:scale-110 hover:shadow-md">
+                            <img src="<?php echo htmlspecialchars($link['icon_link']); ?>" 
+                                 alt="<?php echo htmlspecialchars($link['social_media_name']); ?>" 
+                                 class="w-5 h-5 object-contain">
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+
+                <!-- Mobile menu button  -->
+                <div class="md:hidden">
+                    <button type="button" 
+                            class="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 
+                                   focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                        <span class="sr-only">Open main menu</span>
+                        
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
 
 }?>

@@ -10,13 +10,13 @@ class offerModel {
    public function getoffers() {
        $c = $this->db->connexion();
        $sql = "SELECT o.name as offer_name, 
-                        o.description as offer_description,
-                      p.name as partner_name,
-                      cp.name as category_name, 
+                    o.description as offer_description,
+                    p.name as partner_name,
+                    cp.name as category_name, 
                     ct.name as card_name,
                     o.start_date, 
                     o.end_date,
-                      p.city
+                    p.city
 
 
                FROM offer o
