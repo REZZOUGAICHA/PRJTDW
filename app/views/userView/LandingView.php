@@ -1,12 +1,14 @@
 <?php
 
 require_once "TableView.php";
+require_once "cardView.php";
 require_once __DIR__ . '/../../controllers/diapoController.php';
 require_once __DIR__ . '/../../controllers/eventController.php';
 require_once __DIR__ . '/../../controllers/discountController.php';
 require_once __DIR__ . '/../../controllers/offerController.php';
 require_once __DIR__ . '/../../controllers/topbarController.php';
 require_once __DIR__ . '/../../controllers/navbarController.php';
+
 
 class LandingView {
 
@@ -45,60 +47,34 @@ class LandingView {
 //------------------------------------------------------------------------------------------------------
 
     public function eventsView() {
-        $eventController = new EventController();
-        $data = $eventController->getEvents();
-        ?>
-        <div class="w-full">
-            <?php 
-            $this->displaySection($data['events'], 'Latest Events');
-            $this->displaySection($data['activities'], 'Latest Activities');
-            ?>
-        </div>
-        <?php
-    }
-//------------------------------------------------------------------------------------------------------
-    private function displaySection($items, $title) {
-    if (empty($items)) return;
+    $eventController = new EventController();
+    $data = $eventController->getEvents();
+    $cardView = new CardView();
     ?>
-    <div class="mb-12">
-        <h1 class="text-4xl font-extrabold mb-6 text-blue-700 capitalize px-4">
-            <?php echo $title; ?>
-        </h1>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-            <?php foreach ($items as $item): ?>
-                <div class="w-full"> 
-                    <?php $this->displayCard($item); ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
+    <div class="w-full">
+        <?php 
+        // event
+        $cardView->displaySection($data['events'], 'Latest Events', [
+            'title' => 'event_name',
+            'description' => 'event_description',
+            'date' => 'event_date',
+            'image' => 'file_path'
+        ]);
+        
+        // activity
+        $cardView->displaySection($data['activities'], 'Latest Activities', [
+            'title' => 'event_name',
+            'description' => 'event_description',
+            'date' => 'event_date',
+            'image' => 'file_path'
+        ]);
+        ?>
     </div>
     <?php
 }
 
-//------------------------------------------------------------------------------------------------------
 
-    private function displayCard($item) {
-        ?>
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden h-full">
-            <img 
-                src="<?php echo htmlspecialchars($item['file_path']); ?>" 
-                alt="<?php echo htmlspecialchars($item['event_name']); ?>"
-                class="w-full h-40 object-cover"
-            >
-            <div class="p-3">
-                <h3 class="text-lg font-semibold mb-1">
-                    <?php echo htmlspecialchars($item['event_name']); ?>
-                </h3>
-                <p class="text-gray-600 text-sm mb-1">
-                    <?php echo htmlspecialchars($item['event_description']); ?>
-                </p>
-                <p class="text-xs text-gray-500">
-                    <?php echo date('F j, Y g:i A', strtotime($item['event_date'])); ?>
-                </p>
-            </div>
-        </div>
-        <?php
-    }
+ 
 //------------------------------------------------------------------------------------------------------
     public function discountsView() {
         $discountController = new DiscountController();
@@ -146,6 +122,7 @@ public function offersView() {
     $tableView->displayTable($data, $columns);
 }
 
+//------------------------------------------------------------------------------------------------------
 
 public function displayTopbar() {
     // controllers

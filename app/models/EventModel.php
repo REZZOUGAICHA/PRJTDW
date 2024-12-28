@@ -19,7 +19,7 @@ class EventModel {
                 'limit' => $limit
             ],
             [
-                'limit' => PDO::PARAM_INT // Explicitly set LIMIT as integer
+                'limit' => PDO::PARAM_INT //issue was here, lazm we set limit to int 
             ]
         );
         $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
