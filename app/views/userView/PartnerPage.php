@@ -2,17 +2,20 @@
 
 require_once 'LandingView.php';
 require_once 'footerView.php';
+require_once 'partnerView.php';
+require_once 'submenuView.php';
 
 
 $landing = new LandingView();
 $footer = new FooterView();
+$submenu = new SubmenuView();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>Partners Page</title>
     <link rel="stylesheet" href="../../../public/css/output.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -20,10 +23,7 @@ $footer = new FooterView();
 <body>
     <?php
     $landing->displayTopbar();
-    $landing->diaporamaView();
-    $landing->eventsView();
-    $landing->discountsView();
-    $landing->offersView();
+    $submenu->displaySubmenu('partner');
     $footer->displayFooterMenu();
     
     
