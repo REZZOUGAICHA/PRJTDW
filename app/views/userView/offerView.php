@@ -39,5 +39,45 @@ class OfferView {
         </div>
         <?php
     }
+    public function displaydiscount(){
+    $discountController = new DiscountController();
+    $data = $discountController->getDiscountsData();
+
+    // Separate the discounts by type (regular and special)
+    $regularDiscounts = array_filter($data, function($discount) {
+        return $discount['discount_type'] === 'regular';
+    });
+
+    $specialDiscounts = array_filter($data, function($discount) {
+        return $discount['discount_type'] === 'special';
+    });
+
+    // Define table columns
+    $columns = [
+        ['field' => 'partner_name', 'label' => 'Partenaire'],
+        ['field' => 'category_name', 'label' => 'Categorie'],
+        ['field' => 'card_name', 'label' => 'type carte'],
+        ['field' => 'city', 'label' => 'ville'],
+        ['field' => 'percentage', 'label' => 'pourcentage'],
+        ['field' => 'link', 'label' => 'voir plus'],
+    ];
+
+    
+    if (!class_exists('TableView')) {
+        echo 'TableView class not found';
+        return;
+    }
+
+    $tableView = new TableView();
+
+    // regular discounts
+    echo '<h2 class="text-2xl font-bold mb-4 text-blue-700">Regular Discounts</h2>';
+    $tableView->displayTable($regularDiscounts, $columns);
+
+    // special discounts 
+    echo '<h2 class="text-2xl font-bold mb-4 text-blue-700">Special Discounts</h2>';
+    $tableView->displayTable($specialDiscounts, $columns);
+}
+
 }
 ?>

@@ -13,7 +13,9 @@ require_once __DIR__ . '/../helpers/Database.php';class DiscountModel {
                       cp.name as category_name, 
                     ct.name as card_name,
                       d.percentage,
-                      p.city
+                      p.city,
+                      d.link,
+                      d.discount_type
 
 
                FROM discount d

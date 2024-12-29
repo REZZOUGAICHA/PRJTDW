@@ -23,6 +23,13 @@ require_once __DIR__ . '/../../controllers/EventController.php';
                                     <?php 
                                     if (isset($column['formatter'])) {
                                         echo $column['formatter']($row[$column['field']]);
+                                    } else if ($column['field'] === 'link' && !empty($row[$column['field']])) {
+                                        // links fields handeling
+                                        echo '<a href="' . htmlspecialchars($row[$column['field']]) . '" 
+                                                class="text-blue-600 hover:text-blue-800 hover:underline" 
+                                                target="_blank">
+                                                Voir plus
+                                            </a>';
                                     } else {
                                         echo htmlspecialchars($row[$column['field']]);
                                     }
@@ -34,7 +41,11 @@ require_once __DIR__ . '/../../controllers/EventController.php';
                 </tbody>
             </table>
         </div>
+        
         <?php
+        
+
+
     }
 }
 ?>

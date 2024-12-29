@@ -27,6 +27,7 @@ $offer = new offerView();
     $landing->displayTopbar();
     $submenu->displaySubmenu('offer');
     $offer->displayoffer();
+    $offer->displaydiscount();
     $footer->displayFooterMenu();
     
     
