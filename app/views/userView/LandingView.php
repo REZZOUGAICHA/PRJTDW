@@ -58,7 +58,8 @@ class LandingView {
             'title' => 'event_name',
             'description' => 'event_description',
             'date' => 'event_date',
-            'image' => 'file_path'
+            'image' => 'file_path',
+            'link' => 'link'
         ]);
         
         // activity

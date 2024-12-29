@@ -6,9 +6,11 @@ require_once 'partnerView.php';
 require_once 'submenuView.php';
 
 
+
 $landing = new LandingView();
 $footer = new FooterView();
 $submenu = new SubmenuView();
+$partner = new partnerView();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +26,7 @@ $submenu = new SubmenuView();
     <?php
     $landing->displayTopbar();
     $submenu->displaySubmenu('partner');
+    $partner->displaypartner();
     $footer->displayFooterMenu();
     
     
