@@ -3,6 +3,7 @@ require_once  'cardView.php';
 require_once __DIR__ . '/../../controllers/offerController.php';
 
 class OfferView {
+    
     public function displayoffer() {
         $offerController = new offerController();
         $offers = $offerController->getOffersByType();

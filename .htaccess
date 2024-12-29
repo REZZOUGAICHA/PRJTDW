@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /TDW/
+    
+    # If the requested file or directory doesn't exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Rewrite all requests to the appropriate handler
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
