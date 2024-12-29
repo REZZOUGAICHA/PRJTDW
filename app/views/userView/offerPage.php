@@ -4,11 +4,13 @@ require_once 'LandingView.php';
 require_once 'footerView.php';
 require_once 'partnerView.php';
 require_once 'submenuView.php';
+require_once 'offerView.php';
 
 
 $landing = new LandingView();
 $footer = new FooterView();
 $submenu = new SubmenuView();
+$offer = new offerView();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +26,7 @@ $submenu = new SubmenuView();
     <?php
     $landing->displayTopbar();
     $submenu->displaySubmenu('offer');
+    $offer->displayoffer();
     $footer->displayFooterMenu();
     
     

@@ -10,5 +10,9 @@ public function __construct() {
 public function getOffersData() {
     return $this->model->getOffers();
 }
+
+public function getOffersByType() {
+        return $this->model->getOffersByType();
+    }
 }
 ?>

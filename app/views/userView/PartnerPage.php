@@ -19,7 +19,9 @@ $partner = new partnerView();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partners Page</title>
     <link rel="stylesheet" href="../../../public/css/output.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="../../../public/js/search.js"></script>
 
 </head>
 <body>
