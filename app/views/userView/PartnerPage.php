@@ -22,6 +22,7 @@ $partner = new partnerView();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="../../../public/js/search.js"></script>
+    <script src="../../../public/js/filter.js"></script>
 
 </head>
 <body>
