@@ -8,6 +8,7 @@ class partnerModel {
         $this->db = new Database();
     }
 
+     // -------------------------------------------------------------------------------------------
     public function getPartnersByCategory() {
         $c = $this->db->connexion();
         $sql = "
@@ -32,7 +33,7 @@ class partnerModel {
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $this->db->deconnexion();
 
-        // Organize results into categories
+        //  into categories
         $categories = [];
         foreach ($rows as $row) {
             $discounts = json_decode($row['discounts'], true) ?? [];
@@ -49,6 +50,54 @@ class partnerModel {
         }
 
         return $categories;
+    }
+
+    // CRUDS -------------------------------------------------------------------------------------------
+    public function createPartner($user_id, $name, $city, $description, $logo_url, $category_id, $link) {
+        $c = $this->db->connexion();
+        $sql = "
+            INSERT INTO Partner (user_id, name, city, description, logo_url, category_id, link) 
+            VALUES (:user_id, :name, :city, :description, :logo_url, :category_id, :link)
+        ";
+        $this->db->request($c, $sql, [
+            'user_id' => $user_id,
+            'name' => $name,
+            'city' => $city,
+            'description' => $description,
+            'logo_url' => $logo_url,
+            'category_id' => $category_id,
+            'link' => $link
+        ]);
+        $this->db->deconnexion();
+    }
+
+    // -------------------------------------------------------------------------------------------
+    public function updatePartner($id, $name, $city, $description, $logo_url, $category_id, $link) {
+        $c = $this->db->connexion();
+        $sql = "
+            UPDATE Partner 
+            SET name = :name, city = :city, description = :description, logo_url = :logo_url, 
+                category_id = :category_id, link = :link 
+            WHERE id = :id
+        ";
+        $this->db->request($c, $sql, [
+            'id' => $id,
+            'name' => $name,
+            'city' => $city,
+            'description' => $description,
+            'logo_url' => $logo_url,
+            'category_id' => $category_id,
+            'link' => $link
+        ]);
+        $this->db->deconnexion();
+    }
+
+     // -------------------------------------------------------------------------------------------
+    public function deletePartner($id) {
+        $c = $this->db->connexion();
+        $sql = "DELETE FROM Partner WHERE id = :id";
+        $this->db->request($c, $sql, ['id' => $id]);
+        $this->db->deconnexion();
     }
 }
 ?>

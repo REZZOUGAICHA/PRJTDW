@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    //filter cards generic function
                 function filterPartners() {
                     const searchQuery = $('#searchInput').val().toLowerCase();
                     const selectedCity = $('#cityFilter').val().toLowerCase();
