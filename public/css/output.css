@@ -778,6 +778,10 @@ video {
   height: 100vh;
 }
 
+.min-h-screen {
+  min-height: 100vh;
+}
+
 .w-5 {
   width: 1.25rem;
 }
@@ -946,8 +950,20 @@ video {
   overflow-x: auto;
 }
 
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
+}
+
+.break-words {
+  overflow-wrap: break-word;
 }
 
 .rounded-full {

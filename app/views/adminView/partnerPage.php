@@ -21,15 +21,15 @@ $partnerView = new PartnerView();
 
 
 </head>
-<body >
-    <div class="flex">
+<body class="bg-gray-100 overflow-x-hidden">
+    <div class="flex min-h-screen">
         <!-- Sidebar Section -->
-        <div >
+        <div class="w-64 bg-white  shadow-lg h-full">
             <?php $sidebar->displaySidebar(); ?>
         </div>
 
         <!-- Partners Section -->
-        <div >
+        <div class="flex-1 bg-white p-6 shadow-lg overflow-y-auto">
             <?php $partnerView->displayPartners(); ?>
         </div>
     </div>
