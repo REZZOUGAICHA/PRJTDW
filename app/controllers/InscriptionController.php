@@ -74,3 +74,4 @@ class InscriptionController {
         return ['error' => 'Invalid email or password'];
     }
 }
+?>
