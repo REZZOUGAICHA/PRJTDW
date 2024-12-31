@@ -3,6 +3,7 @@
 require_once "TableView.php";
 require_once "cardView.php";
 require_once "profileImage.php";
+require_once 'LoginPage.php';    
 
 require_once __DIR__ . '/../../controllers/diapoController.php';
 require_once __DIR__ . '/../../controllers/eventController.php';
@@ -12,6 +13,7 @@ require_once __DIR__ . '/../../controllers/topbarController.php';
 require_once __DIR__ . '/../../controllers/navbarController.php';
 require_once __DIR__ . '/../../helpers/SessionHelper.php';
 require_once __DIR__ . '/../../helpers/getImage.php';
+
 
 
 class LandingView {
@@ -213,7 +215,7 @@ public function displayTopbar() {
                                 </div>
                             </div>
                         <?php else: ?>
-                            <a href="login.php" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 
+                            <a href="loginPage.php" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 
                                                      hover:text-blue-800 hover:bg-blue-50 transition-all duration-200">
                                 Login
                             </a>
