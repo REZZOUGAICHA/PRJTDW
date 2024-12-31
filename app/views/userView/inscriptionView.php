@@ -1,5 +1,10 @@
 <?php
 require_once __DIR__ . '/../../controllers/inscriptionController.php';
+require_once __DIR__ . '/../../controllers/topbarController.php';
+require_once __DIR__ . '/../../controllers/navbarController.php';
+require_once __DIR__ . '/../../helpers/FileUploadHelper.php';
+
+
 
 class InscriptionView {
     private $inscriptionController;
@@ -12,11 +17,27 @@ class InscriptionView {
         $message = '';
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $result = $this->inscriptionController->handleInscription($_POST);
-            if (isset($result['success'])) {
-                $message = '<div style="background-color: #d4edda; color: #155724; padding: 15px; margin-bottom: 20px; border-radius: 4px;">' . $result['success'] . '</div>';
-            } elseif (isset($result['error'])) {
-                $message = '<div style="background-color: #f8d7da; color: #721c24; padding: 15px; margin-bottom: 20px; border-radius: 4px;">' . $result['error'] . '</div>';
+            $data = $_POST;
+            
+            // Handle profile picture upload if present
+            if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] !== UPLOAD_ERR_NO_FILE) {
+    $uploadHelper = new FileUploadHelper();
+    $uploadResult = $uploadHelper->uploadFile($_FILES['profile_picture']);
+    
+    if ($uploadResult['success']) {
+        $data['profile_picture'] = $uploadResult['fileContent'];
+    } else {
+        $message = '<div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">' . $uploadResult['error'] . '</div>';
+    }
+}
+
+            if (empty($message)) {
+                $result = $this->inscriptionController->handleInscription($data);
+                if (isset($result['success'])) {
+                    $message = '<div class="bg-green-100 text-green-700 p-4 rounded-lg mb-4">' . $result['success'] . '</div>';
+                } elseif (isset($result['error'])) {
+                    $message = '<div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">' . $result['error'] . '</div>';
+                }
             }
         }
         ?>
@@ -24,55 +45,73 @@ class InscriptionView {
         <html>
         <head>
             <title>Registration</title>
-            <style>
-                .container { max-width: 500px; margin: 50px auto; padding: 20px; }
-                .form-group { margin-bottom: 15px; }
-                label { display: block; margin-bottom: 5px; }
-                input[type="text"], input[type="email"], input[type="password"] {
-                    width: 100%;
-                    padding: 8px;
-                    margin-bottom: 10px;
-                    border: 1px solid #ddd;
-                    border-radius: 4px;
-                }
-                button {
-                    background-color: #4CAF50;
-                    color: white;
-                    padding: 10px 15px;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                }
-                button:hover { background-color: #45a049; }
-            </style>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://cdn.tailwindcss.com"></script>
         </head>
-        <body>
-            <div class="container">
-                <?php echo $message; ?>
-                
-                <form method="POST" action="">
-                    <div class="form-group">
-                        <label>First Name:</label>
-                        <input type="text" name="first_name" required>
+        <body class="bg-gray-100">
+            <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-md">
+                    <div>
+                        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                            Create your account
+                        </h2>
                     </div>
+
+                    <?php echo $message; ?>
                     
-                    <div class="form-group">
-                        <label>Last Name:</label>
-                        <input type="text" name="last_name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Email:</label>
-                        <input type="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Password:</label>
-                        <input type="password" name="password" required>
-                    </div>
-                    
-                    <button type="submit">Register</button>
-                </form>
+                    <form method="POST" action="" enctype="multipart/form-data" class="mt-8 space-y-6">
+                        <div class="rounded-md shadow-sm space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Profile Picture</label>
+                                <div class="mt-1 flex items-center">
+                                    <input type="file" 
+                                           name="profile_picture" 
+                                           accept="image/*"
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">First Name</label>
+                                <input type="text" 
+                                       name="first_name" 
+                                       required 
+                                       class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Last Name</label>
+                                <input type="text" 
+                                       name="last_name" 
+                                       required 
+                                       class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" 
+                                       name="email" 
+                                       required 
+                                       class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Password</label>
+                                <input type="password" 
+                                       name="password" 
+                                       required 
+                                       class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" 
+                                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </body>
         </html>

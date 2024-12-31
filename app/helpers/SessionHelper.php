@@ -1,7 +1,10 @@
+
 <?php
-class Session {
+
+
+class SessionHelper {
     public static function init() {
-        if (session_status() == PHP_SESSION_NONE) {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
     }
@@ -16,13 +19,12 @@ class Session {
 
     public static function destroy() {
         session_destroy();
+        session_unset();
     }
 
-    public static function checkRole($requiredRole) {
-        if (!isset($_SESSION['role']) || $_SESSION['role'] !== $requiredRole) {
-            header('Location: /access-denied');
-            exit();
-        }
+    public static function isLoggedIn() {
+        return isset($_SESSION['user_id']);
     }
 }
+
 ?>

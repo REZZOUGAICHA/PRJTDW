@@ -4,8 +4,11 @@ require_once 'LandingView.php';
 require_once 'footerView.php';
 
 
+
 $landing = new LandingView();
 $footer = new FooterView();
+$helper = new FileUploadHelper();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

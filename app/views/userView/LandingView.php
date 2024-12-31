@@ -2,12 +2,16 @@
 
 require_once "TableView.php";
 require_once "cardView.php";
+require_once "profileImage.php";
+
 require_once __DIR__ . '/../../controllers/diapoController.php';
 require_once __DIR__ . '/../../controllers/eventController.php';
 require_once __DIR__ . '/../../controllers/discountController.php';
 require_once __DIR__ . '/../../controllers/offerController.php';
 require_once __DIR__ . '/../../controllers/topbarController.php';
 require_once __DIR__ . '/../../controllers/navbarController.php';
+require_once __DIR__ . '/../../helpers/SessionHelper.php';
+require_once __DIR__ . '/../../helpers/getImage.php';
 
 
 class LandingView {
@@ -133,10 +137,15 @@ public function displayTopbar() {
     $topbarData = $topbarController->getTopbarData();
     $socialMediaLinks = $topbarController->getSocialMediaLinks();
     $menuItems = $menuController->getMenu();
+    
+    // Get session information
+    $isLoggedIn = SessionHelper::isLoggedIn();
+    $firstName = SessionHelper::get('first_name');
+    $userType = SessionHelper::get('user_type');
     ?>
     <!-- Main topbar container -->
-    <div class=" sticky top-0 z-50 bg-white text-gray-800 shadow-lg border-b border-gray-100">
-        <div class="  container mx-auto px-4">
+    <div class="sticky top-0 z-50 bg-white text-gray-800 shadow-lg border-b border-gray-100">
+        <div class="container mx-auto px-4">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo  -->
                 <div class="flex-shrink-0">
@@ -160,18 +169,64 @@ public function displayTopbar() {
                     <?php endforeach; ?>
                 </nav>
 
-                <!-- Social Media Icons  -->
-                <div class="flex items-center space-x-4">
-                    <?php foreach ($socialMediaLinks as $link): ?>
-                        <a href="<?php echo htmlspecialchars($link['social_media_link']); ?>" 
-                           target="_blank"
-                           class="p-2 rounded-full hover:bg-gray-100 transition-all duration-200 ease-in-out
-                                  transform hover:scale-110 hover:shadow-md">
-                            <img src="<?php echo htmlspecialchars($link['icon_link']); ?>" 
-                                 alt="<?php echo htmlspecialchars($link['social_media_name']); ?>" 
-                                 class="w-5 h-5 object-contain">
-                        </a>
-                    <?php endforeach; ?>
+                <!-- Auth and Social Media Section -->
+                <div class="flex items-center space-x-6">
+                    <!-- Social Media Icons  -->
+                    <div class="flex items-center space-x-4">
+                        <?php foreach ($socialMediaLinks as $link): ?>
+                            <a href="<?php echo htmlspecialchars($link['social_media_link']); ?>" 
+                               target="_blank"
+                               class="p-2 rounded-full hover:bg-gray-100 transition-all duration-200 ease-in-out
+                                      transform hover:scale-110 hover:shadow-md">
+                                <img src="<?php echo htmlspecialchars($link['icon_link']); ?>" 
+                                     alt="<?php echo htmlspecialchars($link['social_media_name']); ?>" 
+                                     class="w-5 h-5 object-contain">
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- Auth Section -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <?php if ($isLoggedIn): ?>
+                            <div class="relative group">
+                                <button class="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium 
+                                             text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-all duration-200">
+                                    <span><?php echo htmlspecialchars($firstName); ?></span>
+                                    <?php if ($userType === 'member'): ?>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Member</span>
+                                    <?php endif; ?>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <!-- Dropdown menu -->
+                                <div class="absolute right-0 w-48 mt-2 py-2 bg-white rounded-md shadow-lg opacity-0 invisible
+                                            group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out">
+                                    <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-800">
+                                        Profile
+                                    </a>
+                                    <form method="POST" action="logout.php" class="block">
+                                        <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <a href="login.php" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 
+                                                     hover:text-blue-800 hover:bg-blue-50 transition-all duration-200">
+                                Login
+                            </a>
+                            <a href="inscriptionPage.php" class="px-4 py-2 rounded-md text-sm font-medium text-white bg-blue-600 
+                                                          hover:bg-blue-700 transition-all duration-200">
+                                Register
+                            </a>
+                        <?php endif; ?>
+                        <img src="../../helpers/getImage.php?user_id=<?php echo htmlspecialchars(SessionHelper::get('user_id')); ?>" 
+         alt="Profile Picture" 
+         class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
+
+                    </div>
                 </div>
 
                 <!-- Mobile menu button  -->
@@ -180,7 +235,6 @@ public function displayTopbar() {
                             class="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 
                                    focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                         <span class="sr-only">Open main menu</span>
-                        
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                   d="M4 6h16M4 12h16M4 18h16"/>

@@ -2,6 +2,7 @@
 require_once 'CardView.php';
 require_once __DIR__ . '/../../controllers/partnerController.php';
 
+
 class PartnerView {
     public function displaypartner() {
         $partnerController = new partnerController();

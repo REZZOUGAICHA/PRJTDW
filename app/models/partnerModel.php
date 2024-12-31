@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../helpers/Database.php';
+require_once __DIR__ . '/../helpers/LinkGenerator.php';
 
 class partnerModel {
     private $db;
@@ -8,7 +9,7 @@ class partnerModel {
         $this->db = new Database();
     }
 
-     // -------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------
     public function getPartnersByCategory() {
         $c = $this->db->connexion();
         $sql = "
@@ -33,7 +34,7 @@ class partnerModel {
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $this->db->deconnexion();
 
-        //  into categories
+        // Group into categories
         $categories = [];
         foreach ($rows as $row) {
             $discounts = json_decode($row['discounts'], true) ?? [];
@@ -52,12 +53,19 @@ class partnerModel {
         return $categories;
     }
 
-    // CRUDS -------------------------------------------------------------------------------------------
-    public function createPartner($user_id, $name, $city, $description, $logo_url, $category_id, $link) {
+    // -------------------------------------------------------------------------------------------
+    private function generatePartnerLink($id, $name) {
+        return LinkGenerator::generateEntityLink('partner', $id, $name);
+    }
+
+    // -------------------------------------------------------------------------------------------
+    public function createPartner($user_id, $name, $city, $description, $logo_url, $category_id) {
         $c = $this->db->connexion();
+        
+        // First, insert the partner to get the ID
         $sql = "
-            INSERT INTO Partner (user_id, name, city, description, logo_url, category_id, link) 
-            VALUES (:user_id, :name, :city, :description, :logo_url, :category_id, :link)
+            INSERT INTO Partner (user_id, name, city, description, logo_url, category_id) 
+            VALUES (:user_id, :name, :city, :description, :logo_url, :category_id)
         ";
         $this->db->request($c, $sql, [
             'user_id' => $user_id,
@@ -65,15 +73,31 @@ class partnerModel {
             'city' => $city,
             'description' => $description,
             'logo_url' => $logo_url,
-            'category_id' => $category_id,
-            'link' => $link
+            'category_id' => $category_id
         ]);
+        
+        // Get the last inserted ID
+        $partnerId = $c->lastInsertId();
+        
+        // Generate and update the link
+        $link = $this->generatePartnerLink($partnerId, $name);
+        $updateSql = "UPDATE Partner SET link = :link WHERE id = :id";
+        $this->db->request($c, $updateSql, [
+            'link' => $link,
+            'id' => $partnerId
+        ]);
+
         $this->db->deconnexion();
+        return $partnerId;
     }
 
     // -------------------------------------------------------------------------------------------
-    public function updatePartner($id, $name, $city, $description, $logo_url, $category_id, $link) {
+    public function updatePartner($id, $name, $city, $description, $logo_url, $category_id) {
         $c = $this->db->connexion();
+        
+        // Generate new link based on updated name
+        $link = $this->generatePartnerLink($id, $name);
+        
         $sql = "
             UPDATE Partner 
             SET name = :name, city = :city, description = :description, logo_url = :logo_url, 
@@ -92,11 +116,33 @@ class partnerModel {
         $this->db->deconnexion();
     }
 
-     // -------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------
     public function deletePartner($id) {
         $c = $this->db->connexion();
         $sql = "DELETE FROM Partner WHERE id = :id";
         $this->db->request($c, $sql, ['id' => $id]);
+        $this->db->deconnexion();
+    }
+
+    // -------------------------------------------------------------------------------------------
+    public function regenerateAllLinks() {
+        $c = $this->db->connexion();
+        
+        // Get all partners
+        $sql = "SELECT id, name FROM Partner";
+        $stmt = $this->db->request($c, $sql);
+        $partners = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Update each partner's link
+        foreach ($partners as $partner) {
+            $link = $this->generatePartnerLink($partner['id'], $partner['name']);
+            $updateSql = "UPDATE Partner SET link = :link WHERE id = :id";
+            $this->db->request($c, $updateSql, [
+                'link' => $link,
+                'id' => $partner['id']
+            ]);
+        }
+        
         $this->db->deconnexion();
     }
 }

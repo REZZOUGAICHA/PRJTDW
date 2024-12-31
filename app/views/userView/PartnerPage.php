@@ -7,6 +7,7 @@ require_once 'submenuView.php';
 
 
 
+
 $landing = new LandingView();
 $footer = new FooterView();
 $submenu = new SubmenuView();
