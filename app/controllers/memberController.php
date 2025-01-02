@@ -11,6 +11,7 @@ class MemberController {
     public function upgradeUserToMember($userId) {
         return $this->model->upgradeUserToMember($userId);
     }
+    
 }
 
 ?>

@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../models/partnerModel.php';
 
+
+
 class partnerController {
     private $partnerModel;
 
@@ -27,5 +29,24 @@ class partnerController {
     public function deletePartner($id) {
         $this->partnerModel->deletePartner($id);
     }
+
+    // -------------------------------------------------------------------------------------------
+    function showPartnerForAdmin() {  //of the admin
+        require_once __DIR__ . '/../Views/adminView/partnerView.php';
+        $view = new partnerView();
+        $view->displayPartners();
+    }
+
+    function showPartnerForUser() {  //of the user
+        require_once __DIR__ . '/../Views/userView/partnerView.php';
+        $view = new partnerView();
+        $view->displaypartner();
+    }
+
+
+
+
+    // -------------------------------------------------------------------------------------------
+
 }
 ?>

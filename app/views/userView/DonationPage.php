@@ -1,12 +1,12 @@
 <?php
 require_once 'LandingView.php';
 require_once 'footerView.php';
-require_once 'InscriptionView.php';
+
 
 
 $landing = new LandingView();
 $footer = new FooterView();
-$inscriptionView = new InscriptionView();
+
 
 ?>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ $inscriptionView = new InscriptionView();
 <body>
     <?php
 $landing->displayTopbar();
-$inscriptionView->displayLoginForm();
+
 $footer->displayFooterMenu();
  
     ?>

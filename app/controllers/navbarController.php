@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../models/navbarModel.php';
 
+
 class MenuController {
     private $model;
 
@@ -15,4 +16,7 @@ class MenuController {
     function getMainMenuItems() {
         return $this->model->getMainMenuItems();
     }
+
+
+    
 }

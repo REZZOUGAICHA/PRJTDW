@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/offerModel.php';
+
 class offerController {
 private $model;
 
@@ -14,5 +15,11 @@ public function getOffersData() {
 public function getOffersByType() {
         return $this->model->getOffersByType();
     }
+
+public function showOffer() {
+    require_once __DIR__ . '/../Views/userView/offerView.php';
+    $view = new offerView();
+    $view->displayOffer();
+}
 }
 ?>

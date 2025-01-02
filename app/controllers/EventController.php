@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../models/EventModel.php';
 
+
+
 class EventController {
     private $model;
 
@@ -14,6 +16,12 @@ class EventController {
             'events' => $this->model->getLatestEventsByType('event'),
             'activities' => $this->model->getLatestEventsByType('activity')
         ];
+    }
+
+    public function showEvent() {
+        require_once __DIR__ . '/../Views/userView/LandingView.php';
+        $view = new LandingView();
+        $view->eventsView();
     }
 }
 ?>

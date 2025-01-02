@@ -215,11 +215,11 @@ public function displayTopbar() {
                                 </div>
                             </div>
                         <?php else: ?>
-                            <a href="loginPage.php" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 
+                            <a href="/Connection" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 
                                                      hover:text-blue-800 hover:bg-blue-50 transition-all duration-200">
                                 Login
                             </a>
-                            <a href="inscriptionPage.php" class="px-4 py-2 rounded-md text-sm font-medium text-white bg-blue-600 
+                            <a href="/Inscription" class="px-4 py-2 rounded-md text-sm font-medium text-white bg-blue-600 
                                                           hover:bg-blue-700 transition-all duration-200">
                                 Register
                             </a>
