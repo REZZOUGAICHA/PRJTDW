@@ -3,7 +3,7 @@
 require_once "TableView.php";
 require_once "cardView.php";
 require_once "profileImage.php";
-require_once 'LoginPage.php';    
+//require_once 'LoginPage.php';    
 
 require_once __DIR__ . '/../../controllers/diapoController.php';
 require_once __DIR__ . '/../../controllers/eventController.php';
@@ -207,26 +207,29 @@ public function displayTopbar() {
                                     <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-800">
                                         Profile
                                     </a>
-                                    <form method="POST" action="logout.php" class="block">
+                                    <form method="POST" action="<?= BASE_URL ?>/logout" class="block">
+                                    
                                         <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                                            Logout
+                                            Se déconnecter
                                         </button>
                                     </form>
                                 </div>
-                            </div>
+                            </div><img src="<?php echo BASE_URL; ?>/app/helpers/getImage.php?user_id=<?php echo htmlspecialchars(SessionHelper::get('user_id')); ?>"
+                             alt="Profile Picture" 
+                            class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
                         <?php else: ?>
-                            <a href="/Connection" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 
+                            <a href="<?php echo BASE_URL; ?>/Connection" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 
                                                      hover:text-blue-800 hover:bg-blue-50 transition-all duration-200">
                                 Login
                             </a>
-                            <a href="/Inscription" class="px-4 py-2 rounded-md text-sm font-medium text-white bg-blue-600 
+                            <a href="<?php echo BASE_URL; ?>/Inscription" class="px-4 py-2 rounded-md text-sm font-medium text-white bg-blue-600 
                                                           hover:bg-blue-700 transition-all duration-200">
                                 Register
                             </a>
-                        <?php endif; ?>
-                        <img src="../../helpers/getImage.php?user_id=<?php echo htmlspecialchars(SessionHelper::get('user_id')); ?>" 
-         alt="Profile Picture" 
-         class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
+                            
+                        
+                        
+         <?php endif; ?>
 
                     </div>
                 </div>

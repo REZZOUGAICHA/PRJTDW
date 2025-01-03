@@ -98,14 +98,14 @@ class InscriptionController {
     }
 
     public function showLoginForm() {
-        require_once __DIR__ . '/../views/userView/LoginView.php';
-        $view = new LoginView();
+        require_once __DIR__ . '/../views/userView/InscriptionView.php';
+        $view = new InscriptionView();
         $view->displayLoginForm();
     }
 
     public function logout() {
         SessionHelper::destroy();
-        header('Location: /acceuil');
+        header('Location: ' . BASE_URL . '/acceuil');
         exit;
     }
 }

@@ -2,7 +2,7 @@
 class FooterView {
 
     public function displayFooterMenu() {
-        echo '<link rel="stylesheet" href="../../../public/css/output.css">';
+        // echo '<link rel="stylesheet" href="../../../public/css/output.css">';
         $menuController = new MenuController();
         $menuItems = $menuController->getMainMenuItems();
 

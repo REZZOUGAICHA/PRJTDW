@@ -75,7 +75,7 @@ class InscriptionView {
 
                     <?php echo $message; ?>
                     
-                    <form method="POST" action="/inscription" enctype="multipart/form-data" class="mt-8 space-y-6">
+                    <form method="POST" action="<?php echo BASE_URL; ?>/Inscription" enctype="multipart/form-data" class="mt-8 space-y-6">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         
                         <div class="rounded-md shadow-sm space-y-4">
@@ -194,7 +194,7 @@ class InscriptionView {
 
                     <?php echo $message; ?>
                     
-                    <form method="POST" action="/login" class="mt-8 space-y-6">
+                    <form method="POST" action="<?php echo BASE_URL; ?>/Connection" class="mt-8 space-y-6">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         
                         <div class="rounded-md shadow-sm space-y-4">
@@ -239,7 +239,7 @@ class InscriptionView {
                         <div class="mt-4 text-center">
                             <p class="text-sm text-gray-600">
                                 Don't have an account? 
-                                <a href="/Inscription" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                <a href="<?php echo BASE_URL; ?>/Inscription" class="font-medium text-indigo-600 hover:text-indigo-500">
                                     Register here
                                 </a>
                             </p>

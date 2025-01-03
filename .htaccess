@@ -1,8 +1,6 @@
 RewriteEngine On
-
 # Set the base directory of your project
 RewriteBase /TDW/
-
 # Redirect all requests to index.php except for existing files or directories
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
