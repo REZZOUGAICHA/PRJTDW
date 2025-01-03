@@ -2,7 +2,7 @@
 require_once 'Database.php';
 class FileUploadHelper {
     
-    private $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    private $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
     private $maxFileSize = 5242880; // 5MB
     private $uploadDirectory;
 
@@ -104,5 +104,35 @@ class FileUploadHelper {
             header('HTTP/1.1 500 Internal Server Error');
         }
     }
+
+
+    public function saveFile($file, $subdirectory = '') {
+        try {
+            $this->validateFile($file);
+            $targetDir = $this->uploadDirectory . $subdirectory;
+            
+            if (!file_exists($targetDir)) {
+                mkdir($targetDir, 0777, true);
+            }
+            
+            $fileName = $this->generateUniqueFileName($file['name']);
+            $targetPath = $targetDir . $fileName;
+            
+            if (!move_uploaded_file($file['tmp_name'], $targetPath)) {
+                throw new Exception('Failed to move uploaded file');
+            }
+            
+            return [
+                'success' => true,
+                'filePath' => $subdirectory . $fileName
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'error' => $e->getMessage()
+            ];
+        }
+    }
 }
+
 ?>

@@ -14,6 +14,17 @@ class SessionHelper {
         return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }
 
+public static function has($key) {
+    return isset($_SESSION[$key]);
+}
+
+public static function unset($key) {
+    if (isset($_SESSION[$key])) {
+        unset($_SESSION[$key]);
+    }
+}
+    
+
     public static function destroy() {
         
         

@@ -176,8 +176,23 @@ class Router {
                 case 'membership' : 
                 require_once __DIR__ . '/../controllers/membershipController.php';
                 $membershipController = new membershipController();
-                $membershipController->showMembership();
+                $membershipController->showMembershipForm();
                 break;
+                case 'membership/submit':
+    require_once __DIR__ . '/../controllers/membershipController.php';
+    $membershipController = new membershipController();
+    $result = $membershipController->submitMembership($_POST, $_FILES);
+    
+    if (isset($result['success'])) {
+        $_SESSION['success'] = 'Votre demande a été soumise avec succès';
+        header('Location: ' . BASE_URL . '/Profile');
+        exit;
+    } else {
+        $_SESSION['error'] = $result['error'];
+        header('Location: ' . BASE_URL . '/membership');
+        exit;
+    }
+    break;
                 
 
             default:
