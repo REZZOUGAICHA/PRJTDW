@@ -77,8 +77,8 @@ class InscriptionController {
                 
                 // Determine redirect based on user type
                 $redirect = match($user['user_type']) {
-                    'member' => '/member',
-                    'partner' => '/partner',
+                    'member' => '/acceuil',
+                    'partner' => '/acceuil',
                     default => '/acceuil'
                 };
                 

@@ -114,6 +114,9 @@ class Router {
                     
                 break;
                 case 'Profile':
+                require_once __DIR__ . '/../controllers/UserController.php';
+                $userController = new UserController();
+                $userController->showProfile(SessionHelper::get('user_id'));
                 
                 
 
@@ -168,6 +171,12 @@ class Router {
                 require_once __DIR__ . '/../controllers/InscriptionController.php';
                 $inscriptionController = new InscriptionController();
                 $inscriptionController->logout();
+                break;
+
+                case 'membership' : 
+                require_once __DIR__ . '/../controllers/membershipController.php';
+                $membershipController = new membershipController();
+                $membershipController->showMembership();
                 break;
                 
 
