@@ -3,7 +3,6 @@
 require_once __DIR__ . '/../models/EventModel.php';
 
 
-
 class EventController {
     private $model;
 
@@ -11,16 +10,31 @@ class EventController {
         $this->model = new EventModel();
     }
 
-    public function getEvents() {
+    // Fetch 3 latest events for the landing page
+    public function getLatestEvents() {
         return [
-            'events' => $this->model->getLatestEventsByType('event'),
-            'activities' => $this->model->getLatestEventsByType('activity')
+            'events' => $this->model->getLatestEventsByType('event', 3), // Limit to 3 events
+            'activities' => $this->model->getLatestEventsByType('activity', 3) // Limit to 3 activities
         ];
     }
 
-    public function showEvent() {
+    // Fetch all events for the news page
+    public function getAllEvents() {
+        return [
+            'events' => $this->model->getAllEventsByType('event'),
+            'activities' => $this->model->getAllEventsByType('activity')
+        ];
+    }
+
+    public function showEventsLanding() {
         require_once __DIR__ . '/../Views/userView/LandingView.php';
         $view = new LandingView();
+        $view->eventsView();
+    }
+
+    public function showEventsNews() {
+        require_once __DIR__ . '/../Views/userView/NewsView.php';
+        $view = new NewsView();
         $view->eventsView();
     }
 }

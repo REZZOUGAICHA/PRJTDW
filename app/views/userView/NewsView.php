@@ -27,5 +27,34 @@ class NewsView {
         </div>
         <?php
     }
+
+    public function eventsView() {
+    $eventController = new EventController();
+    $data = $eventController->getAllEvents(); // Get all events
+    $cardView = new CardView();
+    ?>
+    <div class="w-full">
+        <?php 
+        // Display all events
+        $cardView->displaySection($data['events'], 'All Events', [
+            'title' => 'event_name',
+            'description' => 'event_description',
+            'date' => 'event_date',
+            'image' => 'file_path',
+            'link' => 'link'
+        ]);
+        
+        // Display all activities
+        $cardView->displaySection($data['activities'], 'All Activities', [
+            'title' => 'event_name',
+            'description' => 'event_description',
+            'date' => 'event_date',
+            'image' => 'file_path'
+        ]);
+        ?>
+    </div>
+    <?php
+}
+
 }
 ?>

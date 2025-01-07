@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../controllers/partnerController.php';
 require_once __DIR__ . '/../../views/userView/TableView.php';
 
+
 class partnerView {
     private $partnerController;
 

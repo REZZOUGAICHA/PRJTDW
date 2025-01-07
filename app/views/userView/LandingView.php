@@ -54,12 +54,12 @@ class LandingView {
 
     public function eventsView() {
     $eventController = new EventController();
-    $data = $eventController->getEvents();
+    $data = $eventController->getLatestEvents(); // Get 3 latest events
     $cardView = new CardView();
     ?>
     <div class="w-full">
         <?php 
-        // event
+        // Display the latest events
         $cardView->displaySection($data['events'], 'Latest Events', [
             'title' => 'event_name',
             'description' => 'event_description',
@@ -68,7 +68,7 @@ class LandingView {
             'link' => 'link'
         ]);
         
-        // activity
+        // Display the latest activities
         $cardView->displaySection($data['activities'], 'Latest Activities', [
             'title' => 'event_name',
             'description' => 'event_description',
@@ -79,6 +79,7 @@ class LandingView {
     </div>
     <?php
 }
+
 
 
  

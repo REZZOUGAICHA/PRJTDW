@@ -51,7 +51,7 @@ class Router {
                 $diapoController = new DiaporamaController();
                 $diapoController->showDiaporama();
                 $EventController = new EventController();
-                $EventController->showEvent();
+                $EventController->showEventsLanding();
                 $newsController = new NewsController();
                 $newsController->showAnnouncesLanding();
                 $discountController = new discountController();
@@ -115,6 +115,8 @@ class Router {
                     require_once __DIR__ . '/../controllers/NewsController.php';
                     $newsController = new NewsController();
                     $newsController->showAnnouncesNews();
+                    $EventController = new EventController();
+                    $EventController->showEventsNews();
                 
                 
 
