@@ -101,10 +101,18 @@ class Router {
                     
                 break;
                 case 'don':
-                
+                    require_once __DIR__ . '/../controllers/DonController.php';
+                    $donController = new DonController();
 
-                    
-                break;
+                    // Handle POST request (form submission)
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $donController->handleDonSubmission();
+                    } else {
+                        // Display the form
+                        $donController->showDonForm();
+                    }
+                    break;
+
                 case 'aide':
                 
                 

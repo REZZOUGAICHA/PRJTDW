@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../helpers/Database.php';class DiscountModel {
+require_once __DIR__ . '/../helpers/Database.php';
+class DiscountModel {
    private $db;
 
    public function __construct() {
@@ -11,7 +12,7 @@ require_once __DIR__ . '/../helpers/Database.php';class DiscountModel {
        $sql = "SELECT d.name as discount_name, 
                       p.name as partner_name,
                       cp.name as category_name, 
-                    ct.name as card_name,
+                      ct.name as card_name,
                       d.percentage,
                       p.city,
                       d.link,
