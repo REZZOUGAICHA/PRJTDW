@@ -11,7 +11,7 @@ class EntityViewModel {
         $c = $this->db->connexion();
         
         // Extract ID from link
-        preg_match('/\/TDW\/entity\/\w+\/(\d+)-/', $link, $matches);
+        preg_match('/\/entity\/\w+\/(\d+)-/', $link, $matches);
         $id = $matches[1] ?? null;
         
         if (!$id) return null;

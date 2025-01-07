@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../controllers/partnerController.php';
 require_once __DIR__ . '/../../views/userView/TableView.php';
-require_once __DIR__ . '/../../helpers/LinkGenerator.php';
+
 class partnerView {
     private $partnerController;
 
@@ -10,14 +10,13 @@ class partnerView {
     }
 
     public function displayPartners() {
-        
         $categorizedPartners = $this->partnerController->getPartnersByCategory();
         
-        // Transform 
+        // Transform data
         $flattenedPartners = [];
         foreach ($categorizedPartners as $categoryId => $categoryData) {
             foreach ($categoryData['partners'] as $partner) {
-                // Format discounts as a string
+                // Format discounts
                 $discountStr = '';
                 if (!empty($partner['discounts'])) {
                     $discountItems = array_map(function($discount) {
@@ -27,41 +26,46 @@ class partnerView {
                 }
 
                 $flattenedPartners[] = [
+                    'id' => $partner['id'], 
                     'name' => $partner['name'],
                     'city' => $partner['city'],
                     'category' => $categoryData['name'],
-                    'discounts' => $discountStr,
-                    'link' => $partner['link']
+                    'discounts' => $discountStr
                 ];
             }
         }
 
-        // Define columns for the table
+        // Define columns
         $columns = [
             ['label' => 'Nom', 'field' => 'name'],
             ['label' => 'Ville', 'field' => 'city'],
             ['label' => 'Catégorie', 'field' => 'category'],
-            ['label' => 'Réductions', 'field' => 'discounts'],
-            ['label' => 'Lien', 'field' => 'link']
+            ['label' => 'Réductions', 'field' => 'discounts']
         ];
 
-        // Wrap table in a container div
+        // Define actions
+        $actions = [
+            function($row) {
+                return sprintf(
+                    '<a href="%s/admin/partner?id=%s" class="text-blue-600 hover:text-blue-800 hover:underline">Voir plus</a>',
+                    BASE_URL,
+                    htmlspecialchars($row['id'])
+                );
+            }
+        ];
+
         echo '<div class="partner-table-container">';
-        
-        // Display the table using TableView
         $tableView = new TableView();
-        $tableView->displayTable($flattenedPartners, $columns);
-        
+        $tableView->displayTable($flattenedPartners, $columns, $actions);
         echo '</div>';
-        
-        // Initialize filters
+
+        // Your existing JavaScript for filters
         ?>
         <script>
             $(document).ready(function() {
-                // Initialize filters for city and category columns
                 initializeTableFilters('.partner-table-container', [
-                    { label: 'Ville', columnIndex: 2 },      // Assuming city is the 2nd column
-                    { label: 'Catégorie', columnIndex: 3 }   // Assuming category is the 3rd column
+                    { label: 'Ville', columnIndex: 2 },
+                    { label: 'Catégorie', columnIndex: 3 }
                 ]);
             });
         </script>

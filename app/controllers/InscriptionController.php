@@ -44,7 +44,7 @@ class InscriptionController {
                 SessionHelper::set('first_name', $data['first_name']);
                 SessionHelper::set('last_name', $data['last_name']);
                 
-                return ['success' => 'User registered successfully', 'redirect' => '/acceuil'];
+                return ['success' => 'User registered successfully', 'redirect' => '/accueil'];
             }
         } catch (Exception $e) {
             // Handle specific errors (e.g., duplicate email)
@@ -77,9 +77,9 @@ class InscriptionController {
                 
                 // Determine redirect based on user type
                 $redirect = match($user['user_type']) {
-                    'member' => '/acceuil',
-                    'partner' => '/acceuil',
-                    default => '/acceuil'
+                    'member' => '/accueil',
+                    'partner' => '/accueil',
+                    default => '/accueil'
                 };
                 
                 return ['success' => 'Login successful', 'redirect' => $redirect];
@@ -105,7 +105,7 @@ class InscriptionController {
 
     public function logout() {
         SessionHelper::destroy();
-        header('Location: ' . BASE_URL . '/acceuil');
+        header('Location: ' . BASE_URL . '/accueil');
         exit;
     }
 }

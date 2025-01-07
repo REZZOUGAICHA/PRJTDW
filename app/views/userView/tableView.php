@@ -1,7 +1,7 @@
 <?php
 
 class TableView {
-    public function displayTable($data, $columns, $tableClasses = "min-w-full bg-white border-collapse shadow-sm") {
+    public function displayTable($data, $columns, $actions = [], $tableClasses = "min-w-full bg-white border-collapse shadow-sm") {
         if (empty($data) || empty($columns)) return;
         ?>
         <div class="w-full">
@@ -16,6 +16,11 @@ class TableView {
                                             <?php echo htmlspecialchars($column['label']); ?>
                                         </th>
                                     <?php endforeach; ?>
+                                    <?php if (!empty($actions)): ?>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions
+                                        </th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -27,12 +32,6 @@ class TableView {
                                                     <?php 
                                                     if (isset($column['formatter'])) {
                                                         echo $column['formatter']($row[$column['field']]);
-                                                    } else if ($column['field'] === 'link' && !empty($row[$column['field']])) {
-                                                        echo '<a href="' . htmlspecialchars($row[$column['field']]) . '" 
-                                                                class="text-blue-600 hover:text-blue-800 hover:underline" 
-                                                                target="_blank">
-                                                                Voir plus
-                                                            </a>';
                                                     } else {
                                                         echo htmlspecialchars($row[$column['field']]);
                                                     }
@@ -40,6 +39,13 @@ class TableView {
                                                 </div>
                                             </td>
                                         <?php endforeach; ?>
+                                        <?php if (!empty($actions)): ?>
+                                            <td class="px-4 py-4 text-sm text-gray-500">
+                                                <?php foreach ($actions as $action): ?>
+                                                    <?php echo $action($row); ?>
+                                                <?php endforeach; ?>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

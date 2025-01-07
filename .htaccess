@@ -5,3 +5,4 @@ RewriteBase /TDW/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?page=$1 [QSA,L]
+RewriteRule ^admin/partner/([0-9]+)$ /admin.php?page=partner&id=$1 [L,QSA]

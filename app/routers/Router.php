@@ -15,7 +15,7 @@ class Router {
         $footer = new FooterController();
         
         // Public routes - accessible to everyone
-        $publicRoutes = ['acceuil', 'partenaires', 'Remises', 'Connection', 'Inscription','Don', 'Aide', 'News'];
+        $publicRoutes = ['accueil', 'partenaires', 'remises', 'Connection', 'Inscription','don', 'aide', 'news'];
         
         // Protected routes - require authentication
         $protectedRoutes = ['Profile'];
@@ -36,7 +36,7 @@ class Router {
         
         
         switch ($currentRoute) {
-            case 'acceuil':
+            case 'accueil':
                 
                 
                 require_once __DIR__ . '/../controllers/diapoController.php';
@@ -81,7 +81,7 @@ class Router {
                 }
                 break;
 
-            case 'Remises':
+            case 'remises':
                 
                 require_once __DIR__ . '/../controllers/partnerController.php';
                 require_once __DIR__ . '/../controllers/SubmenuController.php';
@@ -96,18 +96,18 @@ class Router {
                     $discount->showdiscount();
                     
                 break;
-                case 'Don':
+                case 'don':
                 
 
                     
                 break;
-                case 'Aide':
+                case 'aide':
                 
                 
 
                     
                 break;
-                case 'News':
+                case 'news':
                 
                 
 
@@ -179,19 +179,19 @@ class Router {
                 $membershipController->showMembershipForm();
                 break;
                 case 'membership/submit':
-    require_once __DIR__ . '/../controllers/membershipController.php';
-    $membershipController = new membershipController();
-    $result = $membershipController->submitMembership($_POST, $_FILES);
-    
-    if (isset($result['success'])) {
-        $_SESSION['success'] = 'Votre demande a été soumise avec succès';
-        header('Location: ' . BASE_URL . '/Profile');
-        exit;
-    } else {
-        $_SESSION['error'] = $result['error'];
-        header('Location: ' . BASE_URL . '/membership');
-        exit;
-    }
+                require_once __DIR__ . '/../controllers/membershipController.php';
+                $membershipController = new membershipController();
+                $result = $membershipController->submitMembership($_POST, $_FILES);
+                
+                if (isset($result['success'])) {
+                    $_SESSION['success'] = 'Votre demande a été soumise avec succès';
+                    header('Location: ' . BASE_URL . '/Profile');
+                    exit;
+                } else {
+                    $_SESSION['error'] = $result['error'];
+                    header('Location: ' . BASE_URL . '/membership');
+                    exit;
+                }
     break;
                 
 

@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/../../controllers/EntityViewController.php';
-
+require_once __DIR__ . '/../controllers/EntityViewController.php';
 class EntityView {
     private $controller;
 
@@ -9,7 +8,6 @@ class EntityView {
     }
 
     public function displayEntity($link, $tableName) {
-        // Get entity details based on the provided link and table name
         $entity = $this->controller->getEntityDetails($link, $tableName);
         
         if (!$entity) {
