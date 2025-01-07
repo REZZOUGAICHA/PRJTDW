@@ -251,5 +251,24 @@ public function displayTopbar() {
     </div>
     <?php
 }
+//------------------------------------------------------------------------------------------------------
+public function announcesView() {
+    $newsController = new NewsController();
+    $data = $newsController->getAnnounces();
+    $cardView = new CardView();
+    ?>
+    <div class="w-full">
+        <?php 
+        // announces
+        $cardView->displaySection($data['announces'], 'Latest Announcements', [
+            'title' => 'name',
+            'description' => 'description',
+            'image' => 'picture_url',
+        ]);
+        ?>
+    </div>
+    <?php
+}
+
 
 }?>

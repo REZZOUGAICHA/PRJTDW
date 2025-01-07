@@ -43,6 +43,8 @@ class Router {
                 require_once __DIR__ . '/../controllers/EventController.php';
                 require_once __DIR__ . '/../controllers/discountController.php';
                 require_once __DIR__ . '/../controllers/offerController.php';
+                require_once __DIR__ . '/../controllers/NewsController.php';
+                    
                 
                 
                 
@@ -50,6 +52,8 @@ class Router {
                 $diapoController->showDiaporama();
                 $EventController = new EventController();
                 $EventController->showEvent();
+                $newsController = new NewsController();
+                $newsController->showAnnouncesLanding();
                 $discountController = new discountController();
                 $discountController->showDiscount();
                 $offerController = new offerController();
@@ -108,6 +112,9 @@ class Router {
                     
                 break;
                 case 'news':
+                    require_once __DIR__ . '/../controllers/NewsController.php';
+                    $newsController = new NewsController();
+                    $newsController->showAnnouncesNews();
                 
                 
 
