@@ -64,6 +64,9 @@ class PartnerView {
                 </div>
             <?php endforeach; ?>
         </div>
+            <script src="./Public/js/search.js"></script>
+            <script src="./Public/js/filter.js"></script>
+
 
         <?php
     }
