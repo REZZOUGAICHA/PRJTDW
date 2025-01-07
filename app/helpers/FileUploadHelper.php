@@ -5,6 +5,7 @@ class FileUploadHelper {
     private $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
     private $maxFileSize = 5242880; // 5MB
     private $uploadDirectory;
+    
 
     public function __construct($uploadDirectory = 'uploads/') {
         $this->uploadDirectory = rtrim($uploadDirectory, '/') . '/';

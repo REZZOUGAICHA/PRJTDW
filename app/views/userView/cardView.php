@@ -41,8 +41,8 @@ class CardView {
                 <ul class="text-sm text-gray-700 mb-3">
                     <?php foreach ($item[$discountsKey] as $discount): ?>
                         <li>
-                            <?php echo htmlspecialchars($discount['name']); ?> - 
-                            <?php echo htmlspecialchars($discount['percentage']); ?>%
+                            <?php echo htmlspecialchars($discount['name'] ?? ''); ?> - 
+                            <?php echo htmlspecialchars($discount['percentage'] ?? ''); ?>%
                         </li>
                     <?php endforeach; ?>
                 </ul>

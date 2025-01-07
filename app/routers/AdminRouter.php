@@ -45,7 +45,22 @@ class AdminRouter {
             case 'partner':
                 require_once __DIR__ . '/../controllers/PartnerController.php';
                 $partnerController = new PartnerController();
-                if (isset($_GET['id'])) {
+                
+                if (isset($_GET['action'])) {
+                    if ($_GET['action'] === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $success = $partnerController->handlePartnerUpdate($_POST, $_FILES);
+                        if ($success) {
+                            header('Location: ' . BASE_URL . '/admin/partner?id=' . $_POST['partner_id']);
+                        } else {
+                            header('Location: ' . BASE_URL . '/admin/partner?id=' . $_POST['partner_id'] . '&edit=true');
+                        }
+                        exit;
+                    } elseif ($_GET['action'] === 'delete' && isset($_GET['id'])) {
+                        $partnerController->deletePartner($_GET['id']);
+                        header('Location: ' . BASE_URL . '/admin/partenaires');
+                        exit;
+                    }
+                } elseif (isset($_GET['id'])) {
                     $partnerController->showPartnerDetail($_GET['id']);
                 } else {
                     $partnerController->showPartnerForAdmin();

@@ -99,18 +99,20 @@ class partnerModel {
     }
 
     // -------------------------------------------------------------------------------------------
-    public function updatePartner($id, $name, $city, $description, $logo_url, $category_id) {
+    public function updatePartner($id, $name, $city, $description, $logo_url, $category_id, $link) {
         $c = $this->db->connexion();
 
-        // Generate new link based on updated name
-        $link = $this->generatePartnerLink($id, $name);
+        
 
-        $sql = "
-            UPDATE Partner 
-            SET name = :name, city = :city, description = :description, logo_url = :logo_url, 
-                category_id = :category_id, link = :link 
-            WHERE id = :id
-        ";
+        $sql = "UPDATE partner SET 
+                  name = :name,
+                  city = :city,
+                  description = :description,
+                  logo_url = :logo_url,
+                  category_id = :category_id,
+                  link = :link
+                  WHERE id = :id";
+                  
 
         $this->db->request($c, $sql, [
             'id' => $id,

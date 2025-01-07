@@ -1,13 +1,18 @@
 <?php
 require_once __DIR__ . '/../models/partnerModel.php';
+require_once __DIR__ . '/../helpers/FileUploadHelper.php';
 
 
 
 class partnerController {
     private $partnerModel;
+    private $fileUploadHelper;
 
     public function __construct() {
         $this->partnerModel = new partnerModel();
+        $this->fileUploadHelper = new FileUploadHelper('uploads/partners/');
+        $this->fileUploadHelper->setAllowedTypes(['image/jpeg', 'image/png', 'image/gif']);
+        $this->fileUploadHelper->setMaxFileSize(5242880); // 5MB
     }
 
     public function getCategories() {
@@ -64,6 +69,50 @@ public function showPartnerDetail($id) {
 }
 
     // -------------------------------------------------------------------------------------------
+ public function handlePartnerUpdate($postData, $files) {
+    
+        try {
+            if (empty($postData['partner_id']) || empty($postData['name']) || empty($postData['city'])) {
+                throw new Exception('Required fields are missing');
+            }
+
+            $partner = $this->partnerModel->getPartnerById($postData['partner_id']);
+            if (!$partner) {
+                throw new Exception('Partner not found');
+            }
+
+            $logo_url = $partner['logo_url'];
+            if (!empty($files['logo']['tmp_name'])) {
+                $result = $this->fileUploadHelper->saveFile($files['logo']);
+                if (!$result['success']) {
+                    throw new Exception($result['error']);
+                }
+                $logo_url = $result['filePath'];
+            }
+
+            $this->partnerModel->updatePartner(
+                $postData['partner_id'],
+                $postData['name'],
+                $postData['city'],
+                $postData['description'] ?? '',
+                $logo_url,
+                $postData['category_id'] ?? null,
+                $partner['link']
+            );
+
+            $_SESSION['success'] = 'Partner updated successfully';
+            header('Location: ' . BASE_URL . '/admin/partner?id=' . $postData['partner_id']);
+            
+        } catch (Exception $e) {
+            error_log('Error updating partner: ' . $e->getMessage());
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: ' . BASE_URL . '/admin/partner?id=' . $postData['partner_id'] . '&edit=true');
+        }
+        exit;
+    }
+
+
+    
 
 }
 ?>
