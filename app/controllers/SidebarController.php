@@ -14,7 +14,7 @@ class SidebarController {
         return $this->model->getSidebarItems();
     }
 // a modifier, il ya un parametre ici 
-     public function showSidebar() {
+        public function showSidebar() {
         require_once __DIR__ . '/../Views/adminView/sidebarView.php';
         $view = new SidebarView();
         $view->displaySidebar();

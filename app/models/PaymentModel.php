@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../helpers/Database.php';
-
+//------------------------------still not working( for card membership) --------------------------------
 class PaymentModel {
     private $db;
     private $conn;

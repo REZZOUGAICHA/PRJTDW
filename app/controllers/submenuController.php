@@ -20,7 +20,7 @@ class SubmenuController {
     public function showSubmenu($pageIdentifier) {
         require_once __DIR__ . '/../Views/userView/submenuView.php';
         $view = new SubmenuView();
-        // Pass the identifier directly, don't get the items here
+        
         $view->displaySubmenu($pageIdentifier);
     }
 }

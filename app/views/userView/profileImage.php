@@ -12,7 +12,7 @@ if (isset($_GET['user_id'])) {
         
         if ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             if ($row['profile_picture']) {
-                // Detect mime type from the binary data
+                // Detect mime type from the binary data(cus im useing blob here)
                 $finfo = new finfo(FILEINFO_MIME_TYPE);
                 $mime_type = $finfo->buffer($row['profile_picture']);
                 
@@ -22,7 +22,7 @@ if (isset($_GET['user_id'])) {
             }
         }
         
-        // If no image found or empty, return a default image
+        // If no image found or empty, return a default image - add 
         header('Content-Type: image/jpeg');
         readfile(__DIR__ . '/../uploads/default.png');
         

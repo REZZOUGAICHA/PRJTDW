@@ -35,7 +35,7 @@ class UserController {
         unset($data['password']);
         unset($data['user_type']);
         
-        // Attempt to update the user
+        //  update the user
         $success = $this->model->updateUser($id, $data);
         
         if ($success) {

@@ -59,7 +59,7 @@ class LandingView {
     ?>
     <div class="w-full">
         <?php 
-        // Display the latest events
+        
         $cardView->displaySection($data['events'], 'Latest Events', [
             'title' => 'event_name',
             'description' => 'event_description',
@@ -154,8 +154,8 @@ public function displayTopbar() {
                 <div class="flex-shrink-0">
                     <a href="/" class="block">
                         <img src="<?php echo htmlspecialchars($topbarData['logo_link']); ?>" 
-                             alt="Logo" 
-                             class="h-12 w-auto object-contain">
+                            alt="Logo" 
+                            class="h-12 w-auto object-contain">
                     </a>
                 </div>
 
@@ -164,7 +164,7 @@ public function displayTopbar() {
                     <?php foreach ($menuItems as $item): ?>
                         <a href="<?php echo htmlspecialchars($item['link']); ?>" 
                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 
-                                  transition-all duration-200 ease-in-out relative group">
+                           transition-all duration-200 ease-in-out relative group">
                             <?php echo htmlspecialchars($item['name']); ?>
                             <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-800 transform scale-x-0 
                                        group-hover:scale-x-100 transition-transform duration-200 ease-in-out"></span>
@@ -178,12 +178,12 @@ public function displayTopbar() {
                     <div class="flex items-center space-x-4">
                         <?php foreach ($socialMediaLinks as $link): ?>
                             <a href="<?php echo htmlspecialchars($link['social_media_link']); ?>" 
-                               target="_blank"
-                               class="p-2 rounded-full hover:bg-gray-100 transition-all duration-200 ease-in-out
-                                      transform hover:scale-110 hover:shadow-md">
+                                target="_blank"
+                                class="p-2 rounded-full hover:bg-gray-100 transition-all duration-200 ease-in-out
+                                        transform hover:scale-110 hover:shadow-md">
                                 <img src="<?php echo htmlspecialchars($link['icon_link']); ?>" 
-                                     alt="<?php echo htmlspecialchars($link['social_media_name']); ?>" 
-                                     class="w-5 h-5 object-contain">
+                                    alt="<?php echo htmlspecialchars($link['social_media_name']); ?>" 
+                                class="w-5 h-5 object-contain">
                             </a>
                         <?php endforeach; ?>
                     </div>
@@ -193,7 +193,7 @@ public function displayTopbar() {
                         <?php if ($isLoggedIn): ?>
                             <div class="relative group">
                                 <button class="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium 
-                                             text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-all duration-200">
+                                        text-gray-700 hover:text-blue-800 hover:bg-blue-50 transition-all duration-200">
                                     <span><?php echo htmlspecialchars($firstName); ?></span>
                                     <?php if ($userType === 'member'): ?>
                                         <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Member</span>
@@ -216,21 +216,22 @@ public function displayTopbar() {
                                     </form>
                                 </div>
                             </div><img src="<?php echo BASE_URL; ?>/app/helpers/getImage.php?user_id=<?php echo htmlspecialchars(SessionHelper::get('user_id')); ?>"
-                             alt="Profile Picture" 
+                                alt="Profile Picture" 
                             class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
                         <?php else: ?>
                             <a href="<?php echo BASE_URL; ?>/Connection" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 
-                                                     hover:text-blue-800 hover:bg-blue-50 transition-all duration-200">
+
+                            hover:text-blue-800 hover:bg-blue-50 transition-all duration-200">
                                 Login
                             </a>
                             <a href="<?php echo BASE_URL; ?>/Inscription" class="px-4 py-2 rounded-md text-sm font-medium text-white bg-blue-600 
-                                                          hover:bg-blue-700 transition-all duration-200">
+                                hover:bg-blue-700 transition-all duration-200">
                                 Register
                             </a>
                             
                         
                         
-         <?php endif; ?>
+            <?php endif; ?>
 
                     </div>
                 </div>
@@ -239,11 +240,11 @@ public function displayTopbar() {
                 <div class="md:hidden">
                     <button type="button" 
                             class="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 
-                                   focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                                    focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                         <span class="sr-only">Open main menu</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M4 6h16M4 12h16M4 18h16"/>
+                                    d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
                     </button>
                 </div>
@@ -271,5 +272,40 @@ public function announcesView() {
     <?php
 }
 
+public function partnersLogoDisplay() {
+    $partnerController = new PartnerController();
+    $partners = $partnerController->getPartners();
+    ?>
+    <h1 class="text-2xl font-bold text-blue-600 mb-8">Nos partenaires</h1>
+    <div class="w-full py-8">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <?php foreach ($partners as $partner): ?>
+                    <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <!-- Partner Logo -->
+                        <div class="h-40 w-full flex items-center justify-center mb-4 overflow-hidden">
+                            <img 
+                                src="<?php echo htmlspecialchars($partner['logo_url']); ?>"
+                                alt="<?php echo htmlspecialchars($partner['name']); ?>"
+                                class="max-h-32 max-w-full object-contain"
+                            >
+                        </div>
+                        
+                        <!-- Partner Name Button -->
+                        <!-- add after url website for each partner fl db  -->
+                        <button 
+                            class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300 w-full text-center"
+                            onclick="window.location.href='<?php echo htmlspecialchars($partner['website_url'] ?? '#'); ?>'"
+                            
+                        >
+                            <?php echo htmlspecialchars($partner['name']); ?>
+                        </button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+    <?php
+}
 
 }?>

@@ -1,7 +1,7 @@
 <?php 
 class CardView { 
     public function displayCard($item, $config = []) {
-    // diff configs
+    // diff configs (config is optional)
     $titleKey = $config['title'] ?? 'title';
     $descriptionKey = $config['description'] ?? 'description';
     $dateKey = $config['date'] ?? 'date';
@@ -11,7 +11,7 @@ class CardView {
     $extraFields = $config['extraFields'] ?? []; // For offers 
 
     ?> 
-    <!-- elements class cus used in the search js func -->
+    <!-- element class cus used in the search js func -->
     <div class="element bg-white rounded-lg shadow-lg overflow-hidden h-full flex flex-col"> 
         <?php if (!empty($item[$imageKey])): ?> 
         <img  
@@ -21,7 +21,7 @@ class CardView {
         >
         <?php endif; ?> 
         <div class="p-3 flex-grow flex flex-col"> 
-            <!-- element name for js func -->
+            
             <h3 class="element-name text-lg font-semibold mb-1"> 
                 <?php echo htmlspecialchars($item[$titleKey] ?? ''); ?> 
             </h3> 
@@ -63,7 +63,7 @@ class CardView {
 }
 
 
-    public function displaySection($items, $title, $config = []) { 
+public function displaySection($items, $title, $config = []) { 
         if (empty($items)) return; 
         ?> 
         <div class="mb-12"> 

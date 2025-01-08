@@ -9,6 +9,23 @@ class DonController {
         $this->model = new DonModel();
         $this->fileUploader = new FileUploadHelper('uploads/receipts/');
     }
+    public function getAllDons() {
+    $dons = $this->model->getAllDons();
+
+    // Formater les données pour la vue
+    return array_map(function($don) {
+        return [
+            'id' => $don['id'] ?? null,
+            'user' => ($don['first_name'] ?? '') . ' ' . ($don['last_name'] ?? ''),
+            'amount' => $don['amount'] ?? null,
+            'payment_date' => $don['payment_date'] ?? null,
+            'description' => $don['description'] ?? '',
+            'status' => $don['status'] ?? 'pending',
+            'file_path' => $don['file_path'] ?? null,
+        ];
+    }, $dons);
+}
+
 
     public function handleDonSubmission() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
@@ -49,6 +66,11 @@ class DonController {
         require_once __DIR__ . '/../views/userView/DonView.php';
         $view = new DonFormView();
         $view->display();
+    }
+    public function showDonsForAdmin() {
+        require_once __DIR__ . '/../views/adminView/DonView.php';
+        $view = new DonView();
+        $view->displayDons();
     }
 }
 

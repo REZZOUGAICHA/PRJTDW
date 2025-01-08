@@ -1,6 +1,6 @@
 <?php
 class HeaderHelper {
-    public static function renderHeader($title = 'My Website') {
+    public static function renderHeader($title = 'El Mountada') {
         ?>
         <!DOCTYPE html>
         <html lang="en">

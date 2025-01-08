@@ -7,11 +7,12 @@ class OfferView {
     public function displayoffer() {
         $offerController = new offerController();
         $offers = $offerController->getOffersByType();
-
         $cardView = new CardView();
-
         ?>
         <div class="w-full">
+            <!-- foreach ($array as $key => $value) -->
+            <!-- offers here has the data we got from controller devided by type -->
+            <!-- wl offertype is wether regular or limited  -->
             <?php foreach ($offers as $offerType => $offerGroup): ?>
                 <div class="mb-12">
                     <h1 class="text-4xl font-extrabold mb-6 text-blue-700 capitalize px-4">
@@ -19,6 +20,7 @@ class OfferView {
                     </h1>
                     <?php 
                     $cardView->displaySection(
+                        //for offer in card 
                         $offerGroup,
                         '',
                         [
@@ -53,7 +55,7 @@ class OfferView {
         return $discount['discount_type'] === 'special';
     });
 
-    // Define table columns
+    // for discount in table 
     $columns = [
         ['field' => 'partner_name', 'label' => 'Partenaire'],
         ['field' => 'category_name', 'label' => 'Categorie'],
@@ -63,13 +65,8 @@ class OfferView {
         ['field' => 'link', 'label' => 'voir plus'],
     ];
 
-    
-    if (!class_exists('TableView')) {
-        echo 'TableView class not found';
-        return;
-    }
-
     $tableView = new TableView();
+//add action later for voir plus 
 
     // regular discounts
     echo '<h2 class="text-2xl font-bold mb-4 text-blue-700">Regular Discounts</h2>';

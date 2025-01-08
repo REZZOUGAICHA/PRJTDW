@@ -1,5 +1,6 @@
-<?php
+<?php 
 require_once __DIR__ . '/../helpers/Database.php';
+//login not working :(((((((())))))))
 
 class InscriptionModel {
     private $db;
@@ -8,35 +9,29 @@ class InscriptionModel {
         $this->db = new Database();
     }
 
-     public function createUser($data) {
+    public function createUser($data) {
         $connection = $this->db->connexion();
         
-        $query = "INSERT INTO user (first_name, last_name, email, password, profile_picture) 
-                 VALUES (:first_name, :last_name, :email, :password, :profile_picture)";
+        $query = "INSERT INTO `user` (first_name, last_name, email, password, profile_picture, user_type) 
+                VALUES (:first_name, :last_name, :email, :password, :profile_picture, 'user')";
         
         $params = [
             ':first_name' => $data['first_name'],
             ':last_name' => $data['last_name'],
             ':email' => $data['email'],
-            ':password' => password_hash($data['password'], PASSWORD_DEFAULT),
+            ':password' => $data['password'], 
             ':profile_picture' => $data['profile_picture'] ?? null
         ];
 
         try {
-            // Use PDO::PARAM_LOB for BLOB data
-            $stmt = $connection->prepare($query);
-            $stmt->bindValue(':first_name', $params[':first_name'], PDO::PARAM_STR);
-            $stmt->bindValue(':last_name', $params[':last_name'], PDO::PARAM_STR);
-            $stmt->bindValue(':email', $params[':email'], PDO::PARAM_STR);
-            $stmt->bindValue(':password', $params[':password'], PDO::PARAM_STR);
-            $stmt->bindValue(':profile_picture', $params[':profile_picture'], PDO::PARAM_LOB);
-            
-            $result = $stmt->execute();
-            if ($result) {
+            $stmt = $this->db->request($connection, $query, $params);
+            if ($stmt) {
                 return $connection->lastInsertId();
             }
             return false;
         } catch (Exception $e) {
+            // Log the error for debugging
+            error_log("Error creating user: " . $e->getMessage());
             return false;
         } finally {
             $this->db->deconnexion();
@@ -44,63 +39,53 @@ class InscriptionModel {
     }
 
     public function getUserByEmail($email) {
-        $connection = $this->db->connexion();
+    $connection = $this->db->connexion();
+    
+    $query = "SELECT 
+                u.*,
+                'user' as user_type
+             FROM `user` u
+             WHERE u.email = :email";
+    
+    try {
+        $stmt = $this->db->request($connection, $query, [':email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        // First get the user
-        $query = "SELECT u.*, 
-                    CASE 
-                        WHEN m.id IS NOT NULL THEN 'member'
-                        ELSE 'user'
-                    END as user_type,
-                    m.id as member_id,
-                    m.card_id
-                 FROM user u
-                 LEFT JOIN member m ON u.id = m.user_id
-                 WHERE u.email = :email AND u.is_active = TRUE";
+        // Add debug logging
+        error_log("User data fetched: " . print_r($user, true));
         
-        try {
-            $result = $this->db->request($connection, $query, [':email' => $email]);
-            $user = $result->fetch(PDO::FETCH_ASSOC);
-            
-            if ($user) {
-                // Check if it's a partner (you can add this later)
-                // $partnerQuery = "SELECT * FROM partner WHERE user_id = :user_id";
-                // $partnerResult = $this->db->request($connection, $partnerQuery, [':user_id' => $user['id']]);
-                // if ($partnerResult->fetch()) {
-                //     $user['user_type'] = 'partner';
-                // }
-                
-                return $user;
-            }
-            return false;
-        } catch (Exception $e) {
-            return false;
-        } finally {
-            $this->db->deconnexion();
-        }
+        return $user ?: false;
+    } catch (Exception $e) {
+        error_log("Error getting user by email: " . $e->getMessage());
+        return false;
+    } finally {
+        $this->db->deconnexion();
     }
+}
+
 
     public function checkUserType($userId) {
         $connection = $this->db->connexion();
         
         $query = "SELECT 
                     CASE 
-                        WHEN m.id IS NOT NULL THEN 'member'
-                        ELSE 'user'
-                    END as user_type
-                 FROM user u
-                 LEFT JOIN member m ON u.id = m.user_id
-                 WHERE u.id = :user_id";
-                 
+                WHEN m.id IS NOT NULL THEN 'member'
+                ELSE 'user'
+                END as user_type
+                FROM `user` u
+                LEFT JOIN member m ON u.id = m.user_id
+                WHERE u.id = :user_id";
+            
         try {
-            $result = $this->db->request($connection, $query, [':user_id' => $userId]);
-            $data = $result->fetch(PDO::FETCH_ASSOC);
+            $stmt = $this->db->request($connection, $query, [':user_id' => $userId]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
             return $data ? $data['user_type'] : 'user';
         } catch (Exception $e) {
+            error_log("Error checking user type: " . $e->getMessage());
             return 'user';
         } finally {
             $this->db->deconnexion();
         }
     }
 }
-
+?>

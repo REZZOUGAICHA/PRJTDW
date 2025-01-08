@@ -35,8 +35,8 @@ class UserModel {
     public function getUserById($id) {
         $connection = $this->db->connexion();
         $query = "SELECT id, first_name, last_name, email, registration_date, is_active,user_type
-                 FROM user 
-                 WHERE id = :id";
+                FROM user 
+                WHERE id = :id";
         $params = [':id' => $id];
         
         try {
@@ -54,8 +54,8 @@ class UserModel {
     public function getUserByEmail($email) {
         $connection = $this->db->connexion();
         $query = "SELECT id, first_name, last_name, email, password, is_active,user_type
-                 FROM user 
-                 WHERE email = :email";
+                FROM user 
+                WHERE email = :email";
         $params = [':email' => $email];
         
         try {
@@ -73,10 +73,10 @@ class UserModel {
     public function updateUser($id, $data) {
         $connection = $this->db->connexion();
         $query = "UPDATE user 
-                 SET first_name = :first_name,
-                     last_name = :last_name,
-                     email = :email
-                 WHERE id = :id";
+                SET first_name = :first_name,
+                    last_name = :last_name,
+                    email = :email
+                WHERE id = :id";
         
         $params = [
             ':id' => $id,
@@ -99,8 +99,8 @@ class UserModel {
     public function updatePassword($id, $newPassword) {
         $connection = $this->db->connexion();
         $query = "UPDATE user 
-                 SET password = :password 
-                 WHERE id = :id";
+                SET password = :password 
+                WHERE id = :id";
         
         $params = [
             ':id' => $id,
@@ -121,8 +121,8 @@ class UserModel {
     public function updateProfilePicture($id, $imageData) {
         $connection = $this->db->connexion();
         $query = "UPDATE user 
-                 SET profile_picture = :profile_picture 
-                 WHERE id = :id";
+                    SET profile_picture = :profile_picture 
+                    WHERE id = :id";
         
         $params = [
             ':id' => $id,

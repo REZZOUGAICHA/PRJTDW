@@ -13,7 +13,7 @@ class DonModel {
             $connection->beginTransaction();
 
             $paymentQuery = "INSERT INTO payment (user_id, payment_type_id, amount, description, status) 
-                           VALUES (:user_id, :payment_type_id, :amount, :description, 'pending')";
+                            VALUES (:user_id, :payment_type_id, :amount, :description, 'pending')";
             
             $stmt = $connection->prepare($paymentQuery);
             $stmt->execute([
@@ -26,7 +26,7 @@ class DonModel {
             $paymentId = $connection->lastInsertId();
 
             $receiptQuery = "INSERT INTO receipt (payment_id, file_path, upload_date) 
-                           VALUES (:payment_id, :file_path, NOW())";
+                            VALUES (:payment_id, :file_path, NOW())";
             
             $stmt = $connection->prepare($receiptQuery);
             $stmt->execute([
@@ -47,9 +47,9 @@ class DonModel {
         try {
             $connection = $this->db->connexion();
             $query = "SELECT p.*, r.file_path FROM payment p 
-                     JOIN receipt r ON p.id = r.payment_id 
-                     WHERE p.user_id = :user_id AND p.payment_type_id = 1 
-                     ORDER BY p.payment_date DESC";
+                    JOIN receipt r ON p.id = r.payment_id 
+                    WHERE p.user_id = :user_id AND p.payment_type_id = 1 
+                    ORDER BY p.payment_date DESC";
             
             $stmt = $connection->prepare($query);
             $stmt->execute([':user_id' => $userId]);
@@ -59,6 +59,26 @@ class DonModel {
             return false;
         }
     }
+
+    public function getAllDons() {
+    try {
+        $connection = $this->db->connexion();
+        $query = "SELECT p.*, r.file_path, u.first_name, u.last_name 
+                    FROM payment p 
+                    LEFT JOIN receipt r ON p.id = r.payment_id 
+                    LEFT JOIN user u ON p.user_id = u.id
+                    WHERE p.payment_type_id = 1 
+                    ORDER BY p.payment_date DESC";
+        
+        $stmt = $connection->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        error_log("Erreur récupération historique: " . $e->getMessage());
+        return false;
+    }
+}
+
 }
 
 ?>

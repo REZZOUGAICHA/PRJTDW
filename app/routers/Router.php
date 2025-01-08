@@ -31,7 +31,7 @@ class Router {
         }
         HeaderHelper::renderHeader();
         
-        // Display topbar on all pages
+        // Display topbar
         $topbarController->showTopbar();
         
         
@@ -44,7 +44,9 @@ class Router {
                 require_once __DIR__ . '/../controllers/discountController.php';
                 require_once __DIR__ . '/../controllers/offerController.php';
                 require_once __DIR__ . '/../controllers/NewsController.php';
-                    
+                require_once __DIR__ . '/../controllers/PartnerController.php';
+                
+                
                 
                 
                 
@@ -58,6 +60,9 @@ class Router {
                 $discountController->showDiscount();
                 $offerController = new offerController();
                 $offerController->showOffer();
+                $partnerController = new partnerController();
+                $partnerController->showpartnersLogo();
+
                 
                 
                 
@@ -71,7 +76,7 @@ class Router {
                 
 
                 if (isset($_GET['ajax'])) {
-                    // Example: Return JSON data for AJAX
+                    
                     $offresController = new OffresController();
                     $offresController->getOffers();
                 } else {
@@ -104,7 +109,7 @@ class Router {
                     require_once __DIR__ . '/../controllers/DonController.php';
                     $donController = new DonController();
 
-                    // Handle POST request (form submission)
+                    // if form sub
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $donController->handleDonSubmission();
                     } else {
@@ -114,6 +119,32 @@ class Router {
                     break;
 
                 case 'aide':
+                    require_once __DIR__ . '/../controllers/AidController.php';
+                    $aidController = new AidController();
+
+                    // (form submission)
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        
+                        $result = $aidController->handleAidRequest($_POST, $_FILES);
+                        
+                        if (isset($result['success'])) {
+                            // Redirect or show success message
+                            $_SESSION['success'] = 'Votre demande d\'aide a été soumise avec succès.';
+                            header('Location: ' . BASE_URL . '/aide');
+                            exit;
+                        } else {
+                            // Handle error case
+                            $_SESSION['error'] = $result['error'];
+                            header('Location: ' . BASE_URL . '/aide');
+                            exit;
+                        }
+                    } else {
+                        // Display the form
+                        $aidTypes = $aidController->getAidTypes(); 
+                        $aidController->showAidRequestForm($aidTypes);
+                    }
+                    break;
+
                 
                 
 
@@ -151,7 +182,7 @@ class Router {
                         header('Location: ' . BASE_URL . $result['redirect']);
                         exit;
                     }
-                    // Handle error case
+                    
                     SessionHelper::set('error', $result['error']);
                 }
                 
@@ -173,8 +204,7 @@ class Router {
                         header('Location: ' . BASE_URL . $result['redirect']);
                         exit;
                     }
-                    // Handle error case
-                    // You might want to store the error in session and display it in the form
+                    
                     SessionHelper::set('error', $result['error']);
                 }
 

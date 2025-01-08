@@ -1,6 +1,5 @@
-<?php
+<?php 
 require_once __DIR__ . '/../helpers/Database.php';
-require_once __DIR__ . '/../helpers/LinkGenerator.php';
 
 class partnerModel {
     private $db;
@@ -11,7 +10,6 @@ class partnerModel {
 
     // -------------------------------------------------------------------------------------------
     public function getPartnersByCategory() {
-        // Establish database connection
         $c = $this->db->connexion();
 
         $sql = "
@@ -24,11 +22,11 @@ class partnerModel {
                 p.logo_url,
                 p.link,
                 JSON_ARRAYAGG(
-                    JSON_OBJECT('name', d.name, 'percentage', d.percentage)
+                    JSON_OBJECT('id', d.id, 'name', d.name, 'percentage', d.percentage)
                 ) AS discounts
             FROM Partner p
             LEFT JOIN PartnerCategory pc ON p.category_id = pc.id
-            LEFT JOIN Discount d ON p.id = d.partner_id
+            LEFT JOIN discount d ON p.id = d.partner_id
             GROUP BY pc.id, p.id
             ORDER BY pc.name, p.name
         ";
@@ -51,7 +49,6 @@ class partnerModel {
                 'discounts' => $discounts,
             ];
 
-            // Organizing partners into categories
             $categories[$row['category_id']]['name'] = $row['category_name'];
             $categories[$row['category_id']]['partners'][] = $partner;
         }
@@ -60,15 +57,9 @@ class partnerModel {
     }
 
     // -------------------------------------------------------------------------------------------
-    private function generatePartnerLink($id, $name) {
-        return LinkGenerator::generateEntityLink('partner', $id, $name);
-    }
-
-    // -------------------------------------------------------------------------------------------
     public function createPartner($user_id, $name, $city, $description, $logo_url, $category_id) {
         $c = $this->db->connexion();
 
-        // First, insert the partner
         $sql = "INSERT INTO Partner (user_id, name, city, description, logo_url, category_id) 
                 VALUES (:user_id, :name, :city, :description, :logo_url, :category_id)";
 
@@ -80,21 +71,10 @@ class partnerModel {
             'logo_url' => $logo_url,
             'category_id' => $category_id
         ]);
-        
+
         $partnerId = $c->lastInsertId();
-        
-        // Generate the detail view link
-        $link = "/admin/partner/" . $partnerId;
-        
-        // Update the link for the newly created partner
-        $updateSql = "UPDATE Partner SET link = :link WHERE id = :id";
-        $this->db->request($c, $updateSql, [
-            'link' => $link,
-            'id' => $partnerId
-        ]);
 
         $this->db->deconnexion();
-
         return $partnerId;
     }
 
@@ -102,17 +82,14 @@ class partnerModel {
     public function updatePartner($id, $name, $city, $description, $logo_url, $category_id, $link) {
         $c = $this->db->connexion();
 
-        
-
-        $sql = "UPDATE partner SET 
-                  name = :name,
-                  city = :city,
-                  description = :description,
-                  logo_url = :logo_url,
-                  category_id = :category_id,
-                  link = :link
-                  WHERE id = :id";
-                  
+        $sql = "UPDATE Partner SET 
+                name = :name,
+                city = :city,
+                description = :description,
+                logo_url = :logo_url,
+                category_id = :category_id,
+                link = :link
+                WHERE id = :id";
 
         $this->db->request($c, $sql, [
             'id' => $id,
@@ -128,25 +105,61 @@ class partnerModel {
     }
 
     // -------------------------------------------------------------------------------------------
-    public function deletePartner($id) {
-        $c = $this->db->connexion();
-        $sql = "DELETE FROM Partner WHERE id = :id";
-        $this->db->request($c, $sql, ['id' => $id]);
+    
+public function addPartnerDiscount($partnerId, $name, $percentage) {
+        $conn = $this->db->connexion();
+        $sql = "INSERT INTO discount (partner_id, name, percentage) VALUES (:partnerId, :name, :percentage)";
+        $params = [
+            ':partnerId' => $partnerId,
+            ':name' => $name,
+            ':percentage' => $percentage
+        ];
+        $result = $this->db->request($conn, $sql, $params);
         $this->db->deconnexion();
+        return $result;
     }
 
+    public function updatePartnerDiscount($discountId, $partnerId, $name, $percentage) {
+        $conn = $this->db->connexion();
+        $sql = "UPDATE discount SET name = :name, percentage = :percentage WHERE id = :discountId AND partner_id = :partnerId";
+        $params = [
+            ':name' => $name,
+            ':percentage' => $percentage,
+            ':discountId' => $discountId,
+            ':partnerId' => $partnerId
+        ];
+        $result = $this->db->request($conn, $sql, $params);
+        $this->db->deconnexion();
+        return $result;
+    }
+
+    public function deletePartnerDiscount($discountId, $partnerId) {
+        $conn = $this->db->connexion();
+        $sql = "DELETE FROM discount WHERE id = :discountId AND partner_id = :partnerId";
+        $params = [
+            ':discountId' => $discountId,
+            ':partnerId' => $partnerId
+        ];
+        $result = $this->db->request($conn, $sql, $params);
+        $this->db->deconnexion();
+        return $result;
+    }
+
+
+    // -------------------------------------------------------------------------------------------
     public function getCategories() {
         $c = $this->db->connexion();
-        $query = "SELECT * FROM partnercategory ORDER BY name";
+        $query = "SELECT * FROM PartnerCategory ORDER BY name";
         $stmt = $this->db->request($c, $query);
         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $this->db->deconnexion();
         return $categories;
     }
 
+    // -------------------------------------------------------------------------------------------
     public function getCategoryById($category_id) {
         $c = $this->db->connexion();
-        $query = "SELECT * FROM partnercategory WHERE id = :id";
+        $query = "SELECT * FROM PartnerCategory WHERE id = :id";
         $stmt = $this->db->request($c, $query, ['id' => $category_id]);
         $category = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->db->deconnexion();
@@ -155,20 +168,21 @@ class partnerModel {
 
     // -------------------------------------------------------------------------------------------
     public function getPartnerById($id) {
-        // Establish connection to the database
         $c = $this->db->connexion();
-
-        // Prepare and execute the query to get the partner by ID
         $sql = "SELECT * FROM Partner WHERE id = :id";
         $stmt = $this->db->request($c, $sql, ['id' => $id]);
-
-        // Fetch and return the partner's data
         $partner = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Close the database connection
         $this->db->deconnexion();
-
         return $partner;
+    }
+
+    public function getPartners() {
+        $c = $this->db->connexion();
+        $sql = "SELECT * FROM Partner";
+        $stmt = $this->db->request($c, $sql);
+        $partners = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->db->deconnexion();
+        return $partners;
     }
 }
 ?>

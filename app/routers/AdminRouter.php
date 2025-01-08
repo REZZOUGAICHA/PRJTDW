@@ -4,6 +4,7 @@ class AdminRouter {
         ob_start();
         require_once __DIR__ . '/../helpers/SessionHelper.php';
         require_once __DIR__ . '/../helpers/HeaderHelper.php';
+        require_once __DIR__ . '/../helpers/FileUploadHelper.php';
 
         SessionHelper::init();
 
@@ -38,56 +39,98 @@ class AdminRouter {
                 break;
             
             case 'partenaires':
-                require_once __DIR__ . '/../controllers/PartnerController.php';
-                $partnerController = new PartnerController();
-                $partnerController->showPartnerForAdmin();
-                break;
-            case 'partner':
-                require_once __DIR__ . '/../controllers/PartnerController.php';
-                $partnerController = new PartnerController();
                 
-                if (isset($_GET['action'])) {
-                    if ($_GET['action'] === 'update' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-                        $success = $partnerController->handlePartnerUpdate($_POST, $_FILES);
-                        if ($success) {
-                            header('Location: ' . BASE_URL . '/admin/partner?id=' . $_POST['partner_id']);
-                        } else {
-                            header('Location: ' . BASE_URL . '/admin/partner?id=' . $_POST['partner_id'] . '&edit=true');
-                        }
-                        exit;
-                    } elseif ($_GET['action'] === 'delete' && isset($_GET['id'])) {
-                        $partnerController->deletePartner($_GET['id']);
-                        header('Location: ' . BASE_URL . '/admin/partenaires');
-                        exit;
+                require_once __DIR__ . '/../controllers/PartnerController.php';
+                $partnerController = new PartnerController();
+                if (isset($_GET['action']) && $_GET['action'] === 'create') {
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $partnerController->handlePartnerCreate($_POST, $_FILES);
+                    } else {
+                        $partnerController->showCreatePartnerForm();
                     }
-                } elseif (isset($_GET['id'])) {
-                    $partnerController->showPartnerDetail($_GET['id']);
                 } else {
                     $partnerController->showPartnerForAdmin();
                 }
                 break;
+                
+                break;
+            case 'partner':
+    require_once __DIR__ . '/../controllers/PartnerController.php';
+    $partnerController = new PartnerController();
+    
+    if (isset($_GET['action'])) {
+        switch ($_GET['action']) {
+            case 'update':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $success = $partnerController->handlePartnerUpdate($_POST, $_FILES);
+                    header('Location: ' . BASE_URL . '/admin/partner?id=' . $_POST['partner_id'] . ($success ? '' : '&edit=true'));
+                    exit;
+                }
+                break;
+
+            case 'delete':
+                if (isset($_GET['id'])) {
+                    $partnerController->deletePartner($_GET['id']);
+                    header('Location: ' . BASE_URL . '/admin/partenaires');
+                    exit;
+                }
+                break;
+
+            case 'discount/add':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $success = $partnerController->handleDiscountAdd($_POST['partner_id'], $_POST);
+                    header('Location: ' . BASE_URL . '/admin/partner?id=' . $_POST['partner_id'] . '&edit=true');
+                    exit;
+                }
+                break;
+
+            case 'discount/update':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $success = $partnerController->handleDiscountUpdate($_POST['partner_id'], $_POST);
+                    header('Location: ' . BASE_URL . '/admin/partner?id=' . $_POST['partner_id'] . '&edit=true');
+                    exit;
+                }
+                break;
+
+            case 'discount/delete':
+                if (isset($_GET['discount_id']) && isset($_GET['partner_id'])) {
+                    $success = $partnerController->handleDiscountDelete($_GET['partner_id'], $_GET['discount_id']);
+                    header('Location: ' . BASE_URL . '/admin/partner?id=' . $_GET['partner_id'] . '&edit=true');
+                    exit;
+                }
+                break;
+        }
+    } elseif (isset($_GET['id'])) {
+        $partnerController->showPartnerDetail($_GET['id']);
+    } else {
+        $partnerController->showPartnerForAdmin();
+    }
+    break;
             case 'membre':
-                // Logic for "membre" will be added here.
+                
                 break;
 
             case 'dons':
-                // Logic for "dons" will be added here.
+                require_once __DIR__ . '/../controllers/DonController.php';
+                $donController = new DonController();
+                $donController->showDonsForAdmin();
+                
                 break;
 
             case 'benevolat':
-                // Logic for "benevolat" will be added here.
+                
                 break;
 
             case 'annonces':
-                // Logic for "annonces" will be added here.
+                
                 break;
 
             case 'paiement':
-                // Logic for "paiement" will be added here.
+                
                 break;
 
             case 'parametres':
-                // Logic for "parametres" will be added here.
+                
                 break;
             
     

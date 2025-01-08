@@ -45,30 +45,28 @@ class PartnerView {
         </select>
     </div>
 </div>
-
-            <?php foreach ($categories as $category): ?>
-                <div class="mb-12">
-                    <?php 
-                    $cardView->displaySection(
-                        $category['partners'], 
-                        htmlspecialchars($category['name']),
-                        [
-                            'title' => 'name', 
-                            'description' => 'city', 
-                            'image' => 'logo_url', 
-                            'link' => 'link',
-                            'discounts' => 'discounts' 
-                        ]
-                    ); 
-                    ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-            <script src="./Public/js/search.js"></script>
-            <script src="./Public/js/filter.js"></script>
-
-
-        <?php
-    }
+<!-- display partners selon category -->
+<?php foreach ($categories as $category): ?>
+    <div class="mb-12">
+        <?php 
+        $cardView->displaySection(
+            $category['partners'], 
+            htmlspecialchars($category['name']),
+            [
+                'title' => 'name', 
+                'description' => 'city', 
+                'image' => 'logo_url', 
+                'link' => 'link',
+                'discounts' => 'discounts' 
+            ]
+        ); 
+        ?>
+</div>
+<?php endforeach; ?>
+</div>
+    <script src="./Public/js/search.js"></script>
+    <script src="./Public/js/filter.js"></script>
+<?php
+}
 }
 ?>

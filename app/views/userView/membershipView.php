@@ -1,6 +1,7 @@
 <?php 
 require_once __DIR__ . '/../../controllers/membershipController.php';
 require_once __DIR__ . '/../../helpers/SessionHelper.php';
+//--------------------------still not working-----------------------------------------------------
 class MembershipView {
     private $cardTypes;
     
@@ -53,7 +54,7 @@ class MembershipView {
                                     <div class="relative border rounded-lg p-4 hover:border-indigo-500">
                                         <label class="flex items-start">
                                             <input type="radio" name="card_type" value="<?php echo $card['id']; ?>" 
-                                                   class="mt-1 h-4 w-4 text-indigo-600" required>
+                                                    class="mt-1 h-4 w-4 text-indigo-600" required>
                                             <div class="ml-3">
                                                 <span class="block font-medium text-gray-900">
                                                     <?php echo htmlspecialchars($card['name']); ?>
@@ -77,9 +78,9 @@ class MembershipView {
                                 <label class="block text-sm font-medium text-gray-700">Carte d'Identité</label>
                                 <div class="mt-1">
                                     <input type="file" name="id_card" accept="image/*,.pdf" required
-                                           class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
-                                                  file:rounded-full file:border-0 file:text-sm file:font-semibold
-                                                  file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+                                                file:rounded-full file:border-0 file:text-sm file:font-semibold
+                                                file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
                                     <p class="mt-1 text-sm text-gray-500">Format JPG, PNG ou PDF. Maximum 5MB.</p>
                                 </div>
                             </div>
@@ -88,9 +89,9 @@ class MembershipView {
                                 <label class="block text-sm font-medium text-gray-700">Reçu de Paiement</label>
                                 <div class="mt-1">
                                     <input type="file" name="receipt" accept="image/*,.pdf" required
-                                           class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
-                                                  file:rounded-full file:border-0 file:text-sm file:font-semibold
-                                                  file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+                                                file:rounded-full file:border-0 file:text-sm file:font-semibold
+                                                file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
                                     <p class="mt-1 text-sm text-gray-500">Format JPG, PNG ou PDF. Maximum 5MB.</p>
                                 </div>
                             </div>
@@ -100,8 +101,8 @@ class MembershipView {
                         <div class="pt-6 border-t">
                             <button type="submit" 
                                     class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 
-                                           rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 
-                                           focus:ring-offset-2 focus:ring-indigo-500">
+                                        rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 
+                                        focus:ring-offset-2 focus:ring-indigo-500">
                                 Soumettre la demande
                             </button>
                         </div>

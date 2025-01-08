@@ -13,15 +13,15 @@ class FileUploadHelper {
             mkdir($this->uploadDirectory, 0777, true);
         }
     }
-
+//---------------------------------upload file---------------------------------
     
     
 
     public function uploadFile($file) {
         try {
-            $this->validateFile($file);
             
-            // Read file contents directly from the uploaded file
+            
+            // Read file 
             $fileContent = file_get_contents($file['tmp_name']);
             if ($fileContent === false) {
                 throw new Exception('Failed to read file contents');
@@ -40,20 +40,8 @@ class FileUploadHelper {
         }
     }
 
-
-    private function validateFile($file) {
-        if (!isset($file['error']) || $file['error'] !== UPLOAD_ERR_OK) {
-            throw new Exception('File upload failed');
-        }
-
-        if (!in_array($file['type'], $this->allowedTypes)) {
-            throw new Exception('Invalid file type. Only JPG, PNG and GIF are allowed');
-        }
-
-        if ($file['size'] > $this->maxFileSize) {
-            throw new Exception('File size exceeds limit');
-        }
-    }
+//---------------------------------generate unique file name---------------------------------
+   
 
     private function generateUniqueFileName($originalName) {
         $extension = pathinfo($originalName, PATHINFO_EXTENSION);
@@ -67,7 +55,8 @@ class FileUploadHelper {
     public function setMaxFileSize($size) {
         $this->maxFileSize = $size;
     }
-
+// for profile pic --------------------------------------------------------------------------
+//move this to a model later  -using blob here 
     public function displayImage($userId) {
         try {
             
@@ -93,9 +82,9 @@ class FileUploadHelper {
                 header('Content-Type: ' . $mime_type);
                 echo $row['profile_picture'];
             } else {
-                // If no image found, return a default image
+                // If no image found, return a default image 
                 header('Content-Type: image/jpeg');
-                readfile(__DIR__ . '/../assets/default-profile.jpg'); // Adjust path as needed
+                // readfile(__DIR__ . '/../public/default-profile.jpg');  change this and add a default pic :=)
             }
             
             $db->deconnexion();
@@ -109,7 +98,7 @@ class FileUploadHelper {
 
     public function saveFile($file, $subdirectory = '') {
         try {
-            $this->validateFile($file);
+            
             $targetDir = $this->uploadDirectory . $subdirectory;
             
             if (!file_exists($targetDir)) {

@@ -1,32 +1,32 @@
-// tableFilter.js
+
 function initializeTableFilters(tableContainerSelector, filterColumns) {
-    // Create filter container
+    // filter container
     const filterContainer = $('<div>').addClass('mb-4 p-4 bg-white rounded shadow');
     const filterWrapper = $('<div>').addClass('flex gap-4');
     
-    // Create filter dropdowns for each specified column
+    //  filter dropdown for each  column
     filterColumns.forEach(column => {
-        // Get unique values from the specified column
+        //  unique values from the specified column
         const uniqueValues = new Set();
         $(`${tableContainerSelector} table tbody tr td:nth-child(${column.columnIndex})`).each(function() {
             const value = $(this).text().trim();
             if (value) uniqueValues.add(value);
         });
         
-        // Create filter group
+        //  filter group
         const filterGroup = $('<div>').addClass('flex-1');
         
-        // Create label
+        // label
         const label = $('<label>')
             .addClass('block text-sm font-medium text-gray-700 mb-1')
             .text(column.label);
         
-        // Create select
+        //  select
         const select = $('<select>')
             .addClass('w-full p-2 border rounded')
             .attr('data-column-index', column.columnIndex);
             
-        // Add default option
+        // default option (tt les options)
         select.append($('<option>').val('').text(`Tous les ${column.label.toLowerCase()}`));
         
         // Add sorted options
@@ -38,7 +38,7 @@ function initializeTableFilters(tableContainerSelector, filterColumns) {
         filterWrapper.append(filterGroup);
     });
     
-    // Add reset button
+    //  reset button
     const resetButton = $('<button>')
         .addClass('px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600')
         .text('Réinitialiser')
@@ -83,6 +83,6 @@ function initializeTableFilters(tableContainerSelector, filterColumns) {
         });
     }
     
-    // Bind change event to all filter dropdowns
+    //change event to all filter dropdowns
     filterContainer.find('select').on('change', applyFilters);
 }

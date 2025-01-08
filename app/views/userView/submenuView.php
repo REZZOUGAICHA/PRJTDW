@@ -8,7 +8,6 @@ class SubmenuView {
     }
     
     public function displaySubmenu($pageIdentifier) {
-        // Now we pass the identifier string directly
         $items = $this->submenuController->getSubmenu($pageIdentifier);
         ?> 
         <div class="sticky top-14 z-40 w-full flex justify-center py-4 ">

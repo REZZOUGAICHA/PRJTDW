@@ -35,7 +35,7 @@ class NewsView {
     ?>
     <div class="w-full">
         <?php 
-        // Display all events
+        // events
         $cardView->displaySection($data['events'], 'All Events', [
             'title' => 'event_name',
             'description' => 'event_description',

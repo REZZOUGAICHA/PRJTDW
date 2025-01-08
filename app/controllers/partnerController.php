@@ -10,40 +10,77 @@ class partnerController {
 
     public function __construct() {
         $this->partnerModel = new partnerModel();
+        //still not working when trying to update the logo 
         $this->fileUploadHelper = new FileUploadHelper('uploads/partners/');
         $this->fileUploadHelper->setAllowedTypes(['image/jpeg', 'image/png', 'image/gif']);
         $this->fileUploadHelper->setMaxFileSize(5242880); // 5MB
     }
-
+    //---------------------- category ----------------------
     public function getCategories() {
-        return $this->partnerModel->getCategories(); // You'll need to add this to your model
+        return $this->partnerModel->getCategories(); 
+    }
+
+    public function getpartners(){
+        return $this->partnerModel->getpartners();
     }
 
     public function getCategoryById($category_id) {
-        return $this->partnerModel->getCategoryById($category_id); // You'll need to add this to your model
+        return $this->partnerModel->getCategoryById($category_id); 
     }
     //---------------------- PARTNER ----------------------
     public function getPartnersByCategory() {
         return $this->partnerModel->getPartnersByCategory();
     }
-    
 
     // ---------------------- CRUDS ----------------------
-    public function createPartner($user_id, $name, $city, $description, $logo_url, $category_id, $link) {
-        $this->partnerModel->createPartner($user_id, $name, $city, $description, $logo_url, $category_id, $link);
-    }
+    // Add this method to your partnerController class
 
-    // -------------------------------------------------------------------------------------------
-    public function updatePartner($id, $name, $city, $description, $logo_url, $category_id, $link) {
-        $this->partnerModel->updatePartner($id, $name, $city, $description, $logo_url, $category_id, $link);
-    }
+public function handlePartnerCreate($postData, $files) {
+    try {
+        // Validate required fields
+        if (empty($postData['name']) || empty($postData['city']) || empty($postData['category_id'])) {
+            throw new Exception('Les champs obligatoires doivent être remplis');
+        }
 
+        // Handle logo upload if provided
+        $logo_url = '';
+        if (!empty($files['logo']['tmp_name'])) {
+            $result = $this->fileUploadHelper->saveFile($files['logo']);
+            if (!$result['success']) {
+                throw new Exception($result['error']);
+            }
+            $logo_url = $result['filePath'];
+        }
+
+        // Get current user ID from session
+        $user_id = $_SESSION['user_id'] ?? 1; // Default to 1 if not set, adjust as needed
+
+        // Create the partner
+        $partner_id = $this->partnerModel->createPartner(
+            $user_id,
+            $postData['name'],
+            $postData['city'],
+            $postData['description'] ?? '',
+            $logo_url,
+            $postData['category_id']
+        );
+
+        $_SESSION['success'] = 'Partenaire ajouté avec succès';
+        header('Location: ' . BASE_URL . '/admin/partner?id=' . $partner_id);
+        return true;
+        
+    } catch (Exception $e) {
+        error_log('Error creating partner: ' . $e->getMessage());
+        $_SESSION['error'] = $e->getMessage();
+        header('Location: ' . BASE_URL . '/admin/partenaires?action=create');
+        return false;
+    }
+}
     // -------------------------------------------------------------------------------------------
     public function deletePartner($id) {
         $this->partnerModel->deletePartner($id);
     }
-
-    // -------------------------------------------------------------------------------------------
+    // -------------------------------DISPLAY------------------------------------------------------------
     function showPartnerForAdmin() {  //of the admin
         require_once __DIR__ . '/../Views/adminView/partnerView.php';
         $view = new partnerView();
@@ -55,23 +92,26 @@ class partnerController {
         $view = new partnerView();
         $view->displaypartner();
     }
-    function getPartnerById($id) {  
-    return $this->partnerModel->getPartnerById($id);
-}
 
-   
-    
-
-public function showPartnerDetail($id) {
+    public function showPartnerDetail($id) {
     require_once __DIR__ . '/../Views/adminView/partnerDetailView.php';
     $view = new PartnerDetailView();
     $view->displayPartnerDetail($id);
 }
-
+    public function showCreatePartnerForm() {
+        require_once __DIR__ . '/../Views/adminView/partnerView.php';
+        $view = new partnerView();
+        $view->displayCreatePartnerForm();
+    }
+// -------------------------------------------------------------------------------------------
+    function getPartnerById($id) {  
+    return $this->partnerModel->getPartnerById($id);
+}
     // -------------------------------------------------------------------------------------------
- public function handlePartnerUpdate($postData, $files) {
+public function handlePartnerUpdate($postData, $files) {
     
         try {
+            //required or not 
             if (empty($postData['partner_id']) || empty($postData['name']) || empty($postData['city'])) {
                 throw new Exception('Required fields are missing');
             }
@@ -80,7 +120,7 @@ public function showPartnerDetail($id) {
             if (!$partner) {
                 throw new Exception('Partner not found');
             }
-
+            //handle logo  -still not working :')-
             $logo_url = $partner['logo_url'];
             if (!empty($files['logo']['tmp_name'])) {
                 $result = $this->fileUploadHelper->saveFile($files['logo']);
@@ -89,7 +129,7 @@ public function showPartnerDetail($id) {
                 }
                 $logo_url = $result['filePath'];
             }
-
+             // Update data 
             $this->partnerModel->updatePartner(
                 $postData['partner_id'],
                 $postData['name'],
@@ -110,7 +150,63 @@ public function showPartnerDetail($id) {
         }
         exit;
     }
+    public function handleDiscountUpdate($partnerId, $discountData) {
+    try {
+        if (!isset($discountData['discount_id']) || !isset($discountData['name']) || !isset($discountData['percentage'])) {
+            throw new Exception('Missing required discount data');
+        }
 
+        $this->partnerModel->updatePartnerDiscount(
+            $discountData['discount_id'],
+            $partnerId,
+            $discountData['name'],
+            $discountData['percentage']
+        );
+
+        $_SESSION['success'] = 'Discount updated successfully';
+        return true;
+    } catch (Exception $e) {
+        $_SESSION['error'] = $e->getMessage();
+        return false;
+    }
+}
+
+public function handleDiscountAdd($partnerId, $discountData) {
+    try {
+        if (!isset($discountData['name']) || !isset($discountData['percentage'])) {
+            throw new Exception('Missing required discount data');
+        }
+
+        $this->partnerModel->addPartnerDiscount(
+            $partnerId,
+            $discountData['name'],
+            $discountData['percentage']
+        );
+
+        $_SESSION['success'] = 'Discount added successfully';
+        return true;
+    } catch (Exception $e) {
+        $_SESSION['error'] = $e->getMessage();
+        return false;
+    }
+}
+
+public function handleDiscountDelete($partnerId, $discountId) {
+    try {
+        $this->partnerModel->deletePartnerDiscount($discountId, $partnerId);
+        $_SESSION['success'] = 'Discount deleted successfully';
+        return true;
+    } catch (Exception $e) {
+        $_SESSION['error'] = $e->getMessage();
+        return false;
+    }
+}
+
+    public function showpartnersLogo() {
+        require_once __DIR__ . '/../Views/userView/LandingView.php';
+        $view = new landingView();
+        $view->partnersLogoDisplay();
+    }
 
     
 

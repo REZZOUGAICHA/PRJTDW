@@ -21,10 +21,10 @@ class SidebarView {
 
         <!-- Sidebar -->
         <aside id="sidebar" 
-               class="transform lg:transform-none lg:translate-x-0 -translate-x-full transition-transform duration-300 ease-in-out
-                      fixed top-0 left-0 h-screen w-64 bg-gray-800 text-white z-40
-                      lg:relative">
-            <!-- Logo/Header -->
+            class="transform lg:transform-none lg:translate-x-0 -translate-x-full transition-transform duration-300 ease-in-out
+                    fixed top-0 left-0 h-screen w-64 bg-gray-800 text-white z-40
+                    lg:relative">
+            <!-- Logo/Header (add it mmb3d-->
             <div class="flex items-center justify-between h-16 bg-gray-900 px-4">
                 <h1 class="text-lg font-semibold">Admin Panel</h1>
                 <!-- Close button for mobile -->
@@ -42,10 +42,10 @@ class SidebarView {
                     <?php foreach ($items as $item): ?>
                         <li>
                             <a href="<?php echo htmlspecialchars($item['link']); ?>" 
-                               class="flex items-center px-4 py-3 text-sm font-medium
-                                      hover:bg-gray-700 hover:text-blue-400
-                                      transition-all duration-200 ease-in-out
-                                      <?php echo $activePage === $item['link'] 
+                            class="flex items-center px-4 py-3 text-sm font-medium
+                                    hover:bg-gray-700 hover:text-blue-400
+                                    transition-all duration-200 ease-in-out
+                                    <?php echo $activePage === $item['link'] 
                                             ? 'bg-gray-700 text-blue-400 border-l-4 border-blue-400' 
                                             : ''; ?>">
                                 <span><?php echo htmlspecialchars($item['name']); ?></span>
@@ -58,8 +58,8 @@ class SidebarView {
 
         <!-- Overlay for mobile -->
         <div id="sidebar-overlay"
-             class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"
-             aria-hidden="true">
+            class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"
+            aria-hidden="true">
         </div>
 
         <script>

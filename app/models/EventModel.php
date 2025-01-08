@@ -7,7 +7,7 @@ class EventModel {
         $this->db = new Database();
     }
 
-    // Get the latest events by type with a limit
+    // limiting to  3 events
     public function getLatestEventsByType($type, $limit = 3) {
         $c = $this->db->connexion();
         $sql = "SELECT * FROM event WHERE type = :type ORDER BY event_date ASC LIMIT :limit";
