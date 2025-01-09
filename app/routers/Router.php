@@ -1,4 +1,8 @@
 <?php
+// At the top of your index.php or wherever your routing is handled
+error_log('REQUEST_METHOD: ' . $_SERVER['REQUEST_METHOD']);
+error_log('REQUEST_URI: ' . $_SERVER['REQUEST_URI']);
+error_log('GET params: ' . print_r($_GET, true));
 class Router {
     public static function route($page) {
         ob_start();
@@ -220,27 +224,16 @@ class Router {
                 $inscriptionController->logout();
                 break;
 
-                case 'membership' : 
-                require_once __DIR__ . '/../controllers/membershipController.php';
-                $membershipController = new membershipController();
-                $membershipController->showMembershipForm();
-                break;
-                case 'membership/submit':
-                require_once __DIR__ . '/../controllers/membershipController.php';
-                $membershipController = new membershipController();
-                $result = $membershipController->submitMembership($_POST, $_FILES);
-                
-                if (isset($result['success'])) {
-                    $_SESSION['success'] = 'Votre demande a été soumise avec succès';
-                    header('Location: ' . BASE_URL . '/Profile');
-                    exit;
-                } else {
-                    $_SESSION['error'] = $result['error'];
-                    header('Location: ' . BASE_URL . '/membership');
-                    exit;
-                }
+                case 'membership':
+    require_once __DIR__ . '/../controllers/MembershipController.php';
+    $membershipController = new MembershipController();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $membershipController->handleMembershipApplication();
+    } else {
+        $membershipController->showMembershipForm();
+    }
     break;
-                
 
             default:
                 echo "Page not found.";

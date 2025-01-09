@@ -1,4 +1,9 @@
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+error_log('Session started. Session data: ' . print_r($_SESSION, true));
 define('BASE_URL', '/TDW'); // Base URL of your application
 
 // Set JSON header for AJAX requests

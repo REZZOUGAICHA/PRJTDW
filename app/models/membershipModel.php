@@ -1,84 +1,77 @@
-
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-require_once __DIR__ . '/../Helpers/Database.php';
+require_once __DIR__ . '/../helpers/Database.php';
 
-// MembershipModel.php
-class MembershipModel {
+    class MembershipModel {
     private $db;
-    private $conn;
 
     public function __construct() {
         $this->db = new Database();
-        $this->conn = $this->db->connexion();
     }
 
-    public function submitMembershipApplication($userId, $cardTypeId, $idCardFile, $receiptFile, $amount) {
+    public function getcards() {
+        $c = $this->db->connexion();
+        $sql = "SELECT * FROM cardtype";
+        $stmt = $this->db->request($c, $sql);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->db->deconnexion();
+        return $result;
+    }
+
+    public function createMembershipApplication($data) { 
         try {
-            error_log("Starting submitMembershipApplication transaction");
-            $this->conn->beginTransaction();
+            $connection = $this->db->connexion();
+            $connection->beginTransaction();
+
+            // Étape 1 : Créer un paiement
+            $paymentQuery = "INSERT INTO payment (user_id, payment_type_id, amount, description, status) 
+           VALUES (:user_id, :payment_type_id, :amount, :description, 'pending')";
             
-            // 1. Store files
-            error_log("Storing files");
-            $idCardPath = $this->storeFile($idCardFile, 'id_cards');
-            $receiptPath = $this->storeFile($receiptFile, 'receipts');
-            error_log("Files stored successfully - ID Card: $idCardPath, Receipt: $receiptPath");
+            $stmt = $this->db->request($connection, $paymentQuery, [
+                ':user_id' => $data['user_id'],
+                ':payment_type_id' => 2, // Type "Carte"
+                ':amount' => $data['amount'],
+                ':description' => $data['description']
+            ]);
             
-            // 2. Create payment record
-            error_log("Creating payment record");
-            $sql = "INSERT INTO payment (user_id, payment_type_id, amount, status, description) 
-                    VALUES (?, 2, ?, 'pending', 'Payment for membership card')";
-            $this->db->request($this->conn, $sql, [$userId, $amount]);
-            $paymentId = $this->conn->lastInsertId();
-            error_log("Payment created with ID: $paymentId");
+            $paymentId = $connection->lastInsertId();
+
+            // Étape 2 : Associer le reçu au paiement
+            $receiptQuery = "INSERT INTO receipt (payment_id, file_path, upload_date) 
+                             VALUES (:payment_id, :file_path, NOW())";
             
-            // 3. Store receipt record
-            error_log("Storing receipt record");
-            $sql = "INSERT INTO receipt (payment_id, file_path) VALUES (?, ?)";
-            $this->db->request($this->conn, $sql, [$paymentId, $receiptPath]);
+            $this->db->request($connection, $receiptQuery, [
+                ':payment_id' => $paymentId,
+                ':file_path' => $data['receipt_file_path']
+            ]);
+
+            // Étape 3 : Associer la carte d'identité à l'utilisateur
+            $idCardQuery = "INSERT INTO id_card (user_id, file_path, upload_date) 
+                            VALUES (:user_id, :file_path, NOW())";
             
-            // 4. Store ID card record
-            error_log("Storing ID card record");
-            $sql = "INSERT INTO id_card (user_id, file_path) VALUES (?, ?)";
-            $this->db->request($this->conn, $sql, [$userId, $idCardPath]);
+            $this->db->request($connection, $idCardQuery, [
+                ':user_id' => $data['user_id'],
+                ':file_path' => $data['id_card_file_path']
+            ]);
+
+            // Étape 4 : Créer une application de membership
+            $applicationQuery = "INSERT INTO membership_application (user_id, card_type_id, notes, status, application_date) 
+                                 VALUES (:user_id, :card_type_id, :notes, 'pending', NOW())";
             
-            // 5. Create membership application - EXPLICIT ERROR HANDLING
-            error_log("Creating membership application");
-            try {
-                $sql = "INSERT INTO membership_application (
-                    user_id, card_type_id, status, application_date
-                ) VALUES (?, ?, 'pending', NOW())";
-                $stmt = $this->conn->prepare($sql);
-                if (!$stmt) {
-                    throw new Exception("Failed to prepare membership application statement: " . print_r($this->conn->errorInfo(), true));
-                }
-                $result = $stmt->execute([$userId, $cardTypeId]);
-                if (!$result) {
-                    throw new Exception("Failed to execute membership application insert: " . print_r($stmt->errorInfo(), true));
-                }
-                error_log("Membership application created successfully");
-            } catch (Exception $e) {
-                error_log("Error creating membership application: " . $e->getMessage());
-                throw $e;
-            }
-            
-            // 6. Update user status
-            error_log("Updating user status");
-            $sql = "UPDATE user SET membership_status = 'pending' WHERE id = ?";
-            $this->db->request($this->conn, $sql, [$userId]);
-            
-            $this->conn->commit();
-            error_log("Transaction committed successfully");
-            return ['success' => true];
-            
+            $this->db->request($connection, $applicationQuery, [
+                ':user_id' => $data['user_id'],
+                ':card_type_id' => $data['card_type_id'],
+                ':notes' => $data['notes']
+            ]);
+
+            $connection->commit();
+            return $connection->lastInsertId();
         } catch (Exception $e) {
-            error_log("Error in submitMembershipApplication: " . $e->getMessage());
-            error_log("Stack trace: " . $e->getTraceAsString());
-            $this->conn->rollBack();
-            return ['error' => 'Une erreur est survenue lors de la soumission. Veuillez réessayer.'];
+            $connection->rollBack();
+            error_log("Erreur création application de membership: " . $e->getMessage());
+            throw new Exception('Échec de création de l\'application de membership');
         }
     }
 }
+
+
 ?>
