@@ -96,9 +96,8 @@ class FileUploadHelper {
     }
 
 
-    public function saveFile($file, $subdirectory = '') {
+   public function saveFile($file, $subdirectory = '') {
         try {
-            
             $targetDir = $this->uploadDirectory . $subdirectory;
             
             if (!file_exists($targetDir)) {
@@ -112,9 +111,11 @@ class FileUploadHelper {
                 throw new Exception('Failed to move uploaded file');
             }
             
+            $relativePath = BASE_URL . '/' . $this->uploadDirectory . $subdirectory . $fileName;
+            
             return [
                 'success' => true,
-                'filePath' => $subdirectory . $fileName
+                'filePath' => $relativePath
             ];
         } catch (Exception $e) {
             return [
@@ -123,6 +124,7 @@ class FileUploadHelper {
             ];
         }
     }
+
 }
 
 ?>

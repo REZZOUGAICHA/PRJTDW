@@ -1,74 +1,90 @@
+
 <?php
-require_once __DIR__ . '/../models/PaymentModel.php';
+require_once __DIR__ . '/../models/MembershipModel.php';
 require_once __DIR__ . '/../helpers/FileUploadHelper.php';
-
-
+require_once __DIR__ . '/../Views/userView/membershipView.php';
 class MembershipController {
-    private $paymentModel;
-
+    private $membershipModel;
+    private $membershipView;
+    
     public function __construct() {
-        $this->paymentModel = new PaymentModel();
+        $this->membershipModel = new MembershipModel();
+        $this->membershipView = new MembershipView();
     }
-
-    public function submitMembership($data, $files) {
-        $fileHelper = new FileUploadHelper('uploads/');
-        $db = new Database();
-        $conn = $db->connexion();
-        
-
-        try {
-
-            if ($this->hasExistingRequest($_SESSION['user_id'])) {
-            return ['error' => 'Vous avez déjà une demande en cours'];
-        }
-        
-            // Upload ID card
-            $idCardResult = $fileHelper->saveFile($files['id_card'], 'id_cards/');
-            if (!$idCardResult['success']) {
-                return ['error' => 'Erreur lors du téléchargement de la carte d\'identité'];
-            }
-
-            // Upload receipt
-            $receiptResult = $fileHelper->saveFile($files['receipt'], 'receipts/');
-            if (!$receiptResult['success']) {
-                return ['error' => 'Erreur lors du téléchargement du reçu'];
-            }
-
-            $conn->beginTransaction();
-
-            // Insert payment
-            $paymentId = $this->paymentModel->insertPayment($_SESSION['user_id'], $data['card_type']);
-
-            // Insert receipt
-            $this->paymentModel->insertReceipt($paymentId, $receiptResult['filePath']);
-
-            // Insert ID card
-            $this->paymentModel->insertIdCard($_SESSION['user_id'], $idCardResult['filePath']);
-
-            $conn->commit();
-            return ['success' => true];
-
-        } catch (Exception $e) {
-            $conn->rollBack();
-            return ['error' => 'Une erreur est survenue : ' . $e->getMessage()];
-        }
-    }
+    
     public function showMembershipForm() {
-        require_once __DIR__ . '/../views/userView/membershipView.php';
-        $membershipView = new membershipView();
-        $membershipView->displayMembershipForm();
+        if (!isset($_SESSION['user_id'])) {
+            $_SESSION['error'] = 'Vous devez être connecté pour accéder à cette page.';
+            header('Location: ' . BASE_URL . '/login');
+            exit;
+        }
+        
+        $this->membershipView->displayMembershipForm();
+        
     }
-
-    private function hasExistingRequest($userId) {
-    $sql = "SELECT 1 FROM payment p 
-            WHERE p.user_id = ? AND p.payment_type_id = 2 
-            AND p.status = 'pending'";
-    $result = $this->paymentModel->db->request(
-        $this->paymentModel->conn, 
-        $sql, 
-        [$userId]
-    );
-    return !empty($result);
-}
+    
+    public function submitMembership($postData, $files) {
+        error_log("Starting membership submission process");
+        
+        // Debug session
+        error_log("Session user_id: " . (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'not set'));
+        error_log("POST data: " . print_r($postData, true));
+        error_log("FILES data: " . print_r($files, true));
+        
+        if (!isset($_SESSION['user_id'])) {
+            error_log("No user_id in session");
+            return ['error' => 'Vous devez être connecté pour soumettre une demande.'];
+        }
+        
+        if (empty($postData['card_type'])) {
+            error_log("No card_type selected");
+            return ['error' => 'Veuillez sélectionner un type de carte.'];
+        }
+        
+        if (empty($files['id_card']) || empty($files['receipt'])) {
+            error_log("Missing required files");
+            return ['error' => 'Tous les fichiers sont requis.'];
+        }
+        
+        try {
+            $cardType = $this->membershipModel->getCardTypeDetails($postData['card_type']);
+            if (!$cardType) {
+                error_log("Invalid card type: " . $postData['card_type']);
+                return ['error' => 'Type de carte invalide.'];
+            }
+            
+            error_log("Starting file validation");
+            // Validate files
+            $idCardValidation = $this->membershipModel->validateFile($files['id_card']);
+            $receiptValidation = $this->membershipModel->validateFile($files['receipt']);
+            
+            if (isset($idCardValidation['error'])) {
+                error_log("ID card validation failed: " . $idCardValidation['error']);
+                return $idCardValidation;
+            }
+            if (isset($receiptValidation['error'])) {
+                error_log("Receipt validation failed: " . $receiptValidation['error']);
+                return $receiptValidation;
+            }
+            
+            error_log("All validations passed, proceeding with submission");
+            
+            // Submit application
+            $result = $this->membershipModel->submitMembershipApplication(
+                $_SESSION['user_id'],
+                $postData['card_type'],
+                $files['id_card'],
+                $files['receipt'],
+                $cardType['annual_fee']
+            );
+            
+            error_log("Submission result: " . print_r($result, true));
+            return $result;
+            
+        } catch (Exception $e) {
+            error_log("Error in submitMembership: " . $e->getMessage());
+            return ['error' => 'Une erreur est survenue lors de la soumission.'];
+        }
+    }
 }
 ?>

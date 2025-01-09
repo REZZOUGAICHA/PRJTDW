@@ -113,6 +113,8 @@ class partnerModel {
     return $categories;
 }
 
+
+
     // Update offer
 public function updatePartnerOffer($offerId, $partnerId, $cardTypeName, $name, $description, $startDate, $endDate) {
     $conn = $this->db->connexion();
@@ -233,6 +235,12 @@ public function addPartnerOffer($partnerId, $cardTypeName, $name, $description, 
         $this->db->deconnexion();
     }
 
+    public function deletePartner($id) {
+        $c = $this->db->connexion();
+        $sql = "DELETE FROM Partner WHERE id = :id";
+        $this->db->request($c, $sql, ['id' => $id]);
+        $this->db->deconnexion();
+    }
     // -------------------------------------------------------------------------------------------
  public function addPartnerDiscount($partnerId, $cardTypeName, $name, $description, $percentage, $discountType, $startDate, $endDate) {
     $conn = $this->db->connexion();
