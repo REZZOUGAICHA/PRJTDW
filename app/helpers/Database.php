@@ -18,19 +18,21 @@ class Database {
         return $this->connection;
     }
 
-    public function request($conn, $sql, $params = []) {
-    try {
+    public function request($conn, $sql, $params = [], $types = []) {
         $stmt = $conn->prepare($sql);
-        error_log('Executing SQL: ' . $sql);
-        error_log('With parameters: ' . print_r($params, true));
-        $result = $stmt->execute($params);
-        error_log('SQL execution result: ' . ($result ? 'success' : 'failure'));
+        
+        // Bind each parameter with its specific type if provided
+        foreach ($params as $key => $value) {
+            $paramType = PDO::PARAM_STR; // default to string
+            if (isset($types[$key])) {
+                $paramType = $types[$key];
+            }
+            $stmt->bindValue($key, $value, $paramType);
+        }
+        
+        $stmt->execute();
         return $stmt;
-    } catch (PDOException $e) {
-        error_log('Database error: ' . $e->getMessage());
-        throw $e;
     }
-}
 
     public function deconnexion() {
         $this->connection = null; 

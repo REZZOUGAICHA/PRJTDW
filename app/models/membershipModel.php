@@ -71,6 +71,30 @@ require_once __DIR__ . '/../helpers/Database.php';
             throw new Exception('Échec de création de l\'application de membership');
         }
     }
+    public function hasPendingRequest($userId) {
+    // Initialize the database connection
+    $db = new Database();
+    $conn = $db->connexion();
+
+    // Define the query
+    $query = "SELECT COUNT(*) as count FROM membership_application
+              WHERE user_id = :user_id AND status = 'pending'";
+
+    // Execute the query using the `request` method
+    $stmt = $db->request($conn, $query, [
+        ':user_id' => $userId
+    ]);
+
+    // Fetch the result
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Close the connection
+    $db->deconnexion();
+
+    // Return whether there are pending requests
+    return $result['count'] > 0;
+}
+
 }
 
 

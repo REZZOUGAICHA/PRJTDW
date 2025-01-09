@@ -223,6 +223,7 @@ class Router {
                 $inscriptionController = new InscriptionController();
                 $inscriptionController->logout();
                 break;
+                
 
                 case 'membership':
     require_once __DIR__ . '/../controllers/MembershipController.php';

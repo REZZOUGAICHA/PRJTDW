@@ -16,6 +16,7 @@ class MembershipController {
         $this->model = new MembershipModel();
         $this->fileUploader = new FileUploadHelper('uploads/memberships/');
     }
+    
 
     public function handleMembershipApplication() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
@@ -72,7 +73,8 @@ class MembershipController {
         require_once __DIR__ . '/../views/userView/MembershipView.php';
         $view = new MembershipView();
         $cards = $this->model->getCards();
-        $view->display($cards);
+        $hasPendingRequest = $this->model->hasPendingRequest($this->userId);
+        $view->display($cards, $hasPendingRequest);
     }
 }
 
