@@ -8,6 +8,19 @@ require_once __DIR__ . '/../helpers/Database.php';
         $this->db = new Database();
     }
 
+    public function getMembershipApplications(){
+        $c = $this->db->connexion();
+        $sql = "SELECT ma.id, ma.user_id, ma.card_type_id, ma.notes, ma.status, ma.application_date, u.first_name, u.last_name, ct.name as card_name
+                FROM membership_application ma
+                JOIN user u ON ma.user_id = u.id
+                JOIN cardtype ct ON ma.card_type_id = ct.id
+                ORDER BY ma.application_date DESC";
+        $stmt = $this->db->request($c, $sql);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->db->deconnexion();
+        return $result;
+    }
+
     public function getcards() {
         $c = $this->db->connexion();
         $sql = "SELECT * FROM cardtype";

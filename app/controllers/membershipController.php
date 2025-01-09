@@ -69,12 +69,23 @@ class MembershipController {
         }
     }
 
+
+
     public function showMembershipForm() {
         require_once __DIR__ . '/../views/userView/MembershipView.php';
         $view = new MembershipView();
         $cards = $this->model->getCards();
         $hasPendingRequest = $this->model->hasPendingRequest($this->userId);
         $view->display($cards, $hasPendingRequest);
+    }
+
+    public function showMembershipApplications() {
+        // Fetch data from the model
+        $applications = $this->model->getMembershipApplications();
+        require_once __DIR__ . '/../views/adminView/AdhesionsView.php';
+        // Pass data to the view
+        $view = new MembershipTableView();
+        $view->display($applications);
     }
 }
 

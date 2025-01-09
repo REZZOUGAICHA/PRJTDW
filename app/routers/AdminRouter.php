@@ -190,7 +190,12 @@ class AdminRouter {
             case 'parametres':
                 
                 break;
-            
+            case 'adhesions':
+                require_once __DIR__ . '/../controllers/MembershipController.php';
+                $membershipController = new MembershipController();
+                $membershipController->showMembershipApplications();
+
+                break;
     
 
             default:

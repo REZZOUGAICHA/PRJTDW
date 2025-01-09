@@ -49,11 +49,7 @@ class NewsController {
         $view->displayCreateNewsForm();
     }
 
-    public function showSingleNews($id) {
-        require_once __DIR__ . '/../views/userView/NewsDetailsView.php';
-        $view = new NewsDetailsView();
-        $view->displayAnnounceDetail($id);
-    }
+    
 
     // Data methods
     public function getAllAnnounces() {
