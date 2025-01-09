@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../controllers/PartnerController.php';
-
+// here im doing the cruds for partners and each partner with his offers and discounts 
 class PartnerDetailView {
     private $partnerController;
     

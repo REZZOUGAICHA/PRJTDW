@@ -26,7 +26,7 @@ class AnnounceModel {
         return $announces;
     }
 
-    public function getAnnounceById($id) {
+    public function getannounceById($id) {
         $c = $this->db->connexion();
         $sql = "SELECT * FROM annonces WHERE id = :id";
         $stmt = $this->db->request(

@@ -147,43 +147,39 @@ class AdminRouter {
                 
                 break;
             case 'news':
-                require_once __DIR__ . '/../controllers/NewsController.php';
-                $newsController = new NewsController();
+    require_once __DIR__ . '/../controllers/NewsController.php';
+    $newsController = new NewsController();
 
-                if (isset($_GET['action'])) {
-                    switch ($_GET['action']) {
-                        case 'create':
-                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                                $newsController->handleNewsCreate($_POST, $_FILES);
-                            } else {
-                                $newsController->showCreateNewsForm();
-                            }
-                            break;
-
-                        case 'update':
-                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                                $success = $newsController->handleNewsUpdate($_POST, $_FILES);
-                                header('Location: ' . BASE_URL . '/admin/news?id=' . $_POST['news_id'] . ($success ? '' : '&edit=true'));
-                                exit;
-                            }
-                            break;
-
-                        case 'delete':
-                            if (isset($_GET['id'])) {
-                                $newsController->deleteNews($_GET['id']);
-                                header('Location: ' . BASE_URL . '/admin/news');
-                                exit;
-                            }
-                            break;
-
-                        default:
-                            echo "Invalid action for news.";
-                            break;
-                    }
+    if (isset($_GET['action'])) {
+        switch ($_GET['action']) {
+            case 'create':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $newsController->handleNewsCreate($_POST, $_FILES);
                 } else {
-                    $newsController->showNewsForAdmin();
+                    $newsController->showCreateNewsForm();
                 }
                 break;
+            case 'update':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $newsController->handleNewsUpdate($_POST['news_id'], $_POST, $_FILES);
+                    header('Location: ' . BASE_URL . '/admin/news?id=' . $_POST['news_id']);
+                    exit;
+                }
+                break;
+            case 'delete':
+                if (isset($_GET['id'])) {
+                    $newsController->deleteNews($_GET['id']);
+                    header('Location: ' . BASE_URL . '/admin/news');
+                    exit;
+                }
+                break;
+        }
+    } elseif (isset($_GET['id'])) {
+        $newsController->showNewsDetails($_GET['id']);
+    } else {
+        $newsController->showNewsForAdmin();
+    }
+    break;
 
 
            

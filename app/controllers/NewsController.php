@@ -30,6 +30,12 @@ class NewsController {
         $view->announcesView();
     }
 
+    public function showNewsDetails($id) {
+        require_once __DIR__ . '/../Views/adminView/NewsDetailsView.php';
+        $view = new NewsDetailView();
+        $view->displayNewsDetail($id);
+    }
+
    
     public function showNewsForAdmin() {
         require_once __DIR__ . '/../views/adminView/NewsView.php';
@@ -56,7 +62,7 @@ class NewsController {
         ];
     }
 
-    public function getAnnounceById($id) {
+    public function getnewsById($id) {
         return $this->model->getAnnounceById($id);
     }
 
@@ -84,41 +90,49 @@ class NewsController {
     }
 }
 
-    public function handleNewsUpdate($id, $postData, $files) {
-        try {
-            $announce = $this->model->getAnnounceById($id);
-            if (!$announce) {
-                throw new Exception('Announcement not found');
+  public function handleNewsUpdate($id, $postData, $files) {
+    try {
+        $announce = $this->model->getAnnounceById($id);
+        if (!$announce) {
+            throw new Exception('Announcement not found');
+        }
+        
+        $picture_url = $announce['picture_url'];
+        
+        // Check if a new picture is uploaded
+        if (!empty($files['picture']['tmp_name'])) {
+            // Use FileUploadHelper to handle the file upload
+            $fileUploadHelper = new FileUploadHelper('uploads/announces/');
+            $uploadResult = $fileUploadHelper->saveFile($files['picture']);
+            
+            if (!$uploadResult['success']) {
+                throw new Exception('File upload failed: ' . $uploadResult['error']);
             }
             
-            $picture_url = $announce['picture_url'];
+            // Set the new picture URL
+            $picture_url = $uploadResult['filePath'];
             
-            if (!empty($files['picture']['tmp_name'])) {
-                $uploadResult = $this->fileUploader->saveFile($files['picture']);
-                if (!$uploadResult['success']) {
-                    throw new Exception('File upload failed: ' . $uploadResult['error']);
+            // Delete the old picture if it exists
+            if (!empty($announce['picture_url'])) {
+                $oldFilePath = str_replace(BASE_URL, '', $announce['picture_url']);
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
                 }
-                
-                $picture_url = $uploadResult['filePath'];
-                if (!empty($announce['picture_url'])) {
-                    $oldFilePath = 'uploads/announces/' . $announce['picture_url'];
-                    if (file_exists($oldFilePath)) {
-                        unlink($oldFilePath);
-                    }
-                }
             }
-            
-            if ($this->model->updateAnnounce($id, $postData['name'], $postData['description'], $picture_url)) {
-                header('Location: ' . BASE_URL . '/admin/news/' . $id);
-                exit;
-            }
-            throw new Exception('Failed to update announcement');
-        } catch (Exception $e) {
-            $_SESSION['error'] = $e->getMessage();
-            header('Location: ' . BASE_URL . '/admin/news/' . $id . '/edit');
+        }
+        
+        // Update the announcement in the database
+        if ($this->model->updateAnnounce($id, $postData['name'], $postData['description'], $picture_url)) {
+            header('Location: ' . BASE_URL . '/admin/news?id=' . $id);
             exit;
         }
+        throw new Exception('Failed to update announcement');
+    } catch (Exception $e) {
+        $_SESSION['error'] = $e->getMessage();
+        header('Location: ' . BASE_URL . '/admin/news?id=' . $id . '&edit=true');
+        exit;
     }
+}
 
     public function deleteNews($id) {
         try {
