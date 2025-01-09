@@ -119,53 +119,112 @@ class PartnerDetailView {
     <div class="mt-8 pt-6 border-t border-gray-100">
         <h3 class="text-lg font-medium mb-4">Discounts</h3>
         
-        <!-- Existing Discounts -->
         <?php
+        // Debug output to check the data structure
+        // echo '<pre>'; print_r($partnerData); echo '</pre>';
+        
         $partnerData = $this->partnerController->getPartnersByCategory();
         $partnerDiscounts = [];
         foreach ($partnerData as $category) {
             foreach ($category['partners'] as $p) {
                 if ($p['id'] == $partnerId) {
-                    $partnerDiscounts = $p['discounts'];
+                    $partnerDiscounts = $p['discounts'] ?? [];
                     break 2;
                 }
             }
         }
+        
+        $cardTypes = $this->partnerController->getCardTypes();
         ?>
         
+        <!-- Existing Discounts -->
         <div class="space-y-4">
             <?php foreach ($partnerDiscounts as $discount): ?>
-                <form action="<?php echo BASE_URL; ?>/admin/partner?action=discount/update" method="POST" class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                <form action="<?php echo BASE_URL; ?>/admin/partner?action=discount/update" method="POST" class="space-y-4 p-4 bg-gray-50 rounded-lg">
                     <input type="hidden" name="partner_id" value="<?php echo $partnerId; ?>">
-                    <input type="hidden" name="discount_id" value="<?php echo htmlspecialchars($discount['id']); ?>">
+                    <input type="hidden" name="discount_id" value="<?php echo htmlspecialchars($discount['id'] ?? ''); ?>">
                     
-                    <div class="flex-1">
-                        <input type="text" 
-                               name="name"
-                               value="<?php echo htmlspecialchars($discount['name']); ?>"
-                               class="w-full rounded border-gray-200 text-sm"
-                               placeholder="Discount name">
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Name and Percentage -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                            <input type="text" 
+                                   name="name"
+                                   value="<?php echo htmlspecialchars($discount['name'] ?? ''); ?>"
+                                   class="w-full rounded border-gray-200 text-sm"
+                                   required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Percentage</label>
+                            <input type="number" 
+                                   name="percentage"
+                                   value="<?php echo htmlspecialchars($discount['percentage'] ?? ''); ?>"
+                                   class="w-full rounded border-gray-200 text-sm"
+                                   min="0"
+                                   max="100"
+                                   required>
+                        </div>
+                        
+                        <!-- Card Type and Discount Type -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Card Type</label>
+                            <select name="card_type_name" class="w-full rounded border-gray-200 text-sm" required>
+                                <?php foreach ($cardTypes as $cardType): ?>
+                                    <option value="<?php echo htmlspecialchars($cardType['name']); ?>"
+                                            <?php echo ($discount['card_type_id'] == $cardType['id']) ? 'selected' : ''; ?>>
+                                        <?php echo htmlspecialchars($cardType['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Discount Type</label>
+                            <select name="discount_type" class="w-full rounded border-gray-200 text-sm" required>
+                                <option value="regular" <?php echo ($discount['discount_type'] == 'regular') ? 'selected' : ''; ?>>Regular</option>
+                                <option value="special" <?php echo ($discount['discount_type'] == 'special') ? 'selected' : ''; ?>>Special</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Start Date and End Date -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                            <input type="date" 
+                                   name="start_date"
+                                   value="<?php echo date('Y-m-d', strtotime($discount['start_date'])); ?>"
+                                   class="w-full rounded border-gray-200 text-sm"
+                                   required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                            <input type="date" 
+                                   name="end_date"
+                                   value="<?php echo date('Y-m-d', strtotime($discount['end_date'])); ?>"
+                                   class="w-full rounded border-gray-200 text-sm"
+                                   required>
+                        </div>
                     </div>
                     
-                    <div class="w-32">
-                        <input type="number" 
-                               name="percentage"
-                               value="<?php echo htmlspecialchars($discount['percentage']); ?>"
-                               class="w-full rounded border-gray-200 text-sm"
-                               placeholder="Percentage"
-                               min="0"
-                               max="100">
+                    <!-- Description -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <textarea name="description" 
+                                  class="w-full rounded border-gray-200 text-sm" 
+                                  rows="3"
+                                  required><?php echo htmlspecialchars($discount['description'] ?? ''); ?></textarea>
                     </div>
                     
-                    <button type="submit" class="px-4 py-2 text-sm text-blue-600 bg-blue-50 rounded hover:bg-blue-100">
-                        Update
-                    </button>
-                    
-                    <a href="<?php echo BASE_URL; ?>/admin/partner?action=discount/delete&partner_id=<?php echo $partnerId; ?>&discount_id=<?php echo $discount['id']; ?>"
-                       onclick="return confirm('Are you sure you want to delete this discount?')"
-                       class="p-2 text-red-600 hover:bg-red-50 rounded">
-                        Delete
-                    </a>
+                    <!-- Actions -->
+                    <div class="flex justify-end space-x-3">
+                        <button type="submit" class="px-4 py-2 text-sm text-blue-600 bg-blue-50 rounded hover:bg-blue-100">
+                            Update
+                        </button>
+                        
+                        <a href="<?php echo BASE_URL; ?>/admin/partner?action=discount/delete&partner_id=<?php echo $partnerId; ?>&discount_id=<?php echo $discount['id']; ?>"
+                           onclick="return confirm('Are you sure you want to delete this discount?')"
+                           class="px-4 py-2 text-sm text-red-600 bg-red-50 rounded hover:bg-red-100">
+                            Delete
+                        </a>
+                    </div>
                 </form>
             <?php endforeach; ?>
         </div>
@@ -179,22 +238,163 @@ class PartnerDetailView {
             </button>
             
             <div id="newDiscountForm" class="hidden mt-4 p-4 bg-gray-50 rounded-lg">
-                <form action="<?php echo BASE_URL; ?>/admin/partner?action=discount/add" method="POST">
+                <form action="<?php echo BASE_URL; ?>/admin/partner?action=discount/add" method="POST" class="space-y-4">
                     <input type="hidden" name="partner_id" value="<?php echo $partnerId; ?>">
-                    <div class="flex items-center gap-4">
-                        <div class="flex-1">
-                            <input type="text" name="name" class="w-full rounded border-gray-200 text-sm" placeholder="Discount name" required>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Name and Percentage -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                            <input type="text" name="name" class="w-full rounded border-gray-200 text-sm" required>
                         </div>
-                        <div class="w-32">
-                            <input type="number" name="percentage" class="w-full rounded border-gray-200 text-sm" placeholder="Percentage" min="0" max="100" required>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Percentage</label>
+                            <input type="number" name="percentage" class="w-full rounded border-gray-200 text-sm" min="0" max="100" required>
                         </div>
-                        <button type="submit" class="px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">Add</button>
+                        
+                        <!-- Card Type and Discount Type -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Card Type</label>
+                            <select name="card_type_name" class="w-full rounded border-gray-200 text-sm" required>
+                                <?php foreach ($cardTypes as $cardType): ?>
+                                    <option value="<?php echo htmlspecialchars($cardType['name']); ?>">
+                                        <?php echo htmlspecialchars($cardType['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Discount Type</label>
+                            <select name="discount_type" class="w-full rounded border-gray-200 text-sm" required>
+                                <option value="regular">Regular</option>
+                                <option value="special">Special</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Start Date and End Date -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                            <input type="date" name="start_date" class="w-full rounded border-gray-200 text-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                            <input type="date" name="end_date" class="w-full rounded border-gray-200 text-sm" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Description -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <textarea name="description" 
+                                  class="w-full rounded border-gray-200 text-sm" 
+                                  rows="3"
+                                  required></textarea>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">
+                            Add Discount
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 <?php endif; ?>
+<?php
+
+
+$cardTypes = $this->partnerController->getCardTypes();
+?>
+
+<!-- Offer Form -->
+<div class="space-y-4">
+    <?php foreach ($partnerDiscounts as $offer): ?>
+        <form action="<?php echo BASE_URL; ?>/admin/partner?action=offer/update" method="POST" class="space-y-4 p-4 bg-gray-50 rounded-lg">
+            <input type="hidden" name="partner_id" value="<?php echo $partnerId; ?>">
+            <input type="hidden" name="offer_id" value="<?php echo htmlspecialchars($offer['id'] ?? ''); ?>">
+            
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Offer Name and Dates -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Offer Name</label>
+                    <input type="text" name="name" value="<?php echo htmlspecialchars($offer['name'] ?? ''); ?>" class="w-full rounded border-gray-200 text-sm" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                    <input type="date" name="start_date" value="<?php echo date('Y-m-d', strtotime($offer['start_date'])); ?>" class="w-full rounded border-gray-200 text-sm" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                    <input type="date" name="end_date" value="<?php echo date('Y-m-d', strtotime($offer['end_date'])); ?>" class="w-full rounded border-gray-200 text-sm" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Card Type</label>
+                    <select name="card_type_name" class="w-full rounded border-gray-200 text-sm" required>
+                        <?php foreach ($cardTypes as $cardType): ?>
+                            <option value="<?php echo htmlspecialchars($cardType['name']); ?>" <?php echo ($offer['card_type_id'] == $cardType['id']) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($cardType['name']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Offer Description -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea name="description" class="w-full rounded border-gray-200 text-sm" rows="3" required><?php echo htmlspecialchars($offer['description'] ?? ''); ?></textarea>
+            </div>
+            
+            <!-- Actions -->
+            <div class="flex justify-end space-x-3">
+                <button type="submit" class="px-4 py-2 text-sm text-blue-600 bg-blue-50 rounded hover:bg-blue-100">Update</button>
+                <a href="<?php echo BASE_URL; ?>/admin/partner?action=offer/delete&partner_id=<?php echo $partnerId; ?>&offer_id=<?php echo $offer['id']; ?>" onclick="return confirm('Are you sure you want to delete this offer?')" class="px-4 py-2 text-sm text-red-600 bg-red-50 rounded hover:bg-red-100">Delete</a>
+            </div>
+        </form>
+    <?php endforeach; ?>
+</div>
+
+<!-- Add Offer Form -->
+<form action="<?php echo BASE_URL; ?>/admin/partner?action=offer/add" method="POST" class="space-y-4 p-4 bg-gray-50 rounded-lg">
+    <input type="hidden" name="partner_id" value="<?php echo $partnerId; ?>">
+    
+    <div class="grid grid-cols-2 gap-4">
+        <!-- Offer Name and Dates -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Offer Name</label>
+            <input type="text" name="name" class="w-full rounded border-gray-200 text-sm" required>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+            <input type="date" name="start_date" class="w-full rounded border-gray-200 text-sm" required>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+            <input type="date" name="end_date" class="w-full rounded border-gray-200 text-sm" required>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Card Type</label>
+            <select name="card_type_name" class="w-full rounded border-gray-200 text-sm" required>
+                <?php foreach ($cardTypes as $cardType): ?>
+                    <option value="<?php echo htmlspecialchars($cardType['name']); ?>"><?php echo htmlspecialchars($cardType['name']); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    
+    <!-- Offer Description -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+        <textarea name="description" class="w-full rounded border-gray-200 text-sm" rows="3" required></textarea>
+    </div>
+    
+    <!-- Actions -->
+    <div class="flex justify-end space-x-3">
+        <button type="submit" class="px-4 py-2 text-sm text-green-600 bg-green-50 rounded hover:bg-green-100">Add Offer</button>
+    </div>
+</form>
 
                                     
     

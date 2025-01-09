@@ -56,7 +56,9 @@ class AdminRouter {
                 break;
             case 'partner':
     require_once __DIR__ . '/../controllers/PartnerController.php';
+    require_once __DIR__ . '/../controllers/offerController.php';
     $partnerController = new PartnerController();
+    $offerController = new OfferController();
     
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
@@ -99,6 +101,30 @@ class AdminRouter {
                     exit;
                 }
                 break;
+                case 'offer/add':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $success = $offerController->handleOfferAdd($_POST['partner_id'], $_POST);
+                    header('Location: ' . BASE_URL . '/admin/partner?id=' . $_POST['partner_id'] . '&edit=true');
+                    exit;
+                }
+                break;
+
+            case 'offer/update':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $success = $offerController->handleOfferUpdate($_POST['partner_id'], $_POST);
+                    header('Location: ' . BASE_URL . '/admin/partner?id=' . $_POST['partner_id'] . '&edit=true');
+                    exit;
+                }
+                break;
+
+            case 'offer/delete':
+                if (isset($_GET['offer_id']) && isset($_GET['partner_id'])) {
+                    $success = $offerController->handleOfferDelete($_GET['partner_id'], $_GET['offer_id']);
+                    header('Location: ' . BASE_URL . '/admin/partner?id=' . $_GET['partner_id'] . '&edit=true');
+                    exit;
+                }
+                break;
+            
         }
     } elseif (isset($_GET['id'])) {
         $partnerController->showPartnerDetail($_GET['id']);

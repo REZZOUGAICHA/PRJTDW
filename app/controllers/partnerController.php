@@ -152,15 +152,23 @@ public function handlePartnerUpdate($postData, $files) {
     }
     public function handleDiscountUpdate($partnerId, $discountData) {
     try {
-        if (!isset($discountData['discount_id']) || !isset($discountData['name']) || !isset($discountData['percentage'])) {
-            throw new Exception('Missing required discount data');
+        $requiredFields = ['discount_id', 'card_type_name', 'name', 'description', 'percentage', 'discount_type', 'start_date', 'end_date'];
+        foreach ($requiredFields as $field) {
+            if (!isset($discountData[$field])) {
+                throw new Exception("Missing required discount data: $field");
+            }
         }
 
         $this->partnerModel->updatePartnerDiscount(
             $discountData['discount_id'],
             $partnerId,
+            $discountData['card_type_name'],
             $discountData['name'],
-            $discountData['percentage']
+            $discountData['description'],
+            $discountData['percentage'],
+            $discountData['discount_type'],
+            $discountData['start_date'],
+            $discountData['end_date']
         );
 
         $_SESSION['success'] = 'Discount updated successfully';
@@ -171,16 +179,25 @@ public function handlePartnerUpdate($postData, $files) {
     }
 }
 
+
 public function handleDiscountAdd($partnerId, $discountData) {
     try {
-        if (!isset($discountData['name']) || !isset($discountData['percentage'])) {
-            throw new Exception('Missing required discount data');
+        $requiredFields = ['card_type_name', 'name', 'description', 'percentage', 'discount_type', 'start_date', 'end_date'];
+        foreach ($requiredFields as $field) {
+            if (!isset($discountData[$field])) {
+                throw new Exception("Missing required discount data: $field");
+            }
         }
 
         $this->partnerModel->addPartnerDiscount(
             $partnerId,
+            $discountData['card_type_name'],
             $discountData['name'],
-            $discountData['percentage']
+            $discountData['description'],
+            $discountData['percentage'],
+            $discountData['discount_type'],
+            $discountData['start_date'],
+            $discountData['end_date']
         );
 
         $_SESSION['success'] = 'Discount added successfully';
@@ -189,6 +206,10 @@ public function handleDiscountAdd($partnerId, $discountData) {
         $_SESSION['error'] = $e->getMessage();
         return false;
     }
+}
+
+public function getCardTypes() {
+    return $this->partnerModel->getCardTypes();
 }
 
 public function handleDiscountDelete($partnerId, $discountId) {
