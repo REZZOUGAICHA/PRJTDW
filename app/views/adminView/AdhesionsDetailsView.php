@@ -34,7 +34,7 @@ class AdhesionsDetailsView {
                                 Accepter
                             </a>
                             <a href="<?php echo BASE_URL; ?>/admin/adhesions?action=refuse&id=<?php echo $membershipId; ?>" 
-                               class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700">
+                               class="inline-flex items-center px-4 py-2 text-sm font-medium text-black bg-red-600 rounded hover:bg-red-700 stroke-red-700">
                                 Refuser
                             </a>
                         </div>

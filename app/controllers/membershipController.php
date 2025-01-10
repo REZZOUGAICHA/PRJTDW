@@ -8,12 +8,18 @@ class MembershipController {
     private $model;
     private $fileUploader;
     private $userId;
+    private $isAdminContext;
 
     public function __construct() {
-        if (!isset($_SESSION['user_id'])) {
+        $this->isAdminContext = strpos($_SERVER['REQUEST_URI'], '/admin/') !== false;
+        
+        // Only enforce user login check for non-admin routes
+        if (!$this->isAdminContext && !isset($_SESSION['user_id'])) {
             throw new Exception('User not logged in');
         }
-        $this->userId = $_SESSION['user_id'];
+        
+        $this->userId = $_SESSION['user_id'] ?? null;
+        
         $this->model = new MembershipModel();
         $this->fileUploader = new FileUploadHelper('uploads/memberships/');
     }

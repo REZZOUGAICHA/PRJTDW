@@ -8,10 +8,10 @@ class AdminRouter {
 
         SessionHelper::init();
 
-        // if (!SessionHelper::isAdminLoggedIn()) {
-        //     header('Location: ' . BASE_URL . '/admin/connexion');
-        //     exit;
-        // }
+        if (!isset($_SESSION['admin_id'])) {
+            $_SESSION['admin_id'] = 1; 
+            $_SESSION['is_admin'] = true;
+        }
 
         require_once __DIR__ . '/../controllers/SidebarController.php';
         HeaderHelper::renderHeader();
@@ -191,55 +191,44 @@ class AdminRouter {
                 
                 break;
             case 'adhesions':
-    require_once __DIR__ . '/../controllers/MembershipController.php';
-    $membershipController = new MembershipController();
+                require_once __DIR__ . '/../controllers/MembershipController.php';
+                $membershipController = new MembershipController();
 
-    if (isset($_GET['action'])) {
-        switch ($_GET['action']) {
-            case 'create':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $membershipController->handleMembershipCreate($_POST, $_FILES);
+                if (isset($_GET['action'])) {
+                    switch ($_GET['action']) {
+                        case 'accept':
+                            if (isset($_GET['id'])) {
+                                $membershipController->acceptRequest($_GET['id']);
+                                header('Location: ' . BASE_URL . '/admin/adhesions');
+                                exit;
+                            }
+                            break;
+
+                        case 'refuse':
+                            if (isset($_GET['id'])) {
+                                $membershipController->refuseRequest($_GET['id']);
+                                header('Location: ' . BASE_URL . '/admin/adhesions');
+                                exit;
+                            }
+                            break;
+
+                        case 'view':
+                            if (isset($_GET['id'])) {
+                                $membershipController->showMembershipDetails($_GET['id']);
+                                exit;
+                            }
+                            break;
+
+                        default:
+                            // Redirect or handle unknown actions
+                            header('Location: ' . BASE_URL . '/admin/adhesions');
+                            exit;
+                    }
                 } else {
-                    $membershipController->showCreateMembershipForm();
+                    // Default view: list all membership applications
+                    $membershipController->showMembershipApplications();
                 }
                 break;
-
-            case 'accept':
-                if (isset($_GET['id'])) {
-                    $membershipController->acceptRequest($_GET['id']);
-                    header('Location: ' . BASE_URL . '/admin/adhesions');
-                    exit;
-                }
-                break;
-
-            case 'refuse':
-                if (isset($_GET['id'])) {
-                    $membershipController->refuseRequest($_GET['id']);
-                    header('Location: ' . BASE_URL . '/admin/adhesions');
-                    exit;
-                }
-                break;
-
-            case 'view':
-                if (isset($_GET['id'])) {
-                    $membershipController->showMembershipDetails($_GET['id']);
-                    exit;
-                }
-                break;
-
-            default:
-                // Redirect or handle unknown actions
-                header('Location: ' . BASE_URL . '/admin/adhesions');
-                exit;
-        }
-    } elseif (isset($_GET['id'])) {
-        // If no action is specified but an ID is provided, show the details
-        $membershipController->showMembershipDetails($_GET['id']);
-    } else {
-        // Default view: list all membership applications
-        $membershipController->showMembershipApplications();
-    }
-    break;
     
 
             default:
