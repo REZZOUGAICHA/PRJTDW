@@ -12,6 +12,19 @@ class AidController {
         $this->model = new AidModel();
         $this->fileUploadHelper = new FileUploadHelper();
     }
+    public function showAidTypesWithFiles() {
+        return $this->model->getAidTypesWithFiles();
+    }
+    public function showAidRequestForm() {
+    require_once __DIR__ . '/../views/userView/AidView.php';
+    // Fetch aid types and files (you can replace this with your actual logic)
+    $aidTypes = $this->showAidTypesWithFiles();
+
+    // Instantiate the view and call the display method
+    $aidRequestView = new AidRequestView();
+    $aidRequestView->displayAidRequestFormAndFiles($aidTypes);
+}
+
 
     public function handleAidRequest($postData, $files) {
         try {
@@ -63,11 +76,11 @@ class AidController {
         return $this->model->getAllAidTypes();
     }
 
-    public function showAidRequestForm($aidTypes) {
-        require_once __DIR__ . '/../Views/userView/AidView.php';
-        $view = new AidRequestView();
-        $view->displayAidRequestForm($aidTypes);
+     public function getAllFileTypes() {
+        return $this->model->getAllFileTypes(); 
     }
+
+    
 }
 
 ?>

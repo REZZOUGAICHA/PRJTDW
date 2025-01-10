@@ -62,5 +62,54 @@ class AidModel {
             return false;
         }
     }
+
+  public function getAidTypesWithFiles() {
+    $query = "
+        SELECT 
+            AidType.id AS aid_type_id,
+            AidType.name AS aid_type_name,
+            AidType.description AS aid_type_description,
+            FileType.id AS file_type_id,
+            FileType.name AS file_type_name,
+            FileType.description AS file_type_description
+        FROM 
+            AidType
+        LEFT JOIN 
+            AidTypeFileType ON AidType.id = AidTypeFileType.aid_type_id
+        LEFT JOIN 
+            FileType ON AidTypeFileType.file_type_id = FileType.id
+        ORDER BY 
+            AidType.id, FileType.id;
+    ";
+
+    $database = new Database();
+    $connection = $database->connexion(); 
+
+    $stmt = $database->request($connection, $query);
+
+    $result = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        if (!isset($result[$row['aid_type_id']])) {
+            $result[$row['aid_type_id']] = [
+                'id' => $row['aid_type_id'],
+                'name' => $row['aid_type_name'],
+                'description' => $row['aid_type_description'],
+                'files' => []
+            ];
+        }
+        
+        // Only add file types if they exist
+        if ($row['file_type_id']) {
+            $result[$row['aid_type_id']]['files'][] = [
+                'id' => $row['file_type_id'],
+                'name' => $row['file_type_name'],
+                'description' => $row['file_type_description']
+            ];
+        }
+    }
+
+    return array_values($result); // Convert the associative array to a numeric array
+}
+
 }
 ?>

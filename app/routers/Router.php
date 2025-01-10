@@ -122,32 +122,32 @@ class Router {
                     }
                     break;
 
-                case 'aide':
-                    require_once __DIR__ . '/../controllers/AidController.php';
-                    $aidController = new AidController();
+               case 'aide':
+    require_once __DIR__ . '/../controllers/AidController.php';
+    $aidController = new AidController();
 
-                    // (form submission)
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        
-                        $result = $aidController->handleAidRequest($_POST, $_FILES);
-                        
-                        if (isset($result['success'])) {
-                            // Redirect or show success message
-                            $_SESSION['success'] = 'Votre demande d\'aide a été soumise avec succès.';
-                            header('Location: ' . BASE_URL . '/aide');
-                            exit;
-                        } else {
-                            // Handle error case
-                            $_SESSION['error'] = $result['error'];
-                            header('Location: ' . BASE_URL . '/aide');
-                            exit;
-                        }
-                    } else {
-                        // Display the form
-                        $aidTypes = $aidController->getAidTypes(); 
-                        $aidController->showAidRequestForm($aidTypes);
-                    }
-                    break;
+    // Handle form submission
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Call the controller to handle the aid request
+        $result = $aidController->handleAidRequest($_POST, $_FILES);
+        
+        if (isset($result['success'])) {
+            // If successful, redirect or show success message
+            $_SESSION['success'] = 'Votre demande d\'aide a été soumise avec succès.';
+            header('Location: ' . BASE_URL . '/aide');
+            exit;
+        } else {
+            // If there is an error, handle it and show an error message
+            $_SESSION['error'] = $result['error'];
+            header('Location: ' . BASE_URL . '/aide');
+            exit;
+        }
+    } else {
+        // If the request method is not POST, show the form to the user
+        $aidController->showAidRequestForm();
+    }
+    break;
+
 
                 
                 
