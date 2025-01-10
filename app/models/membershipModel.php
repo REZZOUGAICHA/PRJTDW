@@ -60,25 +60,54 @@ public function getMembershipApplicationById($id) {
     }
 }
 
+public function generateCardNumber() {
+    // Generate a random 16-digit card number
+    $cardNumber = '';
+    for ($i = 0; $i < 16; $i++) {
+        // Generate a random digit between 0 and 9
+        $cardNumber .= rand(0, 9);
+    }
+
+    return $cardNumber;
+}
+
+
 public function acceptMembershipApplication($id) {
     $c = $this->db->connexion();
     try {
-        // Fetch the user_id and card_id for this application
+        // Fetch the user_id and card_type_id from the application
         $application = $this->getMembershipApplicationById($id);
         if ($application) {
             $userId = $application['user_id'];
-            $cardId = $application['card_type_id'];
+            $cardTypeId = $application['card_type_id'];
 
-            // Add to the member table
+            // Create a new card with expiration date set to 1 year from now
+            $cardNumber = $this->generateCardNumber(); // You need to implement this function
+            $expirationDate = (new DateTime())->modify('+1 year')->format('Y-m-d H:i:s');
+
+            $insertCardSql = "INSERT INTO card (card_type_id, card_number, expiration_date, status) 
+                              VALUES (:card_type_id, :card_number, :expiration_date, 'active')";
+            $this->db->request($c, $insertCardSql, [
+                ':card_type_id' => $cardTypeId,
+                ':card_number' => $cardNumber,
+                ':expiration_date' => $expirationDate
+            ]);
+
+            // Fetch the newly created card's ID
+            $cardId = $c->lastInsertId();
+ // Assuming getLastInsertId() gets the last inserted card's ID
+
+            // Add to the member table with the newly created card_id
             $sql = "INSERT INTO member (user_id, card_id) VALUES (:user_id, :card_id)";
             $this->db->request($c, $sql, [
                 ':user_id' => $userId,
                 ':card_id' => $cardId
             ]);
 
-            // Update the application status
+            // Update the application status to 'approved'
             $updateSql = "UPDATE membership_application SET status = 'approved' WHERE id = :id";
             $this->db->request($c, $updateSql, [':id' => $id]);
+
             // Update the user_type to 'member'
             $updateUserTypeSql = "UPDATE user SET user_type = 'member' WHERE id = :user_id";
             $this->db->request($c, $updateUserTypeSql, [':user_id' => $userId]);
@@ -93,6 +122,7 @@ public function acceptMembershipApplication($id) {
         $this->db->deconnexion();
     }
 }
+
 
 public function refuseMembershipApplication($id) {
     $c = $this->db->connexion();

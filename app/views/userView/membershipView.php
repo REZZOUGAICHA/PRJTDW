@@ -54,14 +54,14 @@ class MembershipView {
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Type de Carte</label>
                                 <select name="card_type_id" required
-    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500">
-    <option value="" disabled selected>Choisir un type de carte</option>
-    <?php foreach ($cardTypes as $cardType): ?>
-        <option value="<?php echo $cardType['id']; ?>">
-            <?php echo htmlspecialchars($cardType['name']); ?> - <?php echo number_format($cardType['annual_fee'], 2); ?> DA/an
-        </option>
-    <?php endforeach; ?>
-</select>
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500">
+                                    <option value="" disabled selected>Choisir un type de carte</option>
+                                    <?php foreach ($cardTypes as $cardType): ?>
+                                        <option value="<?php echo $cardType['id']; ?>">
+                                            <?php echo htmlspecialchars($cardType['name']); ?> - <?php echo number_format($cardType['annual_fee'], 2); ?> DA/an
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
 
                             <div>
