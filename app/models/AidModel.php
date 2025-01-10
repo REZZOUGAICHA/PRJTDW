@@ -111,5 +111,46 @@ class AidModel {
     return array_values($result); // Convert the associative array to a numeric array
 }
 
+public function getAidRequests(){
+    $query = "
+        SELECT 
+            AidRequest.id AS aid_request_id,
+            AidRequest.user_id AS user_id,
+            AidRequest.aid_type_id AS aid_type_id,
+            AidRequest.created_at AS created_at,
+            AidType.name AS aid_type_name,
+            User.first_name AS first_name,
+            User.last_name AS last_name
+        FROM 
+            AidRequest
+        JOIN 
+            AidType ON AidRequest.aid_type_id = AidType.id
+        JOIN 
+            User ON AidRequest.user_id = User.id
+        ORDER BY 
+            AidRequest.created_at DESC;
+    ";
+
+    $database = new Database();
+    $connection = $database->connexion(); 
+
+    $stmt = $database->request($connection, $query);
+
+    $result = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $result[] = [
+            'id' => $row['aid_request_id'],
+            'user_id' => $row['user_id'],
+            'aid_type_id' => $row['aid_type_id'],
+            'created_at' => $row['created_at'],
+            'aid_type_name' => $row['aid_type_name'],
+            'first_name' => $row['first_name'],
+            'last_name' => $row['last_name']
+        ];
+    }
+
+    return $result;
+}
+
 }
 ?>

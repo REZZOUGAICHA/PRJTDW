@@ -135,6 +135,48 @@ class AdminRouter {
             case 'membre':
                 
                 break;
+            case 'aid':
+    require_once __DIR__ . '/../controllers/AidController.php';
+    $aidController = new AidController();
+
+    if (isset($_GET['action'])) {
+        switch ($_GET['action']) {
+            case 'accept':
+                if (isset($_GET['id'])) {
+                    // Accept the aid request
+                    $aidController->acceptRequest($_GET['id']);
+                    header('Location: ' . BASE_URL . '/admin/aide');
+                    exit;
+                }
+                break;
+
+            case 'refuse':
+                if (isset($_GET['id'])) {
+                    // Refuse the aid request
+                    $aidController->refuseRequest($_GET['id']);
+                    header('Location: ' . BASE_URL . '/admin/aide');
+                    exit;
+                }
+                break;
+
+            case 'view':
+                if (isset($_GET['id'])) {
+                    // View details of the specific aid request
+                    $aidController->showAidRequestDetails($_GET['id']);
+                    exit;
+                }
+                break;
+
+            default:
+                // Redirect or handle unknown actions
+                header('Location: ' . BASE_URL . '/admin/aide');
+                exit;
+        }
+    } else {
+        // Default view: list all aid requests
+        $aidController->showAidRequests();
+    }
+    break;
 
             case 'dons':
     require_once __DIR__ . '/../controllers/DonController.php';

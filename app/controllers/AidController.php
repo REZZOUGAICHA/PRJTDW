@@ -25,6 +25,13 @@ class AidController {
     $aidRequestView->displayAidRequestFormAndFiles($aidTypes);
 }
 
+    public function showAidRequests(){
+        $aidRequests = $this->model->getAidRequests();
+        require_once __DIR__ . '/../views/adminView/AidView.php';
+        $view = new AidView();
+        $view->displayAidRequests($aidRequests);
+    }
+
 
     public function handleAidRequest($postData, $files) {
         try {
