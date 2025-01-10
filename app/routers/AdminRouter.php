@@ -147,39 +147,39 @@ class AdminRouter {
                 
                 break;
             case 'news':
-    require_once __DIR__ . '/../controllers/NewsController.php';
-    $newsController = new NewsController();
+                require_once __DIR__ . '/../controllers/NewsController.php';
+                $newsController = new NewsController();
 
-    if (isset($_GET['action'])) {
-        switch ($_GET['action']) {
-            case 'create':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $newsController->handleNewsCreate($_POST, $_FILES);
+                if (isset($_GET['action'])) {
+                    switch ($_GET['action']) {
+                        case 'create':
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                $newsController->handleNewsCreate($_POST, $_FILES);
+                            } else {
+                                $newsController->showCreateNewsForm();
+                            }
+                            break;
+                        case 'update':
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                $newsController->handleNewsUpdate($_POST['news_id'], $_POST, $_FILES);
+                                header('Location: ' . BASE_URL . '/admin/news?id=' . $_POST['news_id']);
+                                exit;
+                            }
+                            break;
+                        case 'delete':
+                            if (isset($_GET['id'])) {
+                                $newsController->deleteNews($_GET['id']);
+                                header('Location: ' . BASE_URL . '/admin/news');
+                                exit;
+                            }
+                            break;
+                    }
+                } elseif (isset($_GET['id'])) {
+                    $newsController->showNewsDetails($_GET['id']);
                 } else {
-                    $newsController->showCreateNewsForm();
+                    $newsController->showNewsForAdmin();
                 }
                 break;
-            case 'update':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $newsController->handleNewsUpdate($_POST['news_id'], $_POST, $_FILES);
-                    header('Location: ' . BASE_URL . '/admin/news?id=' . $_POST['news_id']);
-                    exit;
-                }
-                break;
-            case 'delete':
-                if (isset($_GET['id'])) {
-                    $newsController->deleteNews($_GET['id']);
-                    header('Location: ' . BASE_URL . '/admin/news');
-                    exit;
-                }
-                break;
-        }
-    } elseif (isset($_GET['id'])) {
-        $newsController->showNewsDetails($_GET['id']);
-    } else {
-        $newsController->showNewsForAdmin();
-    }
-    break;
 
 
            
@@ -191,11 +191,55 @@ class AdminRouter {
                 
                 break;
             case 'adhesions':
-                require_once __DIR__ . '/../controllers/MembershipController.php';
-                $membershipController = new MembershipController();
-                $membershipController->showMembershipApplications();
+    require_once __DIR__ . '/../controllers/MembershipController.php';
+    $membershipController = new MembershipController();
 
+    if (isset($_GET['action'])) {
+        switch ($_GET['action']) {
+            case 'create':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $membershipController->handleMembershipCreate($_POST, $_FILES);
+                } else {
+                    $membershipController->showCreateMembershipForm();
+                }
                 break;
+
+            case 'accept':
+                if (isset($_GET['id'])) {
+                    $membershipController->acceptRequest($_GET['id']);
+                    header('Location: ' . BASE_URL . '/admin/adhesions');
+                    exit;
+                }
+                break;
+
+            case 'refuse':
+                if (isset($_GET['id'])) {
+                    $membershipController->refuseRequest($_GET['id']);
+                    header('Location: ' . BASE_URL . '/admin/adhesions');
+                    exit;
+                }
+                break;
+
+            case 'view':
+                if (isset($_GET['id'])) {
+                    $membershipController->showMembershipDetails($_GET['id']);
+                    exit;
+                }
+                break;
+
+            default:
+                // Redirect or handle unknown actions
+                header('Location: ' . BASE_URL . '/admin/adhesions');
+                exit;
+        }
+    } elseif (isset($_GET['id'])) {
+        // If no action is specified but an ID is provided, show the details
+        $membershipController->showMembershipDetails($_GET['id']);
+    } else {
+        // Default view: list all membership applications
+        $membershipController->showMembershipApplications();
+    }
+    break;
     
 
             default:

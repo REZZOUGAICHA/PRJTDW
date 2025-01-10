@@ -1,0 +1,22 @@
+[2025-01-10 10:57:09] TYPE: Duplicate Entry
+CODE: 23000
+MESSAGE: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'amount' cannot be null
+CONTEXT:
+	SQL: INSERT INTO payment (user_id, payment_type_id, amount, description, status) 
+           VALUES (:user_id, :payment_type_id, :amount, :description, 'pending')
+	Parameters: Array
+(
+    [:user_id] => 20
+    [:payment_type_id] => 2
+    [:amount] => 
+    [:description] => Paiement de la cotisation annuelle pour la carte 
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\membershipModel.php(126): Database->request(Object(PDO), 'INSERT INTO pay...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\membershipController.php(69): MembershipModel->createMembershipApplication(Array)
+#3 C:\wamp64\www\TDW\app\routers\Router.php(233): MembershipController->handleMembershipApplication()
+#4 C:\wamp64\www\TDW\index.php(28): Router::route('membership')
+#5 {main}
+------------------------------------------------
