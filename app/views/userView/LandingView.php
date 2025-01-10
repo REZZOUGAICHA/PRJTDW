@@ -205,7 +205,8 @@ public function displayTopbar() {
                                 <!-- Dropdown menu -->
                                 <div class="absolute right-0 w-48 mt-2 py-2 bg-white rounded-md shadow-lg opacity-0 invisible
                                             group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out">
-                                    <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-800">
+                                             
+                                    <a a href="<?php echo BASE_URL; ?>/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-800">
                                         Profile
                                     </a>
                                     <form method="POST" action="<?= BASE_URL ?>/logout" class="block">

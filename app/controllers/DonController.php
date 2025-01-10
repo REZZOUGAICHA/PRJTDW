@@ -93,6 +93,38 @@ public function refuseDon($id) {
     exit;
 }
 
+
+//-------------------history-------------------------------------
+public function getDonHistory($userId) {
+        try {
+            // Fetch donation history from the model
+            $donHistory = $this->model->getDonHistory($userId);
+
+            // Format the data for the view
+            return array_map(function($don) {
+                return [
+                    'status' => $don['status'] ?? 'pending',
+                    'id' => $don['id'] ?? null,
+                    'amount' => $don['amount'] ?? null,
+                    'payment_date' => $don['payment_date'] ?? null,
+                    'file_path' => $don['file_path'] ?? null,
+                ];
+            }, $donHistory);
+        } catch (Exception $e) {
+            error_log("Erreur récupération historique des dons: " . $e->getMessage());
+            return ['error' => 'Une erreur est survenue lors de la récupération de l\'historique des dons.'];
+        }
+    }
+
+
+public function showUserDonHistory($userId) {
+    $donHistory = $this->getDonHistory($userId);
+    require_once __DIR__ . '/../views/userView/HistoriqueView.php';
+    $view = new HistoriqueView();
+    $view->displayDonHistory($donHistory);
+}
+
+
 }
 
 

@@ -20,3 +20,43 @@ TRACE:
 #4 C:\wamp64\www\TDW\index.php(28): Router::route('membership')
 #5 {main}
 ------------------------------------------------
+[2025-01-10 19:41:22] TYPE: Duplicate Entry
+CODE: 23000
+MESSAGE: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '19' for key 'id_card.user_id'
+CONTEXT:
+	SQL: INSERT INTO id_card (user_id, file_path, upload_date) 
+                            VALUES (:user_id, :file_path, NOW())
+	Parameters: Array
+(
+    [:user_id] => 19
+    [:file_path] => /TDW/uploads/memberships/678177e28ed6d_1736538082.jpg
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\membershipModel.php(151): Database->request(Object(PDO), 'INSERT INTO id_...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\membershipController.php(80): MembershipModel->createMembershipApplication(Array)
+#3 C:\wamp64\www\TDW\app\routers\Router.php(238): MembershipController->handleMembershipApplication()
+#4 C:\wamp64\www\TDW\index.php(28): Router::route('membership')
+#5 {main}
+------------------------------------------------
+[2025-01-10 19:41:46] TYPE: Duplicate Entry
+CODE: 23000
+MESSAGE: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '19' for key 'id_card.user_id'
+CONTEXT:
+	SQL: INSERT INTO id_card (user_id, file_path, upload_date) 
+                            VALUES (:user_id, :file_path, NOW())
+	Parameters: Array
+(
+    [:user_id] => 19
+    [:file_path] => /TDW/uploads/memberships/678177fa7b59d_1736538106.jpg
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\membershipModel.php(151): Database->request(Object(PDO), 'INSERT INTO id_...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\membershipController.php(80): MembershipModel->createMembershipApplication(Array)
+#3 C:\wamp64\www\TDW\app\routers\Router.php(238): MembershipController->handleMembershipApplication()
+#4 C:\wamp64\www\TDW\index.php(28): Router::route('membership')
+#5 {main}
+------------------------------------------------

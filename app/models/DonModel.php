@@ -42,23 +42,31 @@ class DonModel {
             throw new Exception('Échec de création du don');
         }
     }
-
-    public function getDonHistory($userId) {
+//all dons of a user
+     public function getDonHistory($userId) {
         try {
             $connection = $this->db->connexion();
-            $query = "SELECT p.*, r.file_path FROM payment p 
-                    JOIN receipt r ON p.id = r.payment_id 
-                    WHERE p.user_id = :user_id AND p.payment_type_id = 1 
-                    ORDER BY p.payment_date DESC";
+            // Modified query to include status with COALESCE to provide default value
+            $query = "SELECT 
+                p.id,
+                p.amount,
+                p.payment_date,
+                COALESCE(p.status, 'pending') as status,
+                r.file_path 
+            FROM payment p 
+            LEFT JOIN receipt r ON p.id = r.payment_id 
+            WHERE p.user_id = :user_id AND p.payment_type_id = 1 
+            ORDER BY p.payment_date DESC";
             
             $stmt = $connection->prepare($query);
             $stmt->execute([':user_id' => $userId]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             error_log("Erreur récupération historique: " . $e->getMessage());
-            return false;
+            return [];  // Return empty array instead of false for consistency
         }
     }
+
 
     public function getAllDons() {
     try {
@@ -79,6 +87,7 @@ class DonModel {
     }
 }
 
+//all info by a don id 
 public function getDonById($id) {
     try {
         $connection = $this->db->connexion();

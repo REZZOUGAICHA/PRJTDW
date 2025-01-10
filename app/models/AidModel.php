@@ -63,6 +63,44 @@ class AidModel {
         }
     }
 
+    public function acceptAidRequest($requestId) {
+        $query = "
+            UPDATE AidRequest 
+            SET status = 'approved', 
+                updated_at = NOW() 
+            WHERE id = :request_id
+        ";
+        
+        $connection = $this->db->connexion();
+        try {
+            $this->db->request($connection, $query, ['request_id' => $requestId]);
+            $this->db->deconnexion();
+            return true;
+        } catch (Exception $e) {
+            $this->db->deconnexion();
+            return false;
+        }
+    }
+
+    public function refuseAidRequest($requestId) {
+        $query = "
+            UPDATE AidRequest 
+            SET status = 'rejected', 
+                updated_at = NOW() 
+            WHERE id = :request_id
+        ";
+        
+        $connection = $this->db->connexion();
+        try {
+            $this->db->request($connection, $query, ['request_id' => $requestId]);
+            $this->db->deconnexion();
+            return true;
+        } catch (Exception $e) {
+            $this->db->deconnexion();
+            return false;
+        }
+    }
+
   public function getAidTypesWithFiles() {
     $query = "
         SELECT 
@@ -110,6 +148,47 @@ class AidModel {
 
     return array_values($result); // Convert the associative array to a numeric array
 }
+ public function getAidRequestById($aidRequestId) {  // Added parameter here
+        $query = "
+            SELECT 
+                AidRequest.id AS aid_request_id,
+                AidRequest.user_id AS user_id,
+                AidRequest.aid_type_id AS aid_type_id,
+                AidRequest.created_at AS created_at,
+                AidType.name AS aid_type_name,
+                User.first_name AS first_name,
+                User.last_name AS last_name
+            FROM 
+                AidRequest
+            JOIN 
+                AidType ON AidRequest.aid_type_id = AidType.id
+            JOIN 
+                User ON AidRequest.user_id = User.id
+            WHERE 
+                AidRequest.id = :aid_request_id;
+        ";
+
+        $database = new Database();
+        $connection = $database->connexion(); 
+
+        $stmt = $database->request($connection, $query, ['aid_request_id' => $aidRequestId]);
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$row) {
+            return null;
+        }
+
+        return [
+            'id' => $row['aid_request_id'],
+            'user_id' => $row['user_id'],
+            'aid_type_id' => $row['aid_type_id'],
+            'created_at' => $row['created_at'],
+            'aid_type_name' => $row['aid_type_name'],
+            'first_name' => $row['first_name'],
+            'last_name' => $row['last_name']
+        ];
+    }
+
 
 public function getAidRequests(){
     $query = "

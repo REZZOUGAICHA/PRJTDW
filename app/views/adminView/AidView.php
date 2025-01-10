@@ -32,7 +32,7 @@ class AidView {
         $actions = [
             function($row) {
                 return sprintf(
-                    '<a href="%s/admin/aide/demande?id=%s" class="text-blue-600 hover:text-blue-800 hover:underline">Voir plus</a>',
+                    '<a href="%s/admin/aid?action=view&id=%s" class="text-blue-600 hover:text-blue-800 hover:underline">Voir plus</a>',
                     BASE_URL,
                     htmlspecialchars($row['id'])
                 );

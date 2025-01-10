@@ -58,7 +58,7 @@ class MembershipView {
     <option value="" disabled selected>Choisir un type de carte</option>
     <?php foreach ($cardTypes as $cardType): ?>
         <option value="<?php echo $cardType['id']; ?>">
-            <?php echo htmlspecialchars($cardType['name']); ?> - <?php echo number_format($cardType['annual_fee'], 2); ?> €/an
+            <?php echo htmlspecialchars($cardType['name']); ?> - <?php echo number_format($cardType['annual_fee'], 2); ?> DA/an
         </option>
     <?php endforeach; ?>
 </select>

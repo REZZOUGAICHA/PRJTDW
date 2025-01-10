@@ -10,7 +10,7 @@ class AidController {
 
     public function __construct() {
         $this->model = new AidModel();
-        $this->fileUploadHelper = new FileUploadHelper();
+         $this->fileUploadHelper = new FileUploadHelper('uploads/Aid/');
     }
     public function showAidTypesWithFiles() {
         return $this->model->getAidTypesWithFiles();
@@ -31,6 +31,33 @@ class AidController {
         $view = new AidView();
         $view->displayAidRequests($aidRequests);
     }
+
+    public function showAidRequestDetails($id) {
+        // Ensure we're passing just the ID number
+        $requestId = is_array($id) ? $id['id'] : intval($id);
+        $aidRequest = $this->model->getAidRequestById($requestId);
+        
+        require_once __DIR__ . '/../views/adminView/AidDetailsView.php';
+        $view = new AidDetailsView();
+        $view->displayAidRequestDetails($aidRequest);
+    }
+
+    public function getAidRequestById($id) {
+        // Ensure we're passing just the ID number
+        $requestId = is_array($id) ? $id['id'] : intval($id);
+        return $this->model->getAidRequestById($requestId);
+    }
+
+     public function acceptRequest($id) {
+        $requestId = is_array($id) ? $id['id'] : intval($id);
+        return $this->model->acceptAidRequest($requestId);
+    }
+
+    public function refuseRequest($id) {
+        $requestId = is_array($id) ? $id['id'] : intval($id);
+        return $this->model->refuseAidRequest($requestId);
+    }
+
 
 
     public function handleAidRequest($postData, $files) {
