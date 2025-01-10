@@ -79,6 +79,38 @@ class DonModel {
     }
 }
 
+public function getDonById($id) {
+    try {
+        $connection = $this->db->connexion();
+        $query = "SELECT p.*, r.file_path, u.first_name, u.last_name 
+                  FROM payment p 
+                  LEFT JOIN receipt r ON p.id = r.payment_id 
+                  LEFT JOIN user u ON p.user_id = u.id 
+                  WHERE p.id = :id AND p.payment_type_id = 1";
+        $stmt = $connection->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        error_log("Erreur récupération don: " . $e->getMessage());
+        return false;
+    }
+}
+
+public function updateDonStatus($id, $status) {
+    try {
+        $connection = $this->db->connexion();
+        $query = "UPDATE payment SET status = :status WHERE id = :id";
+        $stmt = $connection->prepare($query);
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    } catch (Exception $e) {
+        error_log("Erreur mise à jour statut don: " . $e->getMessage());
+    }
+}
+
+
 }
 
 ?>

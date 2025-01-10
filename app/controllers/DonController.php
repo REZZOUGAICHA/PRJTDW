@@ -68,10 +68,31 @@ class DonController {
         $view->display();
     }
     public function showDonsForAdmin() {
-        require_once __DIR__ . '/../views/adminView/DonView.php';
-        $view = new DonView();
-        $view->displayDons();
-    }
+    $dons = $this->getAllDons();
+    require_once __DIR__ . '/../views/adminView/DonView.php';
+    $view = new DonView();
+    $view->displayDons($dons);
+}
+
+public function showDonDetails($id) {
+    $don = $this->model->getDonById($id);
+    require_once __DIR__ . '/../views/adminView/DonDetailsView.php';
+    $view = new DonDetailsView();
+    $view->displayDonDetails($don);
+}
+
+public function acceptDon($id) {
+    $this->model->updateDonStatus($id, 'approved');
+    header('Location: ' . BASE_URL . '/admin/dons');
+    exit;
+}
+
+public function refuseDon($id) {
+    $this->model->updateDonStatus($id, 'rejected');
+    header('Location: ' . BASE_URL . '/admin/dons');
+    exit;
+}
+
 }
 
 

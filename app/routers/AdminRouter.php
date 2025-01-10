@@ -137,9 +137,45 @@ class AdminRouter {
                 break;
 
             case 'dons':
-                require_once __DIR__ . '/../controllers/DonController.php';
-                $donController = new DonController();
-                $donController->showDonsForAdmin();
+    require_once __DIR__ . '/../controllers/DonController.php';
+    $donController = new DonController();
+
+    if (isset($_GET['action'])) {
+        switch ($_GET['action']) {
+            case 'accept':
+                if (isset($_GET['id'])) {
+                    $donController->acceptDon($_GET['id']);
+                    header('Location: ' . BASE_URL . '/admin/dons');
+                    exit;
+                }
+                break;
+
+            case 'refuse':
+                if (isset($_GET['id'])) {
+                    $donController->refuseDon($_GET['id']);
+                    header('Location: ' . BASE_URL . '/admin/dons');
+                    exit;
+                }
+                break;
+
+            case 'view':
+                if (isset($_GET['id'])) {
+                    $donController->showDonDetails($_GET['id']);
+                    exit;
+                }
+                break;
+
+            default:
+                // Rediriger ou gérer les actions inconnues
+                header('Location: ' . BASE_URL . '/admin/dons');
+                exit;
+        }
+    } else {
+        // Vue par défaut : afficher la liste des dons
+        $donController->showDonsForAdmin();
+    }
+    break;
+
                 
                 break;
 
