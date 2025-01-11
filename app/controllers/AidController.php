@@ -49,14 +49,28 @@ class AidController {
     }
 
      public function acceptRequest($id) {
-        $requestId = is_array($id) ? $id['id'] : intval($id);
-        return $this->model->acceptAidRequest($requestId);
+    $requestId = is_array($id) ? $id['id'] : intval($id);
+    $result = $this->model->acceptAidRequest($requestId);
+    if ($result) {
+        $_SESSION['success'] = 'Demande d\'aide acceptée avec succès.';
+    } else {
+        $_SESSION['error'] = 'Erreur lors de l\'acceptation de la demande d\'aide.';
     }
+    header('Location: ' . BASE_URL . '/admin/aid');
+    exit;
+}
 
-    public function refuseRequest($id) {
-        $requestId = is_array($id) ? $id['id'] : intval($id);
-        return $this->model->refuseAidRequest($requestId);
+public function refuseRequest($id) {
+    $requestId = is_array($id) ? $id['id'] : intval($id);
+    $result = $this->model->refuseAidRequest($requestId);
+    if ($result) {
+        $_SESSION['success'] = 'Demande d\'aide refusée avec succès.';
+    } else {
+        $_SESSION['error'] = 'Erreur lors du refus de la demande d\'aide.';
     }
+    header('Location: ' . BASE_URL . '/admin/aid');
+    exit;
+}
 
 
 

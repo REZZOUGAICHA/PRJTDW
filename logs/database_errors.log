@@ -100,3 +100,79 @@ TRACE:
 #4 C:\wamp64\www\TDW\index.php(28): Router::route('aide')
 #5 {main}
 ------------------------------------------------
+[2025-01-11 13:51:49] TYPE: SQL Syntax Error
+CODE: 42000
+MESSAGE: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '// Updated this line
+            AidType.name AS aid_type_name,
+            Us' at line 6
+CONTEXT:
+	SQL: 
+        SELECT 
+            AidRequest.id AS aid_request_id,
+            AidRequest.user_id AS user_id,
+            AidRequest.aid_type_id AS aid_type_id,
+            AidRequest.created_at AS created_at,
+            AidRequest.link AS link,  // Updated this line
+            AidType.name AS aid_type_name,
+            User.first_name AS first_name,
+            User.last_name AS last_name
+        FROM 
+            AidRequest
+        JOIN 
+            AidType ON AidRequest.aid_type_id = AidType.id
+        JOIN 
+            User ON AidRequest.user_id = User.id
+        WHERE 
+            AidRequest.id = :aid_request_id;
+    
+	Parameters: Array
+(
+    [aid_request_id] => 18
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\AidModel.php(165): Database->request(Object(PDO), '\r\n        SELEC...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\AidController.php(38): AidModel->getAidRequestById(18)
+#3 C:\wamp64\www\TDW\app\routers\AdminRouter.php(165): AidController->showAidRequestDetails('18')
+#4 C:\wamp64\www\TDW\index.php(25): AdminRouter::route('aid')
+#5 {main}
+------------------------------------------------
+[2025-01-11 13:52:26] TYPE: SQL Syntax Error
+CODE: 42000
+MESSAGE: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '// Updated this line
+            AidType.name AS aid_type_name,
+            Us' at line 6
+CONTEXT:
+	SQL: 
+        SELECT 
+            AidRequest.id AS aid_request_id,
+            AidRequest.user_id AS user_id,
+            AidRequest.aid_type_id AS aid_type_id,
+            AidRequest.created_at AS created_at,
+            AidRequest.link AS link,  // Updated this line
+            AidType.name AS aid_type_name,
+            User.first_name AS first_name,
+            User.last_name AS last_name
+        FROM 
+            AidRequest
+        JOIN 
+            AidType ON AidRequest.aid_type_id = AidType.id
+        JOIN 
+            User ON AidRequest.user_id = User.id
+        WHERE 
+            AidRequest.id = :aid_request_id;
+    
+	Parameters: Array
+(
+    [aid_request_id] => 18
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\AidModel.php(165): Database->request(Object(PDO), '\r\n        SELEC...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\AidController.php(38): AidModel->getAidRequestById(18)
+#3 C:\wamp64\www\TDW\app\routers\AdminRouter.php(165): AidController->showAidRequestDetails('18')
+#4 C:\wamp64\www\TDW\index.php(25): AdminRouter::route('aid')
+#5 {main}
+------------------------------------------------

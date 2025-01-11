@@ -143,7 +143,8 @@ class AdminRouter {
         switch ($_GET['action']) {
             case 'accept':
                 if (isset($_GET['id'])) {
-                    // Accept the aid request
+                    // Debugging statement
+                    error_log("Accepting aid request with ID: " . $_GET['id']);
                     $aidController->acceptRequest($_GET['id']);
                     header('Location: ' . BASE_URL . '/admin/aide');
                     exit;
@@ -152,7 +153,8 @@ class AdminRouter {
 
             case 'refuse':
                 if (isset($_GET['id'])) {
-                    // Refuse the aid request
+                    // Debugging statement
+                    error_log("Refusing aid request with ID: " . $_GET['id']);
                     $aidController->refuseRequest($_GET['id']);
                     header('Location: ' . BASE_URL . '/admin/aide');
                     exit;
@@ -161,19 +163,16 @@ class AdminRouter {
 
             case 'view':
                 if (isset($_GET['id'])) {
-                    // View details of the specific aid request
                     $aidController->showAidRequestDetails($_GET['id']);
                     exit;
                 }
                 break;
 
             default:
-                // Redirect or handle unknown actions
                 header('Location: ' . BASE_URL . '/admin/aide');
                 exit;
         }
     } else {
-        // Default view: list all aid requests
         $aidController->showAidRequests();
     }
     break;
