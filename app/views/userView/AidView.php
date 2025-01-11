@@ -96,11 +96,7 @@ class AidRequestView {
                                         <?php foreach ($aidType['files'] as $file): ?>
     <div>
         <label><?php echo htmlspecialchars($file['name']); ?></label>
-        <input type="file" 
-               name="files[<?php echo $file['id']; ?>]" 
-               class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
-                      file:rounded-full file:border-0 file:text-sm file:font-semibold
-                      file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+        
         <p class="text-sm text-gray-600"><?php echo htmlspecialchars($file['description']); ?></p>
     </div>
 <?php endforeach; ?>
