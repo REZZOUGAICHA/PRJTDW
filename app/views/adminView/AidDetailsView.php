@@ -35,7 +35,7 @@ class AidDetailsView {
     Accepter
 </a>
 <a href="<?php echo BASE_URL; ?>/admin/aid?action=refuse&id=<?php echo htmlspecialchars($aidRequest['id']); ?>" 
-   class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700">
+   class="inline-flex items-center px-4 py-2 text-sm font-medium text-black bg-red-600 rounded hover:bg-red-700 ">
     Refuser
 </a>
                     </div>
