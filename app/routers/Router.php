@@ -22,7 +22,7 @@ class Router {
         $publicRoutes = ['accueil', 'partenaires', 'remises', 'Connection', 'Inscription','don', 'aide', 'news'];
         
         // Protected routes - require authentication
-        $protectedRoutes = ['Profile'];
+        $protectedRoutes = ['profile'];
         
         $segments = explode('/', $page);
         $currentRoute = $segments[0];

@@ -65,7 +65,7 @@ class UserController {
                     } else {
                         $_SESSION['success'] = $result['message'];
                     }
-                    header('Location: ' . BASE_URL . '/Profile');
+                    header('Location: ' . BASE_URL . '/profile');
                     exit;
                     break;
             }

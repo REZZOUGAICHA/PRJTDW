@@ -5,15 +5,18 @@
 
         <!-- Header -->
         <div class="p-4 bg-gradient-to-r from-gray-50 to-gray-100">
-            <div class="flex items-center justify-between">
-                <h2 class="text-lg font-semibold text-gray-800">
-                    <?php echo htmlspecialchars($cardDetails['asso_name']); ?>
-                </h2>
-                <img src="<?php echo BASE_URL . htmlspecialchars($cardDetails['logo_link']); ?>" 
-                     alt="Logo" 
-                     class="h-10 object-contain">
-            </div>
-        </div>
+    <div class="flex items-center justify-between">
+        <h2 class="text-lg font-semibold text-gray-800">
+            <?php echo htmlspecialchars($cardDetails['asso_name']); ?>
+        </h2>
+        <img src="<?php echo  htmlspecialchars($cardDetails['logo_link']); ?>" 
+             alt="Logo" 
+             class="h-10 object-contain">
+    </div>
+    
+    
+</div>
+
 
         <!-- Content -->
         <div class="p-4 space-y-4">
