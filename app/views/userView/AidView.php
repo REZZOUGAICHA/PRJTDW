@@ -32,39 +32,46 @@ class AidRequestView {
                         </div>
                     <?php endif; ?>
 
-                    <form action="<?php echo BASE_URL; ?>/aide" method="POST" enctype="multipart/form-data" class="p-6 space-y-6">
-                        <!-- Aid Type -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Type d'aide</label>
-                            <select name="aid_type_id" required
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
-                                <option value="">Sélectionnez un type d'aide</option>
-                                <?php foreach ($aidTypes as $aidType): ?>
-                                    <option value="<?php echo htmlspecialchars($aidType['id']); ?>">
-                                        <?php echo htmlspecialchars($aidType['name']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                    <!-- File Upload Section in the form -->
+<!-- Updated File Upload Section in AidRequestView.php -->
+<form action="<?php echo BASE_URL; ?>/aide" method="POST" enctype="multipart/form-data" class="p-6 space-y-6">
+    <!-- Aid Type selection -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Type d'aide</label>
+        <select name="aid_type_id" required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+            <option value="">Sélectionnez un type d'aide</option>
+            <?php foreach ($aidTypes as $aidType): ?>
+                <option value="<?php echo htmlspecialchars($aidType['id']); ?>">
+                    <?php echo htmlspecialchars($aidType['name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 
-                        <!-- File Upload -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Téléchargez vos fichiers</label>
-                            <input type="file" name="files[]" multiple
-                                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
-                                        file:rounded-full file:border-0 file:text-sm file:font-semibold
-                                        file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
-                            <p class="mt-1 text-sm text-gray-500">Vous pouvez télécharger plusieurs fichiers (max. 10MB chacun).</p>
-                        </div>
+    <!-- Single File Upload for Dossier -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Dossier</label>
+        <input type="file" 
+               name="dossier" 
+               accept=".pdf,.zip,.rar"
+               required
+               class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+                      file:rounded-full file:border-0 file:text-sm file:font-semibold
+                      file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+        <p class="mt-1 text-sm text-gray-500">
+            Veuillez télécharger votre dossier complet (PDF, ZIP ou RAR, max. 10MB)
+        </p>
+    </div>
 
-                        <!-- Submit Button -->
-                        <div class="flex justify-end">
-                            <button type="submit" 
-                                    class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700">
-                                Soumettre la demande
-                            </button>
-                        </div>
-                    </form>
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+        <button type="submit" 
+                class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700">
+            Soumettre la demande
+        </button>
+    </div>
+</form>
                 </div>
 
                 <!-- Files Section -->
@@ -87,11 +94,16 @@ class AidRequestView {
                                     </summary>
                                     <ul class="list-disc pl-5 text-sm text-gray-600 mt-2">
                                         <?php foreach ($aidType['files'] as $file): ?>
-                                            <li>
-                                                <strong><?php echo htmlspecialchars($file['name']); ?>:</strong>
-                                                <?php echo htmlspecialchars($file['description']); ?>
-                                            </li>
-                                        <?php endforeach; ?>
+    <div>
+        <label><?php echo htmlspecialchars($file['name']); ?></label>
+        <input type="file" 
+               name="files[<?php echo $file['id']; ?>]" 
+               class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+                      file:rounded-full file:border-0 file:text-sm file:font-semibold
+                      file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+        <p class="text-sm text-gray-600"><?php echo htmlspecialchars($file['description']); ?></p>
+    </div>
+<?php endforeach; ?>
                                     </ul>
                                 </details>
                             </div>

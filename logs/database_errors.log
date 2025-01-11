@@ -60,3 +60,43 @@ TRACE:
 #4 C:\wamp64\www\TDW\index.php(28): Router::route('membership')
 #5 {main}
 ------------------------------------------------
+[2025-01-11 13:23:32] TYPE: Database Error
+CODE: 42S22
+MESSAGE: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dossier' in 'field list'
+CONTEXT:
+	SQL: INSERT INTO AidRequest (user_id, aid_type_id, dossier) VALUES (:user_id, :aid_type_id, :dossier)
+	Parameters: Array
+(
+    [user_id] => 23
+    [aid_type_id] => 1
+    [dossier] => /TDW/uploads/aid/678270d4d9615_1736601812.pdf
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\AidModel.php(43): Database->request(Object(PDO), 'INSERT INTO Aid...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\AidController.php(86): AidModel->createAidRequest(23, '1', '/TDW/uploads/ai...')
+#3 C:\wamp64\www\TDW\app\routers\Router.php(132): AidController->handleAidRequest(Array, Array)
+#4 C:\wamp64\www\TDW\index.php(28): Router::route('aide')
+#5 {main}
+------------------------------------------------
+[2025-01-11 13:24:18] TYPE: Database Error
+CODE: 42S22
+MESSAGE: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dossier' in 'field list'
+CONTEXT:
+	SQL: INSERT INTO AidRequest (user_id, aid_type_id, dossier) VALUES (:user_id, :aid_type_id, :dossier)
+	Parameters: Array
+(
+    [user_id] => 23
+    [aid_type_id] => 1
+    [dossier] => /TDW/uploads/aid/6782710216658_1736601858.pdf
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\AidModel.php(43): Database->request(Object(PDO), 'INSERT INTO Aid...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\AidController.php(86): AidModel->createAidRequest(23, '1', '/TDW/uploads/ai...')
+#3 C:\wamp64\www\TDW\app\routers\Router.php(132): AidController->handleAidRequest(Array, Array)
+#4 C:\wamp64\www\TDW\index.php(28): Router::route('aide')
+#5 {main}
+------------------------------------------------

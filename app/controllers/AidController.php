@@ -10,7 +10,7 @@ class AidController {
 
     public function __construct() {
         $this->model = new AidModel();
-         $this->fileUploadHelper = new FileUploadHelper('uploads/Aid/');
+         $this->fileUploadHelper = new FileUploadHelper('uploads/aid/');
     }
     public function showAidTypesWithFiles() {
         return $this->model->getAidTypesWithFiles();
@@ -64,48 +64,45 @@ class AidController {
         try {
             // Validate the form data
             if (!isset($postData['aid_type_id']) || empty($postData['aid_type_id'])) {
-                return ['error' => 'Type d\'aide non sélectionné'];
+                throw new Exception('Type d\'aide non sélectionné');
             }
 
             if (!isset($_SESSION['user_id'])) {
-                return ['error' => 'Utilisateur non connecté'];
+                throw new Exception('Utilisateur non connecté');
             }
 
-            // Process uploaded files
-            $fileData = [];
-            if (!empty($files)) {
-                foreach ($files['files'] as $fileTypeId => $fileInfo) {
-                    if ($fileInfo['error'] === UPLOAD_ERR_OK) {
-                        $uploadResult = $this->fileUploadHelper->saveFile($fileInfo);
-                        if ($uploadResult['success']) {
-                            $fileData[] = [
-                                'file_type_id' => $fileTypeId,
-                                'file_path' => $uploadResult['filePath']
-                            ];
-                        } else {
-                            return ['error' => 'Erreur lors du téléchargement du fichier: ' . $uploadResult['error']];
-                        }
-                    }
-                }
+            // Check if a file was uploaded
+            if (!isset($files['dossier']) || $files['dossier']['error'] !== UPLOAD_ERR_OK) {
+                throw new Exception('Veuillez fournir un dossier valide');
             }
 
-            // Save the aid request
-            $requestSaved = $this->model->createAidRequest(
+            // Upload the file
+            $uploadResult = $this->fileUploadHelper->saveFile($files['dossier']);
+            if (!$uploadResult['success']) {
+                throw new Exception('Erreur lors du téléchargement du fichier: ' . $uploadResult['error']);
+            }
+
+            // Create the aid request with the file path
+            $aidRequest = $this->model->createAidRequest(
                 $_SESSION['user_id'],
                 $postData['aid_type_id'],
-                $fileData
+                $uploadResult['filePath']
             );
 
-            if ($requestSaved) {
-                return ['success' => true];
-            } else {
-                return ['error' => 'Erreur lors de la sauvegarde de la demande'];
+            if (!$aidRequest) {
+                throw new Exception('Erreur lors de la création de la demande d\'aide');
             }
+
+            $_SESSION['success'] = 'Demande d\'aide soumise avec succès';
+            header('Location: ' . BASE_URL . '/aide');
+            exit;
+
         } catch (Exception $e) {
-            return ['error' => 'Une erreur est survenue: ' . $e->getMessage()];
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: ' . BASE_URL . '/aide');
+            exit;
         }
     }
-
     public function getAidTypes() {
         return $this->model->getAllAidTypes();
     }

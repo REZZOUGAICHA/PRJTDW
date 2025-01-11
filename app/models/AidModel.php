@@ -35,34 +35,24 @@ class AidModel {
     }
 
     // Save the aid request and related files
-    public function createAidRequest($userId, $aidTypeId, $fileData) {
-        $c = $this->db->connexion();
-        try {
-            // Insert into the aid request table 
-            $sql = "INSERT INTO AidRequest (user_id, aid_type_id) VALUES (:user_id, :aid_type_id)";
-            $this->db->request($c, $sql, ['user_id' => $userId, 'aid_type_id' => $aidTypeId]);
+   public function createAidRequest($userId, $aidTypeId, $filePath) {
+    $c = $this->db->connexion();
+    try {
+        $sql = "INSERT INTO AidRequest (user_id, aid_type_id, Link) VALUES (:user_id, :aid_type_id, :Link)";
+        $this->db->request($c, $sql, [
+            'user_id' => $userId,
+            'aid_type_id' => $aidTypeId,
+            'Link' => $filePath
+        ]);
 
-            // Get the last inserted aid request ID
-            $aidRequestId = $c->lastInsertId();
-
-            // Insert the files associated with this request
-            foreach ($fileData as $file) {
-                $sql = "INSERT INTO AidFile (aid_request_id, file_type_id, file_path) VALUES (:aid_request_id, :file_type_id, :file_path)";
-                $this->db->request($c, $sql, [
-                    'aid_request_id' => $aidRequestId,
-                    'file_type_id' => $file['file_type_id'],
-                    'file_path' => $file['file_path']
-                ]);
-            }
-
-            $this->db->deconnexion();
-            return true;
-        } catch (Exception $e) {
-            $this->db->deconnexion();
-            return false;
-        }
+        $aidRequestId = $c->lastInsertId();
+        $this->db->deconnexion();
+        return $aidRequestId;
+    } catch (Exception $e) {
+        $this->db->deconnexion();
+        return false;
     }
-
+}
     public function acceptAidRequest($requestId) {
         $query = "
             UPDATE AidRequest 
@@ -189,6 +179,25 @@ class AidModel {
         ];
     }
 
+public function saveAidFile($aidRequestId, $fileTypeId, $filePath) {
+    $c = $this->db->connexion();
+    try {
+        $sql = "INSERT INTO AidFile (aid_request_id, file_type_id, file_path) 
+                VALUES (:aid_request_id, :file_type_id, :file_path)";
+        
+        $this->db->request($c, $sql, [
+            'aid_request_id' => $aidRequestId,
+            'file_type_id' => $fileTypeId,
+            'file_path' => $filePath
+        ]);
+        
+        $this->db->deconnexion();
+        return true;
+    } catch (Exception $e) {
+        $this->db->deconnexion();
+        return false;
+    }
+}
 
 public function getAidRequests(){
     $query = "
