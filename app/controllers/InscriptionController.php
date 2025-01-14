@@ -2,14 +2,17 @@
 require_once __DIR__ . '/../models/InscriptionModel.php';
 require_once __DIR__ . '/../helpers/SessionHelper.php';
 require_once __DIR__ . '/../helpers/FileUploadHelper.php';
+require_once __DIR__ . '/../models/partnerModel.php';
 
 class InscriptionController {
     private $inscriptionModel;
     private $fileUploadHelper;
+    private $partnerModel;
 
     public function __construct() {
         $this->inscriptionModel = new InscriptionModel();
         $this->fileUploadHelper = new FileUploadHelper();
+        $this->partnerModel = new PartnerModel();
         SessionHelper::init();
     }
 
@@ -53,7 +56,7 @@ class InscriptionController {
 
         return ['error' => 'Registration failed'];
     }
-
+//------------------------------------------------------user-------------------------------------------------------
     public function handleLogin($email, $password) {
         if (empty($email) || empty($password)) {
             return ['error' => 'Email and password are required'];
@@ -90,6 +93,50 @@ class InscriptionController {
         
         return ['error' => 'Invalid email or password'];
     }
+//------------------------------------------------------partner-------------------------------------------------------
+public function handlePartnerLogin($email, $password) {
+    if (empty($email) || empty($password)) {
+        return ['error' => 'Email et mot de passe sont requis'];
+    }
+
+    try {
+        $user = $this->inscriptionModel->getUserByEmail($email);
+        
+        // Check if user exists and is a partner
+        if ($user && $user['user_type'] === 'partner' && password_verify($password, $user['password'])) {
+            // Get partner details based on user_id
+            $partner = $this->partnerModel->getPartnerByUserId($user['id']);
+            
+            if (!$partner) {
+                return ['error' => 'Compte partenaire non trouvé'];
+            }
+
+            // Set session data
+            SessionHelper::set('user_id', $user['id']);
+            SessionHelper::set('user_type', 'partner');
+            SessionHelper::set('first_name', $user['first_name']);
+            SessionHelper::set('last_name', $user['last_name']);
+            SessionHelper::set('partner_id', $partner['id']);
+            SessionHelper::set('partner_name', $partner['name']);
+            
+            return [
+                'success' => 'Connexion réussie', 
+                'redirect' => '/partner/dashboard'  // Or whatever your partner dashboard route is
+            ];
+        }
+
+        // If user exists but is not a partner
+        if ($user && $user['user_type'] !== 'partner') {
+            return ['error' => 'Ce compte n\'est pas un compte partenaire'];
+        }
+        
+    } catch (Exception $e) {
+        return ['error' => 'Échec de la connexion: ' . $e->getMessage()];
+    }
+    
+    return ['error' => 'Email ou mot de passe invalide'];
+}
+//----------------------------------------------------------------------------------------------------------------------
 
     public function showInscriptionForm() {
         require_once __DIR__ . '/../views/userView/InscriptionView.php';

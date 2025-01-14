@@ -58,7 +58,8 @@ public function handlePartnerCreate($postData, $files) {
             $postData['first_name'],
             $postData['last_name'],
             $postData['email'],
-            $postData['password']
+            $postData['password'],
+            $logo_url
         );
 
         // Then create the partner entry

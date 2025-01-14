@@ -188,44 +188,52 @@ public function addPartnerOffer($partnerId, $cardTypeName, $name, $description, 
 
 
     // -------------------------------------------------------------------------------------------
-    public function createPartner($user_id, $name, $city, $description, $logo_url, $category_id) {
-        $c = $this->db->connexion();
-
-        $sql = "INSERT INTO Partner (user_id, name, city, description, logo_url, category_id) 
-                VALUES (:user_id, :name, :city, :description, :logo_url, :category_id)";
-
-        $this->db->request($c, $sql, [
-            'user_id' => $user_id,
-            'name' => $name,
-            'city' => $city,
-            'description' => $description,
-            'logo_url' => $logo_url,
-            'category_id' => $category_id
-            
-        ]);
-
-        $partnerId = $c->lastInsertId();
-
-        $this->db->deconnexion();
-        return $partnerId;
-    }
-
-    public function createPartnerUser($first_name, $last_name, $email, $password) {
+ public function createPartnerUser($first_name, $last_name, $email, $password, $logo_url) {
     $c = $this->db->connexion();
     
-    $sql = "INSERT INTO user (first_name, last_name, email, password, user_type) 
-            VALUES (:first_name, :last_name, :email, :password, 'partner')";
+    $sql = "INSERT INTO user (first_name, last_name, email, password, user_type, profile_picture) 
+            VALUES (:first_name, :last_name, :email, :password, 'partner', :profile_picture)";
     
     $this->db->request($c, $sql, [
         'first_name' => $first_name,
         'last_name' => $last_name,
         'email' => $email,
-        'password' => password_hash($password, PASSWORD_DEFAULT)
+        'password' => password_hash($password, PASSWORD_DEFAULT),
+        'profile_picture' => $logo_url
     ]);
     
     $userId = $c->lastInsertId();
     $this->db->deconnexion();
     return $userId;
+}
+
+public function createPartner($user_id, $name, $city, $description, $logo_url, $category_id) {
+    $c = $this->db->connexion();
+
+    // First update the user's profile picture
+    $updateUserSql = "UPDATE user SET profile_picture = :logo_url WHERE id = :user_id";
+    $this->db->request($c, $updateUserSql, [
+        'logo_url' => $logo_url,
+        'user_id' => $user_id
+    ]);
+
+    // Then create the partner entry
+    $sql = "INSERT INTO Partner (user_id, name, city, description, logo_url, category_id) 
+            VALUES (:user_id, :name, :city, :description, :logo_url, :category_id)";
+
+    $this->db->request($c, $sql, [
+        'user_id' => $user_id,
+        'name' => $name,
+        'city' => $city,
+        'description' => $description,
+        'logo_url' => $logo_url,
+        'category_id' => $category_id
+    ]);
+
+    $partnerId = $c->lastInsertId();
+
+    $this->db->deconnexion();
+    return $partnerId;
 }
 
     // -------------------------------------------------------------------------------------------
@@ -383,6 +391,15 @@ public function addPartnerOffer($partnerId, $cardTypeName, $name, $description, 
         $this->db->deconnexion();
         return $partner;
     }
+
+    //for login partner 
+   public function getPartnerByUserId($userId) {
+    $c = $this->db->connexion();
+    $sql = "SELECT * FROM Partner WHERE user_id = :user_id";
+    $partner = $this->db->request($c, $sql, ['user_id' => $userId]);
+    $this->db->deconnexion();
+    return $partner ? $partner[0] : null;
+}
 
     public function getPartners() {
         $c = $this->db->connexion();
