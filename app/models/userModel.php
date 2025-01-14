@@ -160,5 +160,19 @@ class UserModel {
             $this->db->deconnexion();
         }
     }
+
+public function getProfilePicture($userId) {
+        $c = $this->db->connexion();
+        $query = "SELECT profile_picture FROM user WHERE id = :user_id";
+        $params = [':user_id' => $userId];
+        $result = $this->db->request($c, $query, $params);
+
+        if ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            return $row['profile_picture']; // Return the image URL or path
+        }
+        return null; // Return null if no image is found
+    }
+
+    
 }
 ?>

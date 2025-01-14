@@ -16,6 +16,9 @@ class ProfileView {
 
         $userId = SessionHelper::get('user_id');
         $user = $this->userController->getUser($userId);
+            $userController = new UserController();
+    $userId = htmlspecialchars(SessionHelper::get('user_id'));
+    $profilePicture = $userController->getUserProfilePicture($userId);
         $isEditing = isset($_GET['edit']) && $_GET['edit'] === 'true';
         ?>
         <div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -32,9 +35,9 @@ class ProfileView {
                         <!-- Profile Header Section -->
                         <div class="flex items-start space-x-6 mb-6 pb-6 border-b border-gray-200">
                             <div class="flex-shrink-0">
-                                <img src="<?php echo BASE_URL; ?>/app/helpers/getImage.php?user_id=<?php echo htmlspecialchars($userId); ?>"
-                                     alt="Photo de profil"
-                                     class="h-20 w-20 rounded-full border-2 border-gray-200 object-cover">
+                                <img src="<?php echo htmlspecialchars($profilePicture); ?>" 
+                                 alt="Profile Picture" 
+                                 class="w-20 h-20 rounded-full border-2 border-gray-300 object-cover">
                             </div>
                             <div class="flex-1">
                                 <h2 class="text-2xl font-bold text-gray-900">

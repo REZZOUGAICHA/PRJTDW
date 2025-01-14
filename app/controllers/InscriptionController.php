@@ -11,7 +11,7 @@ class InscriptionController {
 
     public function __construct() {
         $this->inscriptionModel = new InscriptionModel();
-        $this->fileUploadHelper = new FileUploadHelper();
+        $this->fileUploadHelper = new FileUploadHelper('uploads/');
         $this->partnerModel = new PartnerModel();
         SessionHelper::init();
     }
@@ -28,14 +28,14 @@ class InscriptionController {
 
         // Handle profile picture if uploaded
         if (isset($files['profile_picture']) && $files['profile_picture']['error'] !== UPLOAD_ERR_NO_FILE) {
-            $uploadResult = $this->fileUploadHelper->uploadFile($files['profile_picture']);
-            
-            if ($uploadResult['success']) {
-                $data['profile_picture'] = $uploadResult['fileContent'];
-            } else {
-                return ['error' => $uploadResult['error']];
-            }
+        $uploadResult = $this->fileUploadHelper->saveFile($files['profile_picture'], 'profile/');
+        
+        if ($uploadResult['success']) {
+            $data['profile_picture'] = $uploadResult['filePath']; // Store relative path in database
+        } else {
+            return ['error' => $uploadResult['error']];
         }
+    }
 
         try {
             $userId = $this->inscriptionModel->createUser($data);

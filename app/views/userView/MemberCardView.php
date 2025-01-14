@@ -52,11 +52,7 @@
        
 <div class="p-4 bg-gray-50 text-center">
     <?php 
-       
-        
-        
-        
-       
+
         
         if (isset($cardDetails['QR_LINK']) && $cardDetails['QR_LINK']): 
             $finalPath = '/TDW/public' . $cardDetails['QR_LINK'];

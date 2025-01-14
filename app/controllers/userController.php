@@ -75,5 +75,9 @@ class UserController {
         $view = new ProfileView();
         $view->displayProfile();
     }
+
+    public function getUserProfilePicture($userId) {
+        return $this->model->getProfilePicture($userId);
+    }
 }
 ?>

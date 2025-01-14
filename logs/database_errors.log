@@ -176,3 +176,61 @@ TRACE:
 #4 C:\wamp64\www\TDW\index.php(25): AdminRouter::route('aid')
 #5 {main}
 ------------------------------------------------
+[2025-01-14 22:48:31] TYPE: Database Error
+CODE: 42S22
+MESSAGE: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'field list'
+CONTEXT:
+	SQL: INSERT INTO card (user_id, cardtype_id, created_at) 
+                        VALUES (:user_id, (SELECT id FROM cardtype WHERE name = 'partenaire' LIMIT 1), NOW())
+	Parameters: Array
+(
+    [user_id] => 31
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\partnerModel.php(241): Database->request(Object(PDO), 'INSERT INTO car...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\partnerController.php(66): partnerModel->createPartner('31', 'azertyuiop', 'Alger', 'fghjvf', '/TDW/uploads/pa...', '5')
+#3 C:\wamp64\www\TDW\app\routers\AdminRouter.php(47): partnerController->handlePartnerCreate(Array, Array)
+#4 C:\wamp64\www\TDW\index.php(25): AdminRouter::route('partenaires')
+#5 {main}
+------------------------------------------------
+[2025-01-14 22:54:38] TYPE: Database Error
+CODE: 42S22
+MESSAGE: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'field list'
+CONTEXT:
+	SQL: INSERT INTO card (user_id, cardtype_id, created_at) 
+                        VALUES (:user_id, (SELECT id FROM cardtype WHERE name = 'Partenaire' LIMIT 1), NOW())
+	Parameters: Array
+(
+    [user_id] => 32
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\partnerModel.php(241): Database->request(Object(PDO), 'INSERT INTO car...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\partnerController.php(66): partnerModel->createPartner('32', 'DFGH', 'Alger', 'tuyi', '', '5')
+#3 C:\wamp64\www\TDW\app\routers\AdminRouter.php(47): partnerController->handlePartnerCreate(Array, Array)
+#4 C:\wamp64\www\TDW\index.php(25): AdminRouter::route('partenaires')
+#5 {main}
+------------------------------------------------
+[2025-01-14 22:56:16] TYPE: Database Error
+CODE: 42S22
+MESSAGE: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'field list'
+CONTEXT:
+	SQL: INSERT INTO card (user_id, cardtype_id, created_at) 
+                          VALUES (:user_id, :card_type_id, NOW())
+	Parameters: Array
+(
+    [user_id] => 33
+    [card_type_id] => 4
+)
+
+TRACE:
+#0 C:\wamp64\www\TDW\app\helpers\Database.php(35): PDOStatement->execute()
+#1 C:\wamp64\www\TDW\app\models\partnerModel.php(250): Database->request(Object(PDO), 'INSERT INTO car...', Array)
+#2 C:\wamp64\www\TDW\app\controllers\partnerController.php(66): partnerModel->createPartner('33', 'fvbn', 'Alger', 'fg', '/TDW/uploads/pa...', '5')
+#3 C:\wamp64\www\TDW\app\routers\AdminRouter.php(47): partnerController->handlePartnerCreate(Array, Array)
+#4 C:\wamp64\www\TDW\index.php(25): AdminRouter::route('partenaires')
+#5 {main}
+------------------------------------------------

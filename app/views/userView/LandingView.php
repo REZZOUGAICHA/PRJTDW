@@ -13,6 +13,7 @@ require_once __DIR__ . '/../../controllers/topbarController.php';
 require_once __DIR__ . '/../../controllers/navbarController.php';
 require_once __DIR__ . '/../../helpers/SessionHelper.php';
 require_once __DIR__ . '/../../helpers/getImage.php';
+require_once __DIR__ . '/../../controllers/UserController.php';
 
 
 
@@ -145,6 +146,9 @@ public function displayTopbar() {
     $isLoggedIn = SessionHelper::isLoggedIn();
     $firstName = SessionHelper::get('first_name');
     $userType = SessionHelper::get('user_type');
+    $userController = new UserController();
+    $userId = htmlspecialchars(SessionHelper::get('user_id'));
+    $profilePicture = $userController->getUserProfilePicture($userId);
     ?>
     <!-- Main topbar container -->
     <div class="sticky top-0 z-50 bg-white text-gray-800 shadow-lg border-b border-gray-100">
@@ -216,7 +220,7 @@ public function displayTopbar() {
                                         </button>
                                     </form>
                                 </div>
-                            </div><img src="<?php echo BASE_URL; ?>/app/helpers/getImage.php?user_id=<?php echo htmlspecialchars(SessionHelper::get('user_id')); ?>"
+                            </div><img src="<?php echo htmlspecialchars($profilePicture); ?>" 
                                 alt="Profile Picture" 
                             class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
                         <?php else: ?>
