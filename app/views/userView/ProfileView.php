@@ -167,7 +167,7 @@ class ProfileView {
                             </div>
                         <?php endif; ?>
                     </div>
-                     <div class="p-6 mr-10">  <!--card div -->
+                    <div class="p-6 mr-10">  <!--card div -->
                                 <?php
                                 if ($user['user_type'] === 'member'):
                                     require_once __DIR__ . '/../../controllers/MemberCardController.php';
@@ -175,8 +175,8 @@ class ProfileView {
                                     $memberCardController->displayMemberCard($user['id']);
                                 endif;
                                 ?>
-                            </div>
-                     </div>  <!--big div end -->
+                    </div>
+                    </div>  <!--big div end -->
                 </div>
             </div>
         </div>

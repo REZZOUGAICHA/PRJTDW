@@ -5,18 +5,15 @@
 
         <!-- Header -->
         <div class="p-4 bg-gradient-to-r from-gray-50 to-gray-100">
-    <div class="flex items-center justify-between">
-        <h2 class="text-lg font-semibold text-gray-800">
-            <?php echo htmlspecialchars($cardDetails['asso_name']); ?>
-        </h2>
-        <img src="<?php echo  htmlspecialchars($cardDetails['logo_link']); ?>" 
-             alt="Logo" 
-             class="h-10 object-contain">
-    </div>
-    
-    
-</div>
-
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">
+                    <?php echo htmlspecialchars($cardDetails['asso_name']); ?>
+                </h2>
+                <img src="<?php echo htmlspecialchars($cardDetails['logo_link']); ?>" 
+                     alt="Logo" 
+                     class="h-10 object-contain">
+            </div>
+        </div>
 
         <!-- Content -->
         <div class="p-4 space-y-4">
@@ -52,10 +49,24 @@
         </div>
 
         <!-- QR Code -->
-        <div class="p-4 bg-gray-50 text-center">
-            <img src="<?php echo BASE_URL; ?>/public/qr_codes/<?php echo htmlspecialchars($cardDetails['card_number']); ?>.png" 
-                 alt="QR Code" 
-                 class="w-16 h-16 mx-auto rounded-md shadow-md">
-        </div>
-    </div>
+       
+<div class="p-4 bg-gray-50 text-center">
+    <?php 
+       
+        
+        
+        
+       
+        
+        if (isset($cardDetails['QR_LINK']) && $cardDetails['QR_LINK']): 
+            $finalPath = '/TDW/public' . $cardDetails['QR_LINK'];
+            
+    ?>
+        <img src="<?php echo $finalPath; ?>" 
+             alt="QR Code" 
+             class="w-16 h-16 mx-auto rounded-md shadow-md"
+             onerror="console.log('Failed to load image:', this.src)">
+   
+        <!-- Remove this fallback as it's not needed -->
+    <?php endif; ?>
 </div>

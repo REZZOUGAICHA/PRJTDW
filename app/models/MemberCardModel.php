@@ -8,12 +8,24 @@ class MemberCardModel {
         $database = new Database();
         $this->db = $database->connexion(); // Establish a connection using the Database class
     }
+    public function updateQRLink($userId, $qrLink) {
+        $sql = "UPDATE user SET QR_LINK = :qrLink WHERE id = :userId";
+        
+        $database = new Database();
+        return $database->request(
+            $this->db,
+            $sql,
+            [':qrLink' => $qrLink, ':userId' => $userId],
+            [':qrLink' => PDO::PARAM_STR, ':userId' => PDO::PARAM_INT]
+        );
+    }
 
     public function getMemberCard($userId) {
     $sql = "SELECT 
                 m.id AS member_id,
                 u.first_name,
                 u.last_name,
+                u.QR_LINK,
                 c.card_number,
                 c.issue_date,
                 c.expiration_date,
