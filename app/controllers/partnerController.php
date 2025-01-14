@@ -34,11 +34,12 @@ class partnerController {
 
     // ---------------------- CRUDS ----------------------
     // Add this method to your partnerController class
-
 public function handlePartnerCreate($postData, $files) {
     try {
         // Validate required fields
-        if (empty($postData['name']) || empty($postData['city']) || empty($postData['category_id'])) {
+        if (empty($postData['name']) || empty($postData['city']) || empty($postData['category_id']) ||
+            empty($postData['first_name']) || empty($postData['last_name']) || 
+            empty($postData['email']) || empty($postData['password'])) {
             throw new Exception('Les champs obligatoires doivent être remplis');
         }
 
@@ -52,12 +53,17 @@ public function handlePartnerCreate($postData, $files) {
             $logo_url = $result['filePath'];
         }
 
-        // Get current user ID from session
-        $user_id = $_SESSION['user_id'] ?? 1; // Default to 1 if not set, adjust as needed
+        // First create the user account for the partner
+        $user_id = $this->partnerModel->createPartnerUser(
+            $postData['first_name'],
+            $postData['last_name'],
+            $postData['email'],
+            $postData['password']
+        );
 
-        // Create the partner
+        // Then create the partner entry
         $partner_id = $this->partnerModel->createPartner(
-            $user_id,
+            $user_id, // Use the newly created user's ID
             $postData['name'],
             $postData['city'],
             $postData['description'] ?? '',

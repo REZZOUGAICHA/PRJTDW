@@ -94,11 +94,38 @@ public function displayCreatePartnerForm() {
         
         <form action="<?php echo BASE_URL; ?>/admin/partenaires?action=create" method="POST" enctype="multipart/form-data" class="space-y-6">
             <!-- Name -->
+             <h3 class="text-xl font-bold mt-8">Compte utilisateur du partenaire</h3>
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Nom *</label>
+                <label for="name" class="block text-sm font-medium text-gray-700">Titre du parteniare *</label>
                 <input type="text" id="name" name="name" required
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
             </div>
+
+            <div>
+                <label for="first_name" class="block text-sm font-medium text-gray-700">Prénom *</label>
+                <input type="text" id="first_name" name="first_name" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="last_name" class="block text-sm font-medium text-gray-700">Nom de famille *</label>
+                <input type="text" id="last_name" name="last_name" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email *</label>
+                <input type="email" id="email" name="email" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe *</label>
+                <input type="password" id="password" name="password" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <h3 class="text-xl font-bold mt-8">Information</h3>
 
             <!-- City -->
             <div>

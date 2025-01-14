@@ -201,6 +201,7 @@ public function addPartnerOffer($partnerId, $cardTypeName, $name, $description, 
             'description' => $description,
             'logo_url' => $logo_url,
             'category_id' => $category_id
+            
         ]);
 
         $partnerId = $c->lastInsertId();
@@ -208,6 +209,24 @@ public function addPartnerOffer($partnerId, $cardTypeName, $name, $description, 
         $this->db->deconnexion();
         return $partnerId;
     }
+
+    public function createPartnerUser($first_name, $last_name, $email, $password) {
+    $c = $this->db->connexion();
+    
+    $sql = "INSERT INTO user (first_name, last_name, email, password, user_type) 
+            VALUES (:first_name, :last_name, :email, :password, 'partner')";
+    
+    $this->db->request($c, $sql, [
+        'first_name' => $first_name,
+        'last_name' => $last_name,
+        'email' => $email,
+        'password' => password_hash($password, PASSWORD_DEFAULT)
+    ]);
+    
+    $userId = $c->lastInsertId();
+    $this->db->deconnexion();
+    return $userId;
+}
 
     // -------------------------------------------------------------------------------------------
     public function updatePartner($id, $name, $city, $description, $logo_url, $category_id, $link) {

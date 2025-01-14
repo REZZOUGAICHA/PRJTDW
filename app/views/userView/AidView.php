@@ -53,12 +53,12 @@ class AidRequestView {
     <div>
         <label class="block text-sm font-medium text-gray-700">Dossier</label>
         <input type="file" 
-               name="dossier" 
-               accept=".pdf,.zip,.rar"
-               required
-               class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
-                      file:rounded-full file:border-0 file:text-sm file:font-semibold
-                      file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+                    name="dossier" 
+                    accept=".pdf,.zip,.rar"
+                    required
+                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+                            file:rounded-full file:border-0 file:text-sm file:font-semibold
+                            file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
         <p class="mt-1 text-sm text-gray-500">
             Veuillez télécharger votre dossier complet (PDF, ZIP ou RAR, max. 10MB)
         </p>
