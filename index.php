@@ -1,4 +1,8 @@
 <?php
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/php-errors.log');
+error_reporting(E_ALL);
+file_put_contents(__DIR__ . '/debug.log', "Route hit: " . $_GET['page'] . "\n", FILE_APPEND);
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

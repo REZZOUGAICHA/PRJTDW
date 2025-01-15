@@ -222,6 +222,17 @@ public function getProfilePicture($userId) {
     }
 //--------------------------------------------------------------------------------------
 //users for admin gestion 
-
+// Add this to UserModel class
+public function deleteUser($id) {
+    $c = $this->db->connexion();
+    $sql = "DELETE FROM user WHERE id = :id";
+    $stmt = $this->db->request(
+        $c, 
+        $sql, 
+        ['id' => $id]
+    );
+    $this->db->deconnexion();
+    return $stmt->rowCount() > 0;
+}
 }
 ?>

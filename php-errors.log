@@ -1,0 +1,1071 @@
+[15-Jan-2025 20:48:41 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 20:48:41 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 20:48:41 UTC] REQUEST_URI: /TDW/admin/membre?id=37
+[15-Jan-2025 20:48:41 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 37
+)
+
+[15-Jan-2025 20:51:20 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 20:51:20 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 20:51:20 UTC] REQUEST_URI: /TDW/admin/membre?id=37
+[15-Jan-2025 20:51:20 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 37
+)
+
+[15-Jan-2025 20:55:43 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 20:55:43 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 20:55:43 UTC] REQUEST_URI: /TDW/admin/membre?id=38
+[15-Jan-2025 20:55:43 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 38
+)
+
+[15-Jan-2025 20:57:40 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 20:57:40 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 20:57:40 UTC] REQUEST_URI: /TDW/admin/membre?id=38
+[15-Jan-2025 20:57:40 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 38
+)
+
+[15-Jan-2025 20:57:40 UTC] Starting route processing
+[15-Jan-2025 20:57:40 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 20:57:40 UTC] Full request URL: http://localhost/TDW/admin/membre?id=38
+[15-Jan-2025 21:01:28 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:01:28 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:01:28 UTC] REQUEST_URI: /TDW/admin/membre?id=38
+[15-Jan-2025 21:01:28 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 38
+)
+
+[15-Jan-2025 21:01:28 UTC] Starting route processing
+[15-Jan-2025 21:01:28 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:01:28 UTC] Full request URL: http://localhost/TDW/admin/membre?id=38
+[15-Jan-2025 21:01:28 UTC] Entering membre case
+[15-Jan-2025 21:01:28 UTC] About to show user details for ID: 38
+[15-Jan-2025 21:01:28 UTC] UserController::showUserDetails called with id: 38
+[15-Jan-2025 21:01:28 UTC] Attempting to require file: C:\wamp64\www\TDW\app\controllers/../views/adminView/UserDetailsView.php
+[15-Jan-2025 21:01:28 UTC] About to display user detail
+[15-Jan-2025 21:01:28 UTC] UserDetailsView::displayUserDetail called with userId: 38
+[15-Jan-2025 21:01:28 UTC] User data retrieved: Array
+(
+    [id] => 38
+    [first_name] => h
+    [last_name] => h
+    [email] => h@gmail.com
+    [password] => $2y$10$JKsjHdqQCbzcwjfxAi8.KuhQuqOzijiavzt0MD2fK9wbnhC9HXnWO
+    [registration_date] => 2025-01-15 20:45:46
+    [is_active] => 1
+    [profile_picture] => /TDW/uploads/profile/6788106a10949_1736970346.jpg
+    [user_type] => user
+    [membership_status] => none
+    [QR_LINK] => 
+    [card_type] => 
+    [card_number] => 
+    [expiration_date] => 
+)
+
+[15-Jan-2025 21:01:28 UTC] After displaying user detail
+[15-Jan-2025 21:02:51 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:02:51 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:02:51 UTC] REQUEST_URI: /TDW/admin/membre?id=38
+[15-Jan-2025 21:02:51 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 38
+)
+
+[15-Jan-2025 21:02:51 UTC] Starting route processing
+[15-Jan-2025 21:02:51 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:02:51 UTC] Full request URL: http://localhost/TDW/admin/membre?id=38
+[15-Jan-2025 21:02:51 UTC] Entering membre case
+[15-Jan-2025 21:02:51 UTC] About to show user details for ID: 38
+[15-Jan-2025 21:02:51 UTC] UserController::showUserDetails called with id: 38
+[15-Jan-2025 21:02:51 UTC] Attempting to require file: C:\wamp64\www\TDW\app\controllers/../views/adminView/UserDetailsView.php
+[15-Jan-2025 21:02:51 UTC] About to display user detail
+[15-Jan-2025 21:02:51 UTC] UserDetailsView::displayUserDetail called with userId: 38
+[15-Jan-2025 21:02:51 UTC] User data retrieved: Array
+(
+    [id] => 38
+    [first_name] => h
+    [last_name] => h
+    [email] => h@gmail.com
+    [password] => $2y$10$JKsjHdqQCbzcwjfxAi8.KuhQuqOzijiavzt0MD2fK9wbnhC9HXnWO
+    [registration_date] => 2025-01-15 20:45:46
+    [is_active] => 1
+    [profile_picture] => /TDW/uploads/profile/6788106a10949_1736970346.jpg
+    [user_type] => user
+    [membership_status] => none
+    [QR_LINK] => 
+    [card_type] => 
+    [card_number] => 
+    [expiration_date] => 
+)
+
+[15-Jan-2025 21:02:51 UTC] After displaying user detail
+[15-Jan-2025 21:09:12 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:09:12 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:09:12 UTC] REQUEST_URI: /TDW/admin/membre?action=delete&id=38
+[15-Jan-2025 21:09:12 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [action] => delete
+    [id] => 38
+)
+
+[15-Jan-2025 21:09:12 UTC] Starting route processing
+[15-Jan-2025 21:09:12 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:09:12 UTC] Full request URL: http://localhost/TDW/admin/membre?action=delete&id=38
+[15-Jan-2025 21:09:12 UTC] Entering membre case
+[15-Jan-2025 21:09:12 UTC] Action is set: delete
+[15-Jan-2025 21:09:20 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:09:20 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:09:20 UTC] REQUEST_URI: /TDW/profile
+[15-Jan-2025 21:09:20 UTC] GET params: Array
+(
+    [page] => profile
+)
+
+[15-Jan-2025 21:09:20 UTC] Starting route processing
+[15-Jan-2025 21:09:20 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:09:20 UTC] Full request URL: http://localhost/TDW/profile
+[15-Jan-2025 21:09:23 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:09:23 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:09:23 UTC] REQUEST_URI: /TDW/admin/membre
+[15-Jan-2025 21:09:23 UTC] GET params: Array
+(
+    [page] => admin/membre
+)
+
+[15-Jan-2025 21:09:23 UTC] Starting route processing
+[15-Jan-2025 21:09:23 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:09:23 UTC] Full request URL: http://localhost/TDW/admin/membre
+[15-Jan-2025 21:09:23 UTC] Entering membre case
+[15-Jan-2025 21:09:23 UTC] Showing all users
+[15-Jan-2025 21:09:34 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:09:34 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:09:34 UTC] REQUEST_URI: /TDW/admin/membre?id=37
+[15-Jan-2025 21:09:34 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 37
+)
+
+[15-Jan-2025 21:09:34 UTC] Starting route processing
+[15-Jan-2025 21:09:34 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:09:34 UTC] Full request URL: http://localhost/TDW/admin/membre?id=37
+[15-Jan-2025 21:09:34 UTC] Entering membre case
+[15-Jan-2025 21:09:34 UTC] About to show user details for ID: 37
+[15-Jan-2025 21:09:34 UTC] UserController::showUserDetails called with id: 37
+[15-Jan-2025 21:09:34 UTC] Attempting to require file: C:\wamp64\www\TDW\app\controllers/../views/adminView/UserDetailsView.php
+[15-Jan-2025 21:09:34 UTC] About to display user detail
+[15-Jan-2025 21:09:34 UTC] UserDetailsView::displayUserDetail called with userId: 37
+[15-Jan-2025 21:09:34 UTC] User data retrieved: Array
+(
+    [id] => 37
+    [first_name] => han
+    [last_name] => han
+    [email] => han@esi.dz
+    [password] => $2y$10$L49S3tZeNCsKlBh8vV/nFeZGYUbbDthBJMJQzpHZQFlPpgmKkoWmC
+    [registration_date] => 2025-01-15 19:30:55
+    [is_active] => 1
+    [profile_picture] => /TDW/uploads/profile/6787fedfa360f_1736965855.jpg
+    [user_type] => member
+    [membership_status] => none
+    [QR_LINK] => /qr_codes/card_cardnumber9052958764781148membernamehanhanissuedate2025-01-15193315expirationdate2026-01-15183315cardtypeClassiqueassociationELMountada.png
+    [card_type] => Classique
+    [card_number] => 9052958764781148
+    [expiration_date] => 2026-01-15 18:33:15
+)
+
+[15-Jan-2025 21:09:34 UTC] After displaying user detail
+[15-Jan-2025 21:24:44 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:24:44 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:24:44 UTC] REQUEST_URI: /TDW/admin/membre?id=37
+[15-Jan-2025 21:24:44 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 37
+)
+
+[15-Jan-2025 21:24:44 UTC] Starting route processing
+[15-Jan-2025 21:24:44 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:24:44 UTC] Full request URL: http://localhost/TDW/admin/membre?id=37
+[15-Jan-2025 21:24:44 UTC] PHP Warning:  require_once(C:\wamp64\www\TDW\app\routers/../app/controllers/UserController.php): Failed to open stream: No such file or directory in C:\wamp64\www\TDW\app\routers\AdminRouter.php on line 264
+[15-Jan-2025 21:24:44 UTC] PHP Stack trace:
+[15-Jan-2025 21:24:44 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:24:44 UTC] PHP   2. AdminRouter::route($page = 'membre') C:\wamp64\www\TDW\index.php:29
+[15-Jan-2025 21:24:44 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\wamp64\www\TDW\app\routers/../app/controllers/UserController.php' (include_path='.;C:\php\pear') in C:\wamp64\www\TDW\app\routers\AdminRouter.php:264
+Stack trace:
+#0 C:\wamp64\www\TDW\index.php(29): AdminRouter::route('membre')
+#1 {main}
+  thrown in C:\wamp64\www\TDW\app\routers\AdminRouter.php on line 264
+[15-Jan-2025 21:25:12 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:25:12 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:25:12 UTC] REQUEST_URI: /TDW/admin/membre?id=37
+[15-Jan-2025 21:25:12 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 37
+)
+
+[15-Jan-2025 21:25:12 UTC] Starting route processing
+[15-Jan-2025 21:25:12 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:25:12 UTC] Full request URL: http://localhost/TDW/admin/membre?id=37
+[15-Jan-2025 21:25:12 UTC] Entering membre case
+[15-Jan-2025 21:25:12 UTC] About to show user details for ID: 37
+[15-Jan-2025 21:25:12 UTC] UserController::showUserDetails called with id: 37
+[15-Jan-2025 21:25:12 UTC] Attempting to require file: C:\wamp64\www\TDW\app\controllers/../views/adminView/UserDetailsView.php
+[15-Jan-2025 21:25:12 UTC] About to display user detail
+[15-Jan-2025 21:25:12 UTC] UserDetailsView::displayUserDetail called with userId: 37
+[15-Jan-2025 21:25:12 UTC] User data retrieved: Array
+(
+    [id] => 37
+    [first_name] => han
+    [last_name] => han
+    [email] => han@esi.dz
+    [password] => $2y$10$L49S3tZeNCsKlBh8vV/nFeZGYUbbDthBJMJQzpHZQFlPpgmKkoWmC
+    [registration_date] => 2025-01-15 19:30:55
+    [is_active] => 1
+    [profile_picture] => /TDW/uploads/profile/6787fedfa360f_1736965855.jpg
+    [user_type] => member
+    [membership_status] => none
+    [QR_LINK] => /qr_codes/card_cardnumber9052958764781148membernamehanhanissuedate2025-01-15193315expirationdate2026-01-15183315cardtypeClassiqueassociationELMountada.png
+    [card_type] => Classique
+    [card_number] => 9052958764781148
+    [expiration_date] => 2026-01-15 18:33:15
+)
+
+[15-Jan-2025 21:25:13 UTC] After displaying user detail
+[15-Jan-2025 21:25:50 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:25:50 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:25:50 UTC] REQUEST_URI: /TDW/admin/membre?id=37
+[15-Jan-2025 21:25:50 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 37
+)
+
+[15-Jan-2025 21:25:50 UTC] Starting route processing
+[15-Jan-2025 21:25:50 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:25:50 UTC] Full request URL: http://localhost/TDW/admin/membre?id=37
+[15-Jan-2025 21:25:50 UTC] Entering membre case
+[15-Jan-2025 21:25:50 UTC] About to show user details for ID: 37
+[15-Jan-2025 21:25:50 UTC] UserController::showUserDetails called with id: 37
+[15-Jan-2025 21:25:50 UTC] Attempting to require file: C:\wamp64\www\TDW\app\controllers/../views/adminView/UserDetailsView.php
+[15-Jan-2025 21:25:50 UTC] About to display user detail
+[15-Jan-2025 21:25:50 UTC] UserDetailsView::displayUserDetail called with userId: 37
+[15-Jan-2025 21:25:50 UTC] User data retrieved: Array
+(
+    [id] => 37
+    [first_name] => han
+    [last_name] => han
+    [email] => han@esi.dz
+    [password] => $2y$10$L49S3tZeNCsKlBh8vV/nFeZGYUbbDthBJMJQzpHZQFlPpgmKkoWmC
+    [registration_date] => 2025-01-15 19:30:55
+    [is_active] => 1
+    [profile_picture] => /TDW/uploads/profile/6787fedfa360f_1736965855.jpg
+    [user_type] => member
+    [membership_status] => none
+    [QR_LINK] => /qr_codes/card_cardnumber9052958764781148membernamehanhanissuedate2025-01-15193315expirationdate2026-01-15183315cardtypeClassiqueassociationELMountada.png
+    [card_type] => Classique
+    [card_number] => 9052958764781148
+    [expiration_date] => 2026-01-15 18:33:15
+)
+
+[15-Jan-2025 21:25:50 UTC] After displaying user detail
+[15-Jan-2025 21:25:53 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:25:53 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:25:53 UTC] REQUEST_URI: /TDW/admin/membre?action=delete&id=37
+[15-Jan-2025 21:25:53 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [action] => delete
+    [id] => 37
+)
+
+[15-Jan-2025 21:25:53 UTC] Starting route processing
+[15-Jan-2025 21:25:53 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:25:53 UTC] Full request URL: http://localhost/TDW/admin/membre?action=delete&id=37
+[15-Jan-2025 21:25:53 UTC] Entering membre case
+[15-Jan-2025 21:25:53 UTC] Action is set: delete
+[15-Jan-2025 21:25:53 UTC] Deleting user with ID: 37
+[15-Jan-2025 21:25:53 UTC] PHP Warning:  Undefined property: UserController::$userModel in C:\wamp64\www\TDW\app\controllers\userController.php on line 32
+[15-Jan-2025 21:25:53 UTC] PHP Stack trace:
+[15-Jan-2025 21:25:53 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:25:53 UTC] PHP   2. AdminRouter::route($page = 'membre') C:\wamp64\www\TDW\index.php:29
+[15-Jan-2025 21:25:53 UTC] PHP   3. UserController->deleteUser($id = '37') C:\wamp64\www\TDW\app\routers\AdminRouter.php:275
+[15-Jan-2025 21:25:53 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getUserById() on null in C:\wamp64\www\TDW\app\controllers\userController.php:32
+Stack trace:
+#0 C:\wamp64\www\TDW\app\routers\AdminRouter.php(275): UserController->deleteUser('37')
+#1 C:\wamp64\www\TDW\index.php(29): AdminRouter::route('membre')
+#2 {main}
+  thrown in C:\wamp64\www\TDW\app\controllers\userController.php on line 32
+[15-Jan-2025 21:26:40 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:26:40 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:26:40 UTC] REQUEST_URI: /TDW/admin/membre?action=delete&id=37
+[15-Jan-2025 21:26:40 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [action] => delete
+    [id] => 37
+)
+
+[15-Jan-2025 21:26:40 UTC] Starting route processing
+[15-Jan-2025 21:26:40 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:26:40 UTC] Full request URL: http://localhost/TDW/admin/membre?action=delete&id=37
+[15-Jan-2025 21:26:40 UTC] Entering membre case
+[15-Jan-2025 21:26:40 UTC] Action is set: delete
+[15-Jan-2025 21:26:40 UTC] Deleting user with ID: 37
+[15-Jan-2025 21:26:40 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:26:40 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:26:40 UTC] REQUEST_URI: /TDW/admin/membre
+[15-Jan-2025 21:26:40 UTC] GET params: Array
+(
+    [page] => admin/membre
+)
+
+[15-Jan-2025 21:26:40 UTC] Starting route processing
+[15-Jan-2025 21:26:40 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:26:40 UTC] Full request URL: http://localhost/TDW/admin/membre
+[15-Jan-2025 21:26:40 UTC] Entering membre case
+[15-Jan-2025 21:26:40 UTC] Showing all users
+[15-Jan-2025 21:26:43 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:26:43 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:26:43 UTC] REQUEST_URI: /TDW/admin/membre?id=38
+[15-Jan-2025 21:26:43 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 38
+)
+
+[15-Jan-2025 21:26:43 UTC] Starting route processing
+[15-Jan-2025 21:26:43 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:26:43 UTC] Full request URL: http://localhost/TDW/admin/membre?id=38
+[15-Jan-2025 21:26:43 UTC] Entering membre case
+[15-Jan-2025 21:26:43 UTC] About to show user details for ID: 38
+[15-Jan-2025 21:26:43 UTC] UserController::showUserDetails called with id: 38
+[15-Jan-2025 21:26:43 UTC] Attempting to require file: C:\wamp64\www\TDW\app\controllers/../views/adminView/UserDetailsView.php
+[15-Jan-2025 21:26:43 UTC] About to display user detail
+[15-Jan-2025 21:26:43 UTC] UserDetailsView::displayUserDetail called with userId: 38
+[15-Jan-2025 21:26:43 UTC] User data retrieved: Array
+(
+    [id] => 38
+    [first_name] => h
+    [last_name] => h
+    [email] => h@gmail.com
+    [password] => $2y$10$JKsjHdqQCbzcwjfxAi8.KuhQuqOzijiavzt0MD2fK9wbnhC9HXnWO
+    [registration_date] => 2025-01-15 20:45:46
+    [is_active] => 1
+    [profile_picture] => /TDW/uploads/profile/6788106a10949_1736970346.jpg
+    [user_type] => user
+    [membership_status] => none
+    [QR_LINK] => 
+    [card_type] => 
+    [card_number] => 
+    [expiration_date] => 
+)
+
+[15-Jan-2025 21:26:43 UTC] After displaying user detail
+[15-Jan-2025 21:26:45 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:26:45 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:26:45 UTC] REQUEST_URI: /TDW/admin/membre?action=delete&id=38
+[15-Jan-2025 21:26:45 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [action] => delete
+    [id] => 38
+)
+
+[15-Jan-2025 21:26:45 UTC] Starting route processing
+[15-Jan-2025 21:26:45 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:26:45 UTC] Full request URL: http://localhost/TDW/admin/membre?action=delete&id=38
+[15-Jan-2025 21:26:45 UTC] Entering membre case
+[15-Jan-2025 21:26:45 UTC] Action is set: delete
+[15-Jan-2025 21:26:45 UTC] Deleting user with ID: 38
+[15-Jan-2025 21:26:45 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:26:45 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:26:45 UTC] REQUEST_URI: /TDW/admin/membre
+[15-Jan-2025 21:26:45 UTC] GET params: Array
+(
+    [page] => admin/membre
+)
+
+[15-Jan-2025 21:26:45 UTC] Starting route processing
+[15-Jan-2025 21:26:45 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:26:45 UTC] Full request URL: http://localhost/TDW/admin/membre
+[15-Jan-2025 21:26:45 UTC] Entering membre case
+[15-Jan-2025 21:26:45 UTC] Showing all users
+[15-Jan-2025 21:27:01 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:27:01 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:27:01 UTC] REQUEST_URI: /TDW/profile
+[15-Jan-2025 21:27:01 UTC] GET params: Array
+(
+    [page] => profile
+)
+
+[15-Jan-2025 21:27:01 UTC] Starting route processing
+[15-Jan-2025 21:27:01 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:27:01 UTC] Full request URL: http://localhost/TDW/profile
+[15-Jan-2025 21:27:01 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\LandingView.php on line 224
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. TopbarController->showTopbar() C:\wamp64\www\TDW\app\routers\Router.php:39
+[15-Jan-2025 21:27:01 UTC] PHP   4. LandingView->displayTopbar() C:\wamp64\www\TDW\app\controllers\topbarController.php:27
+[15-Jan-2025 21:27:01 UTC] PHP   5. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\LandingView.php:224
+[15-Jan-2025 21:27:01 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 38
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP   5. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\ProfileView.php:38
+[15-Jan-2025 21:27:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 44
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 44
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 46
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 46
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP   5. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\ProfileView.php:46
+[15-Jan-2025 21:27:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 61
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 133
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP Deprecated:  strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 133
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP   5. strtotime($datetime = NULL) C:\wamp64\www\TDW\app\views\userView\ProfileView.php:133
+[15-Jan-2025 21:27:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 140
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 145
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:01 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\wamp64\www\TDW\app\views\userView\ProfileView.php on line 175
+[15-Jan-2025 21:27:01 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:01 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:01 UTC] PHP   2. Router::route($page = 'profile') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:01 UTC] PHP   3. UserController->showProfile($id = '38') C:\wamp64\www\TDW\app\routers\Router.php:171
+[15-Jan-2025 21:27:01 UTC] PHP   4. ProfileView->displayProfile() C:\wamp64\www\TDW\app\controllers\userController.php:106
+[15-Jan-2025 21:27:06 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:27:06 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:27:06 UTC] REQUEST_URI: /TDW/accueil
+[15-Jan-2025 21:27:06 UTC] GET params: Array
+(
+    [page] => accueil
+)
+
+[15-Jan-2025 21:27:06 UTC] Starting route processing
+[15-Jan-2025 21:27:06 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:27:06 UTC] Full request URL: http://localhost/TDW/accueil
+[15-Jan-2025 21:27:06 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\LandingView.php on line 224
+[15-Jan-2025 21:27:06 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:06 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:06 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:06 UTC] PHP   3. TopbarController->showTopbar() C:\wamp64\www\TDW\app\routers\Router.php:39
+[15-Jan-2025 21:27:06 UTC] PHP   4. LandingView->displayTopbar() C:\wamp64\www\TDW\app\controllers\topbarController.php:27
+[15-Jan-2025 21:27:06 UTC] PHP   5. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\LandingView.php:224
+[15-Jan-2025 21:27:06 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:27:06 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:06 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:06 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:06 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:27:06 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:27:06 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:27:06 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36
+[15-Jan-2025 21:27:06 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:27:06 UTC] PHP Stack trace:
+[15-Jan-2025 21:27:06 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:27:06 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:27:06 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:27:06 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:27:06 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:27:06 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36
+[15-Jan-2025 21:30:40 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:30:40 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:30:40 UTC] REQUEST_URI: /TDW/accueil
+[15-Jan-2025 21:30:40 UTC] GET params: Array
+(
+    [page] => accueil
+)
+
+[15-Jan-2025 21:30:40 UTC] Starting route processing
+[15-Jan-2025 21:30:40 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:30:40 UTC] Full request URL: http://localhost/TDW/accueil
+[15-Jan-2025 21:30:40 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\LandingView.php on line 224
+[15-Jan-2025 21:30:40 UTC] PHP Stack trace:
+[15-Jan-2025 21:30:40 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:30:40 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:30:40 UTC] PHP   3. TopbarController->showTopbar() C:\wamp64\www\TDW\app\routers\Router.php:39
+[15-Jan-2025 21:30:40 UTC] PHP   4. LandingView->displayTopbar() C:\wamp64\www\TDW\app\controllers\topbarController.php:27
+[15-Jan-2025 21:30:40 UTC] PHP   5. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\LandingView.php:224
+[15-Jan-2025 21:30:40 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:30:40 UTC] PHP Stack trace:
+[15-Jan-2025 21:30:40 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:30:40 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:30:40 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:30:40 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:30:40 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:30:40 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36
+[15-Jan-2025 21:30:40 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:30:40 UTC] PHP Stack trace:
+[15-Jan-2025 21:30:40 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:30:40 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:30:40 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:30:40 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:30:40 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:30:40 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36
+[15-Jan-2025 21:30:46 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:30:46 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:30:46 UTC] REQUEST_URI: /TDW/admin/membre?id=36
+[15-Jan-2025 21:30:46 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [id] => 36
+)
+
+[15-Jan-2025 21:30:46 UTC] Starting route processing
+[15-Jan-2025 21:30:46 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:30:46 UTC] Full request URL: http://localhost/TDW/admin/membre?id=36
+[15-Jan-2025 21:30:46 UTC] Entering membre case
+[15-Jan-2025 21:30:46 UTC] About to show user details for ID: 36
+[15-Jan-2025 21:30:46 UTC] UserController::showUserDetails called with id: 36
+[15-Jan-2025 21:30:46 UTC] Attempting to require file: C:\wamp64\www\TDW\app\controllers/../views/adminView/UserDetailsView.php
+[15-Jan-2025 21:30:46 UTC] About to display user detail
+[15-Jan-2025 21:30:46 UTC] UserDetailsView::displayUserDetail called with userId: 36
+[15-Jan-2025 21:30:46 UTC] User data retrieved: Array
+(
+    [id] => 36
+    [first_name] => azerty
+    [last_name] => dfghjkl
+    [email] => waa@esi.dz
+    [password] => $2y$10$32bRoOOnQHWgk44QgwgP5OwsJLcmCv62Ny./3Ys/b9k0aLaiC2Um2
+    [registration_date] => 2025-01-15 00:24:46
+    [is_active] => 1
+    [profile_picture] => /TDW/uploads/profile/profile/6786f23edb165_1736897086.jpg
+    [user_type] => member
+    [membership_status] => none
+    [QR_LINK] => /qr_codes/card_0091093524854754.png
+    [card_type] => Classique
+    [card_number] => 0091093524854754
+    [expiration_date] => 2026-01-14 23:51:53
+)
+
+[15-Jan-2025 21:30:46 UTC] After displaying user detail
+[15-Jan-2025 21:30:53 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:30:53 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:30:53 UTC] REQUEST_URI: /TDW/aide
+[15-Jan-2025 21:30:53 UTC] GET params: Array
+(
+    [page] => aide
+)
+
+[15-Jan-2025 21:30:53 UTC] Starting route processing
+[15-Jan-2025 21:30:53 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:30:53 UTC] Full request URL: http://localhost/TDW/aide
+[15-Jan-2025 21:30:53 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\LandingView.php on line 224
+[15-Jan-2025 21:30:53 UTC] PHP Stack trace:
+[15-Jan-2025 21:30:53 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:30:53 UTC] PHP   2. Router::route($page = 'aide') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:30:53 UTC] PHP   3. TopbarController->showTopbar() C:\wamp64\www\TDW\app\routers\Router.php:39
+[15-Jan-2025 21:30:53 UTC] PHP   4. LandingView->displayTopbar() C:\wamp64\www\TDW\app\controllers\topbarController.php:27
+[15-Jan-2025 21:30:53 UTC] PHP   5. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\LandingView.php:224
+[15-Jan-2025 21:30:54 UTC] Session started. Session data: Array
+(
+    [csrf_token] => e26bd806f0be8d2d71cdb8c8d20007cf6afdbf972a19ca0518e8e5086611bb1d
+    [user_id] => 38
+    [user_type] => user
+    [first_name] => h
+    [last_name] => h
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:30:54 UTC] REQUEST_METHOD: POST
+[15-Jan-2025 21:30:54 UTC] REQUEST_URI: /TDW/logout
+[15-Jan-2025 21:30:54 UTC] GET params: Array
+(
+    [page] => logout
+)
+
+[15-Jan-2025 21:30:54 UTC] Starting route processing
+[15-Jan-2025 21:30:54 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:30:54 UTC] Full request URL: http://localhost/TDW/logout
+[15-Jan-2025 21:30:54 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\LandingView.php on line 224
+[15-Jan-2025 21:30:54 UTC] PHP Stack trace:
+[15-Jan-2025 21:30:54 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:30:54 UTC] PHP   2. Router::route($page = 'logout') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:30:54 UTC] PHP   3. TopbarController->showTopbar() C:\wamp64\www\TDW\app\routers\Router.php:39
+[15-Jan-2025 21:30:54 UTC] PHP   4. LandingView->displayTopbar() C:\wamp64\www\TDW\app\controllers\topbarController.php:27
+[15-Jan-2025 21:30:54 UTC] PHP   5. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\LandingView.php:224
+[15-Jan-2025 21:30:54 UTC] Session started. Session data: Array
+(
+)
+
+[15-Jan-2025 21:30:54 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:30:54 UTC] REQUEST_URI: /TDW/accueil
+[15-Jan-2025 21:30:54 UTC] GET params: Array
+(
+    [page] => accueil
+)
+
+[15-Jan-2025 21:30:54 UTC] Starting route processing
+[15-Jan-2025 21:30:54 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:30:54 UTC] Full request URL: http://localhost/TDW/accueil
+[15-Jan-2025 21:30:54 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:30:54 UTC] PHP Stack trace:
+[15-Jan-2025 21:30:54 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:30:54 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:30:54 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:30:54 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:30:54 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:30:54 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36
+[15-Jan-2025 21:30:54 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:30:54 UTC] PHP Stack trace:
+[15-Jan-2025 21:30:54 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:30:54 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:30:54 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:30:54 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:30:54 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:30:54 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36
+[15-Jan-2025 21:30:56 UTC] Session started. Session data: Array
+(
+)
+
+[15-Jan-2025 21:30:56 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:30:56 UTC] REQUEST_URI: /TDW/Connection
+[15-Jan-2025 21:30:56 UTC] GET params: Array
+(
+    [page] => Connection
+)
+
+[15-Jan-2025 21:30:56 UTC] Starting route processing
+[15-Jan-2025 21:30:56 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:30:56 UTC] Full request URL: http://localhost/TDW/Connection
+[15-Jan-2025 21:31:06 UTC] Session started. Session data: Array
+(
+    [csrf_token] => 177bccf9fb22a5ffeee5aa7225441bd99304e26f41203253150d818f8f7a449f
+)
+
+[15-Jan-2025 21:31:06 UTC] REQUEST_METHOD: POST
+[15-Jan-2025 21:31:06 UTC] REQUEST_URI: /TDW/Connection
+[15-Jan-2025 21:31:06 UTC] GET params: Array
+(
+    [page] => Connection
+)
+
+[15-Jan-2025 21:31:06 UTC] Starting route processing
+[15-Jan-2025 21:31:06 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:31:06 UTC] Full request URL: http://localhost/TDW/Connection
+[15-Jan-2025 21:31:06 UTC] User data fetched: Array
+(
+    [id] => 36
+    [first_name] => azerty
+    [last_name] => dfghjkl
+    [email] => waa@esi.dz
+    [password] => $2y$10$32bRoOOnQHWgk44QgwgP5OwsJLcmCv62Ny./3Ys/b9k0aLaiC2Um2
+    [registration_date] => 2025-01-15 00:24:46
+    [is_active] => 1
+    [profile_picture] => /TDW/uploads/profile/profile/6786f23edb165_1736897086.jpg
+    [user_type] => user
+    [membership_status] => none
+    [QR_LINK] => /qr_codes/card_0091093524854754.png
+)
+
+[15-Jan-2025 21:31:06 UTC] Session started. Session data: Array
+(
+    [csrf_token] => 177bccf9fb22a5ffeee5aa7225441bd99304e26f41203253150d818f8f7a449f
+    [user_id] => 36
+    [user_type] => user
+    [first_name] => azerty
+    [last_name] => dfghjkl
+)
+
+[15-Jan-2025 21:31:06 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:31:06 UTC] REQUEST_URI: /TDW/accueil
+[15-Jan-2025 21:31:06 UTC] GET params: Array
+(
+    [page] => accueil
+)
+
+[15-Jan-2025 21:31:06 UTC] Starting route processing
+[15-Jan-2025 21:31:06 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:31:06 UTC] Full request URL: http://localhost/TDW/accueil
+[15-Jan-2025 21:31:07 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:31:07 UTC] PHP Stack trace:
+[15-Jan-2025 21:31:07 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:31:07 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:31:07 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:31:07 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:31:07 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:31:07 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36
+[15-Jan-2025 21:31:07 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:31:07 UTC] PHP Stack trace:
+[15-Jan-2025 21:31:07 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:31:07 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:31:07 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:31:07 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:31:07 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:31:07 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36
+[15-Jan-2025 21:31:14 UTC] Session started. Session data: Array
+(
+    [csrf_token] => 177bccf9fb22a5ffeee5aa7225441bd99304e26f41203253150d818f8f7a449f
+    [user_id] => 36
+    [user_type] => user
+    [first_name] => azerty
+    [last_name] => dfghjkl
+)
+
+[15-Jan-2025 21:31:14 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:31:14 UTC] REQUEST_URI: /TDW/admin/membre?action=delete&id=36
+[15-Jan-2025 21:31:14 UTC] GET params: Array
+(
+    [page] => admin/membre
+    [action] => delete
+    [id] => 36
+)
+
+[15-Jan-2025 21:31:14 UTC] Starting route processing
+[15-Jan-2025 21:31:14 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:31:14 UTC] Full request URL: http://localhost/TDW/admin/membre?action=delete&id=36
+[15-Jan-2025 21:31:14 UTC] Entering membre case
+[15-Jan-2025 21:31:14 UTC] Action is set: delete
+[15-Jan-2025 21:31:14 UTC] Deleting user with ID: 36
+[15-Jan-2025 21:31:14 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\wamp64\www\TDW\app\controllers\userController.php on line 40
+[15-Jan-2025 21:31:14 UTC] PHP Stack trace:
+[15-Jan-2025 21:31:14 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:31:14 UTC] PHP   2. AdminRouter::route($page = 'membre') C:\wamp64\www\TDW\index.php:29
+[15-Jan-2025 21:31:14 UTC] PHP   3. UserController->deleteUser($id = '36') C:\wamp64\www\TDW\app\routers\AdminRouter.php:275
+[15-Jan-2025 21:31:14 UTC] PHP   4. session_start() C:\wamp64\www\TDW\app\controllers\userController.php:40
+[15-Jan-2025 21:31:14 UTC] Session started. Session data: Array
+(
+)
+
+[15-Jan-2025 21:31:14 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:31:14 UTC] REQUEST_URI: /TDW/admin/membre
+[15-Jan-2025 21:31:14 UTC] GET params: Array
+(
+    [page] => admin/membre
+)
+
+[15-Jan-2025 21:31:14 UTC] Starting route processing
+[15-Jan-2025 21:31:14 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:31:14 UTC] Full request URL: http://localhost/TDW/admin/membre
+[15-Jan-2025 21:31:14 UTC] Entering membre case
+[15-Jan-2025 21:31:14 UTC] Showing all users
+[15-Jan-2025 21:31:16 UTC] Session started. Session data: Array
+(
+    [admin_id] => 1
+    [is_admin] => 1
+)
+
+[15-Jan-2025 21:31:16 UTC] REQUEST_METHOD: GET
+[15-Jan-2025 21:31:16 UTC] REQUEST_URI: /TDW/accueil
+[15-Jan-2025 21:31:16 UTC] GET params: Array
+(
+    [page] => accueil
+)
+
+[15-Jan-2025 21:31:16 UTC] Starting route processing
+[15-Jan-2025 21:31:16 UTC] Current working directory: C:\wamp64\www\TDW
+[15-Jan-2025 21:31:16 UTC] Full request URL: http://localhost/TDW/accueil
+[15-Jan-2025 21:31:16 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:31:16 UTC] PHP Stack trace:
+[15-Jan-2025 21:31:16 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:31:16 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:31:16 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:31:16 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:31:16 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:31:16 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36
+[15-Jan-2025 21:31:16 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in C:\wamp64\www\TDW\app\views\userView\tableView.php on line 36
+[15-Jan-2025 21:31:16 UTC] PHP Stack trace:
+[15-Jan-2025 21:31:16 UTC] PHP   1. {main}() C:\wamp64\www\TDW\index.php:0
+[15-Jan-2025 21:31:16 UTC] PHP   2. Router::route($page = 'accueil') C:\wamp64\www\TDW\index.php:32
+[15-Jan-2025 21:31:16 UTC] PHP   3. DiscountController->showDiscount() C:\wamp64\www\TDW\app\routers\Router.php:64
+[15-Jan-2025 21:31:16 UTC] PHP   4. OfferView->displaydiscount() C:\wamp64\www\TDW\app\controllers\discountController.php:17
+[15-Jan-2025 21:31:16 UTC] PHP   5. TableView->displayTable($data = [1 => ['discount_name' => 'Stay and Savee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '26.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular'], 3 => ['discount_name' => 'Tech Accessories Discount', 'partner_name' => 'Innovateurs Tech', 'category_name' => 'School', 'card_name' => 'Classique', 'percentage' => '15.00', 'city' => 'Alger', 'link' => '#link', 'discount_type' => 'regular'], 5 => ['discount_name' => 'Académie Avenir Brillantt', 'partner_name' => 'new', 'category_name' => 'Clinic', 'card_name' => 'Classique', 'percentage' => '1.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 6 => ['discount_name' => 'azertyu', 'partner_name' => 'now', 'category_name' => 'Education', 'card_name' => 'Classique', 'percentage' => '5.00', 'city' => 'Alger', 'link' => NULL, 'discount_type' => 'regular'], 8 => ['discount_name' => 'Room Upgrade Offereee', 'partner_name' => 'clinic ', 'category_name' => 'Clinic', 'card_name' => 'Jeunes', 'percentage' => '10.00', 'city' => 'Constantine', 'link' => '#link', 'discount_type' => 'regular']], $columns = [0 => ['field' => 'partner_name', 'label' => 'Partenaire'], 1 => ['field' => 'category_name', 'label' => 'Categorie'], 2 => ['field' => 'card_name', 'label' => 'type carte'], 3 => ['field' => 'city', 'label' => 'ville'], 4 => ['field' => 'percentage', 'label' => 'pourcentage'], 5 => ['field' => 'link', 'label' => 'voir plus']], $actions = *uninitialized*, $tableClasses = *uninitialized*) C:\wamp64\www\TDW\app\views\userView\offerView.php:73
+[15-Jan-2025 21:31:16 UTC] PHP   6. htmlspecialchars($string = NULL) C:\wamp64\www\TDW\app\views\userView\tableView.php:36

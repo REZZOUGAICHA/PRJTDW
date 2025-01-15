@@ -32,15 +32,15 @@ public function displayUsers() {
         ];
 
         // Define actions
-        $actions = [
-            function($row) {
-                return sprintf(
-                    '<a href="%s/admin/users?id=%s" class="text-blue-600 hover:text-blue-800 hover:underline">Voir plus</a>',
-                    BASE_URL,
-                    htmlspecialchars($row['id'])
-                );
-            }
-        ];
+       $actions = [
+    function($row) {
+        return sprintf(
+            '<a href="%s/admin/membre?id=%s" class="text-blue-600 hover:text-blue-800 hover:underline">Voir plus</a>',
+            BASE_URL,
+            htmlspecialchars($row['id'])
+        );
+    }
+];
 
         echo '<div class="users-table-container">';
         $tableView = new TableView();

@@ -1,4 +1,8 @@
 <?php
+error_log("Starting route processing");
+error_log("Current working directory: " . getcwd());
+error_log("Full request URL: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+
 class AdminRouter {
     public static function route($page) {
         ob_start();
@@ -132,31 +136,41 @@ class AdminRouter {
         $partnerController->showPartnerForAdmin();
     }
     break;
-            case 'membre':
-    require_once __DIR__ . '/../controllers/UserController.php';
-    $userController = new UserController();
+            
+            case 'news':
+                require_once __DIR__ . '/../controllers/NewsController.php';
+                $newsController = new NewsController();
 
-    if (isset($_GET['action'])) {
-        switch ($_GET['action']) {
-            case 'create':
-                // Future implementation for creating a new member (to be implemented later)
+                if (isset($_GET['action'])) {
+                    switch ($_GET['action']) {
+                        case 'create':
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                $newsController->handleNewsCreate($_POST, $_FILES);
+                            } else {
+                                $newsController->showCreateNewsForm();
+                            }
+                            break;
+                        case 'update':
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                $newsController->handleNewsUpdate($_POST['news_id'], $_POST, $_FILES);
+                                header('Location: ' . BASE_URL . '/admin/news?id=' . $_POST['news_id']);
+                                exit;
+                            }
+                            break;
+                        case 'delete':
+                            if (isset($_GET['id'])) {
+                                $newsController->deleteNews($_GET['id']);
+                                header('Location: ' . BASE_URL . '/admin/news');
+                                exit;
+                            }
+                            break;
+                    }
+                } elseif (isset($_GET['id'])) {
+                    $newsController->showNewsDetails($_GET['id']);
+                } else {
+                    $newsController->showNewsForAdmin();
+                }
                 break;
-            case 'update':
-                // Future implementation for updating a member (to be implemented later)
-                break;
-            case 'delete':
-                // Future implementation for deleting a member (to be implemented later)
-                break;
-            default:
-                // If no specific action, just show the list of users
-                $userController->showUsers();
-                break;
-        }
-    } else {
-        // If no specific action, just show the list of users
-        $userController->showUsers();
-    }
-    break;
 
             case 'aid':
     require_once __DIR__ . '/../controllers/AidController.php';
@@ -246,31 +260,48 @@ class AdminRouter {
             case 'benevolat':
                 
                 break;
-            case 'membre':
+          case 'membre':
     require_once __DIR__ . '/../controllers/UserController.php';
     $userController = new UserController();
 
-    if (isset($_GET['action'])) {
-        switch ($_GET['action']) {
-            case 'create':
-                // Future implementation for creating a new member
-                break;
-            case 'update':
-                // Future implementation for updating a member
-                break;
-            case 'delete':
-                // Future implementation for deleting a member
-                break;
-            default:
-                // If no specific action, just show the list of users
-                $userController->showUsersList();
-                break;
+    try {
+        error_log("Entering membre case");
+        if (isset($_GET['action'])) {
+            error_log("Action is set: " . $_GET['action']);
+            switch ($_GET['action']) {
+                case 'delete':
+                    if (isset($_GET['id'])) {
+                        error_log("Deleting user with ID: " . $_GET['id']);
+                        $userController->deleteUser($_GET['id']);
+                        $_SESSION['success'] = "Utilisateur supprimé avec succès.";
+                        header('Location: ' . BASE_URL . '/admin/membre');
+                        exit;
+                    } else {
+                        error_log("Delete action requested but no ID provided.");
+                        $_SESSION['error'] = "ID de l'utilisateur non spécifié pour la suppression.";
+                        header('Location: ' . BASE_URL . '/admin/membre');
+                        exit;
+                    }
+                    break;
+                // Add other actions here as needed
+            }
+        } elseif (isset($_GET['id'])) {
+            error_log("About to show user details for ID: " . $_GET['id']);
+            $userController->showUserDetails($_GET['id']);
+            exit;
+        } else {
+            error_log("Showing all users");
+            $userController->showUsers();
         }
-    } else {
-        // If no specific action, just show the list of users
-        $userController->showUsersList();
+    } catch (Exception $e) {
+        error_log("Error in membre case: " . $e->getMessage());
+        $_SESSION['error'] = $e->getMessage();
+        header('Location: ' . BASE_URL . '/admin/membre');
+        exit;
     }
     break;
+
+
 
 
            

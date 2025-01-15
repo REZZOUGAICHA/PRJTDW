@@ -25,8 +25,41 @@ class UserController {
     public function getUserInfoById($id) {
         return $this->model->getUserInfoById($id);
     }
+
+    // Add this to UserController class
+public function deleteUser($id) {
+    try {
+        $user = $this->model->getUserById($id);
+        if (!$user) {
+            throw new Exception('Utilisateur non trouvé');
+        }
+        
+        // Check if we're deleting the currently logged-in user
+        if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $id) {
+            // Destroy the session for the deleted user
+            session_start();
+            session_unset();
+            session_destroy();
+        }
+        
+        if ($this->model->deleteUser($id)) {
+            // Also delete any related sessions in the database if you have a sessions table
+            // $this->model->deleteUserSessions($id);
+            
+            $_SESSION['success'] = 'Utilisateur supprimé avec succès';
+            header('Location: ' . BASE_URL . '/admin/membre');
+            exit;
+        }
+        
+        throw new Exception('Échec de la suppression');
+    } catch (Exception $e) {
+        $_SESSION['error'] = $e->getMessage();
+        header('Location: ' . BASE_URL . '/admin/membre');  // Removed the ID from redirect since user might not exist
+        exit;
+    }
+}
 //----------------------admin fin---------------------------------
-    public function updateUser($id, $data) {
+    public function updateUser($id, $data) {//for profile update
         // Validate incoming data
         if (empty($data['first_name']) || empty($data['last_name']) || empty($data['email'])) {
             return [
@@ -96,17 +129,27 @@ class UserController {
 
     //---------------------display------------------------------
     public function showUsers() {
-        require_once __DIR__ . '/../Views/adminView/UserView.php';
+        require_once __DIR__ . '/../views/adminView/UserView.php';
         $view = new UserView();
         $view->displayUsers();
     }
 
-    public function showUserDetails($id) {
-        $user = $this->userModel->getUserById($id);
-        require_once __DIR__ . '/../Views/adminView/UserDetailsView.php';
-        $view = new UserDetailsView();
-        $view->displayUserDetail($id);
+   
+public function showUserDetails($id) {
+    error_log("UserController::showUserDetails called with id: " . $id);  // Add this
+    $viewPath = __DIR__ . '/../views/adminView/UserDetailsView.php';
+    error_log("Attempting to require file: " . $viewPath);  // Add this
+    if (!file_exists($viewPath)) {
+        error_log("File does not exist: " . $viewPath);  // Add this
+        throw new Exception("View file not found");
     }
+    require_once $viewPath;
+    $view = new UserDetailsView();
+    error_log("About to display user detail");  // Add this
+    $view->displayUserDetail($id);
+    error_log("After displaying user detail");  // Add this
+    exit;
+}
 
    
 }
