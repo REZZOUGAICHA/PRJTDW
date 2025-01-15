@@ -147,7 +147,8 @@ public function displayTopbar() {
     $firstName = SessionHelper::get('first_name');
     $userType = SessionHelper::get('user_type');
     $userController = new UserController();
-    $userId = htmlspecialchars(SessionHelper::get('user_id'));
+    $userId = htmlspecialchars(SessionHelper::get('user_id') ?? '');
+
     $profilePicture = $userController->getUserProfilePicture($userId);
     ?>
     <!-- Main topbar container -->

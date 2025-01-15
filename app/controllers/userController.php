@@ -79,5 +79,21 @@ class UserController {
     public function getUserProfilePicture($userId) {
         return $this->model->getProfilePicture($userId);
     }
+    
+
+     public function getUsers() {
+        return $this->model->getUsers();  // This calls the getUsers() method from your model
+    }
+
+    public function showUsersList() {
+        $users = $this->getUsers();
+        require_once __DIR__ . '/../views/adminView/MemberView.php';
+        $view = new MemberView();
+        $view->displayUsers($users);
+    }
+
+    
+
+   
 }
 ?>

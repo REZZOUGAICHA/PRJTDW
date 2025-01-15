@@ -8,25 +8,31 @@ class MemberCardController {
         $this->memberCardModel = new MemberCardModel();
     }
 
-    public function displayMemberCard($memberId) {
-        $cardDetails = $this->memberCardModel->getMemberCard($memberId);
-        
-        if ($cardDetails) {
-            // Check if QR code is already stored in database
-            if (empty($cardDetails['QR_LINK'])) {
-                // Generate new QR code only if it's not already stored
-                $qrLink = QRCodeHelper::generateQRCode($cardDetails['card_number']);
-                // Save the QR link to the user table
-                $this->memberCardModel->updateQRLink($memberId, $qrLink);
-                // Update cardDetails with new QR link
-                $cardDetails['QR_LINK'] = $qrLink;
-            }
-
-            // Include the card view
-            require_once __DIR__ . '/../views/userView/MemberCardView.php';
-        } else {
-            echo "Member not found or not a valid member.";
+   public function displayMemberCard($memberId) {
+    $cardDetails = $this->memberCardModel->getMemberCard($memberId);
+    
+    if ($cardDetails) {
+        if (empty($cardDetails['QR_LINK'])) {
+            // Create a string or JSON with all necessary data
+            $qrData = json_encode([
+                'card_number' => $cardDetails['card_number'],
+                'member_name' => $cardDetails['first_name'] . ' ' . $cardDetails['last_name'],
+                'issue_date' => $cardDetails['issue_date'],
+                'expiration_date' => $cardDetails['expiration_date'],
+                'card_type' => $cardDetails['card_type'],
+                'association' => $cardDetails['asso_name']
+            ]);
+            
+            // Generate QR code with all data
+            $qrLink = QRCodeHelper::generateQRCode($qrData);
+            $this->memberCardModel->updateQRLink($memberId, $qrLink);
+            $cardDetails['QR_LINK'] = $qrLink;
         }
+        
+        require_once __DIR__ . '/../views/userView/MemberCardView.php';
+    } else {
+        echo "Member not found or not a valid member.";
     }
+}
 }
 ?>

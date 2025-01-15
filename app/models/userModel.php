@@ -172,7 +172,53 @@ public function getProfilePicture($userId) {
         }
         return null; // Return null if no image is found
     }
+//--------------------------------------------------------------------------------------
+//users for admin gestion 
+public function getUsers() {
+    $c = $this->db->connexion();
 
-    
+    // SQL query to join user, member, card, and cardtype tables
+    $sql = "
+        SELECT 
+            u.id AS user_id,
+            u.first_name,
+            u.last_name,
+            u.email,
+            u.profile_picture,
+            u.membership_status,
+            u.user_type,
+            m.id AS membership_id,
+            c.card_number,
+            c.status AS card_status,
+            c.expiration_date,
+            m.membership_date,
+            ct.name AS card_type
+        FROM 
+            user u
+        LEFT JOIN 
+            member m ON u.id = m.user_id
+        LEFT JOIN 
+            card c ON m.card_id = c.id
+        LEFT JOIN 
+            cardtype ct ON c.card_type_id = ct.id
+        WHERE 
+            u.user_type IN (:user_type1, :user_type2)
+        ORDER BY 
+            u.id DESC
+    ";
+
+    // Execute the query
+    $stmt = $this->db->request($c, $sql, [
+        ':user_type1' => 'user',
+        ':user_type2' => 'member'
+    ]);
+
+    // Fetch the results
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $this->db->deconnexion();
+    return $users ?: []; // Return the results or an empty array if no data is found
+}
+
 }
 ?>

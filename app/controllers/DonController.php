@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/DonModel.php';
+require_once __DIR__ . '/../helpers/FileUploadHelper.php';
 class DonController {
     
     private $model;

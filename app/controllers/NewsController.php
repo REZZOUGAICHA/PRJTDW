@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/NewsModel.php';
+require_once __DIR__ . '/../helpers/FileUploadHelper.php';
 
 class NewsController {
     private $model;
