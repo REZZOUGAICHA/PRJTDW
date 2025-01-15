@@ -134,7 +134,7 @@ class AdminRouter {
     break;
             case 'membre':
     require_once __DIR__ . '/../controllers/UserController.php';
-    $userController = new UserController(new UserModel());
+    $userController = new UserController();
 
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
@@ -149,12 +149,12 @@ class AdminRouter {
                 break;
             default:
                 // If no specific action, just show the list of users
-                $userController->showUsersList();
+                $userController->showUsers();
                 break;
         }
     } else {
         // If no specific action, just show the list of users
-        $userController->showUsersList();
+        $userController->showUsers();
     }
     break;
 

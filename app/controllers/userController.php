@@ -15,7 +15,17 @@ class UserController {
     public function getUser($id) {
         return $this->model->getUserById($id);
     }
+//----------------------admin start---------------------------------
+    public function getAllUsers() {
+        return [
+            'users' => $this->model->getAllUsers()
+        ];
+    }
 
+    public function getUserInfoById($id) {
+        return $this->model->getUserInfoById($id);
+    }
+//----------------------admin fin---------------------------------
     public function updateUser($id, $data) {
         // Validate incoming data
         if (empty($data['first_name']) || empty($data['last_name']) || empty($data['email'])) {
@@ -81,18 +91,22 @@ class UserController {
     }
     
 
-     public function getUsers() {
-        return $this->model->getUsers();  // This calls the getUsers() method from your model
+
+ 
+
+    //---------------------display------------------------------
+    public function showUsers() {
+        require_once __DIR__ . '/../Views/adminView/UserView.php';
+        $view = new UserView();
+        $view->displayUsers();
     }
 
-    public function showUsersList() {
-        $users = $this->getUsers();
-        require_once __DIR__ . '/../views/adminView/MemberView.php';
-        $view = new MemberView();
-        $view->displayUsers($users);
+    public function showUserDetails($id) {
+        $user = $this->userModel->getUserById($id);
+        require_once __DIR__ . '/../Views/adminView/UserDetailsView.php';
+        $view = new UserDetailsView();
+        $view->displayUserDetail($id);
     }
-
-    
 
    
 }
