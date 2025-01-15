@@ -149,7 +149,8 @@ public function displayTopbar() {
     $userController = new UserController();
     $userId = htmlspecialchars(SessionHelper::get('user_id') ?? '');
 
-    $profilePicture = $userController->getUserProfilePicture($userId);
+    $profilePicture = $userController->getUserProfilePicture($userId) ?? BASE_URL . '/uploads/default/default.jpg';
+
     ?>
     <!-- Main topbar container -->
     <div class="sticky top-0 z-50 bg-white text-gray-800 shadow-lg border-b border-gray-100">

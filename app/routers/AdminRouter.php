@@ -11,21 +11,58 @@ class AdminRouter {
         require_once __DIR__ . '/../helpers/FileUploadHelper.php';
 
         SessionHelper::init();
+        $isLoginPage = ($page === 'connection');
+        $isLoggedIn = isset($_SESSION['admin_id']) && $_SESSION['is_admin'] === true;
 
-        if (!isset($_SESSION['admin_id'])) {
-            $_SESSION['admin_id'] = 1; 
-            $_SESSION['is_admin'] = true;
+        // If not logged in and not on login page, redirect to login
+        if (!$isLoggedIn && !$isLoginPage) {
+            header('Location: ' . BASE_URL . '/admin/connection');
+            exit;
         }
 
-        require_once __DIR__ . '/../controllers/SidebarController.php';
-        HeaderHelper::renderHeader();
+        // If logged in and trying to access login page, redirect to dashboard
+        if ($isLoggedIn && $isLoginPage) {
+            header('Location: ' . BASE_URL . '/admin/tableau-de-bord');
+            exit;
+        }
 
-        echo '<div class="flex min-h-screen bg-gray-100">';
-        $sidebarController = new SidebarController();
-        $sidebarController->showSidebar();
-        echo '<div class="flex-1 lg:ml-64">';
+        // Only render header and sidebar if logged in
+        if ($isLoggedIn) {
+            require_once __DIR__ . '/../controllers/SidebarController.php';
+            HeaderHelper::renderHeader();
+            echo '<div class="flex min-h-screen bg-gray-100">';
+            $sidebarController = new SidebarController();
+            $sidebarController->showSidebar();
+            echo '<div class="flex-1 lg:ml-64">';
+        }
+
+        
+
+        
+
+        
 
         switch ($page) {
+            case 'test-logout':
+    session_destroy();
+    session_unset();
+    header('Location: ' . BASE_URL . '/admin/connection');
+    exit;
+    break;
+            
+            case 'connection':
+    require_once __DIR__ . '/../controllers/AdminConnController.php';
+    $adminConnController = new AdminConnController();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        error_log("Processing login POST request");
+        $result = $adminConnController->handleLogin($_POST['name'], $_POST['password']);
+        error_log("Login result: " . print_r($result, true));
+    } else {
+        error_log("Showing login form");
+        $adminConnController->showLoginForm();
+    }
+    break;
+
             case 'tableau-de-bord':
                 require_once __DIR__ . '/../controllers/AdminDashboardController.php';
                 $dashboardController = new DashboardController();
@@ -357,8 +394,10 @@ class AdminRouter {
                 echo "Page admin introuvable.";
                 break;
         }
-        echo '</div></div>';
-        HeaderHelper::renderFooter();
+        if ($isLoggedIn) {
+            echo '</div></div>';
+            HeaderHelper::renderFooter();
+        }
         ob_end_flush();
     }
 }

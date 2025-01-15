@@ -1,7 +1,7 @@
 node_modules/
 helpers/phpqrcode/
 logs/
-debug.log/
-php-error.log/
+debug.log
+php-error.log
 uploads/
 
