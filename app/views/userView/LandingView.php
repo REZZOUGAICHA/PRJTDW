@@ -21,32 +21,127 @@ class LandingView {
 
   
     //------------------------------------------------------------------------------------------------------
-    public function diaporamaView() {
+
+public function diaporamaView(): void
+{
     $diaporamaController = new DiaporamaController();
     $images = $diaporamaController->getDiaporama();
+
+    $this->renderDiaporama($images);
+}
+
+private function renderDiaporama(array $images): void
+{
     ?>
-    <div class="big-cont mx-auto mt-16">
-        <div class="container mx-auto">
-            <div class="inner-container mx-auto">
-                <?php if ($images) {
-                    foreach ($images as $image) { ?>
-                        <img class="bg-contain" src="<?php echo htmlspecialchars($image['lien']); ?>" alt="<?php echo htmlspecialchars($image['titre']); ?>"/>
-                    <?php }
-                } else {
-                    echo "Aucune image trouvée.";
-                } ?>
-            </div>
+    <div class="diaporama-container">
+        <div class="diaporama-wrapper">
+            <?php if (!empty($images)): ?>
+                <div class="diaporama-slider">
+                    <?php foreach ($images as $image): ?>
+                        <div class="slide">
+                            <img 
+                                src="<?= htmlspecialchars($image['lien']) ?>" 
+                                alt="<?= htmlspecialchars($image['titre']) ?>" 
+                                class="slide-image"
+                            />
+                        </div>
+                    <?php endforeach; ?>
+                    <!-- Duplicate images for seamless looping -->
+                    <?php foreach ($images as $image): ?>
+                        <div class="slide">
+                            <img 
+                                src="<?= htmlspecialchars($image['lien']) ?>" 
+                                alt="<?= htmlspecialchars($image['titre']) ?>" 
+                                class="slide-image"
+                            />
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p class="no-images-message">Aucune image trouvée.</p>
+            <?php endif; ?>
         </div>
     </div>
+
     <style>
-        .big-cont { overflow: hidden; }
-        .container { overflow: hidden !important; position: relative; width: 400%; }
-        .inner-container { display: flex; animation: slide 10s linear infinite; position: relative; gap: 5%; }
-        .inner-container:hover { animation-play-state: paused; }
-        img { width: 80%; height: 400px; }
+        /* Full-width container */
+        .diaporama-container {
+            overflow: hidden;
+            width: 100vw; /* Full viewport width */
+            margin: 0;
+            padding: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .diaporama-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .diaporama-slider {
+            display: flex;
+            animation: slide 10s linear infinite;
+            gap: 1%; /* Reduced space between images */
+        }
+
+        .diaporama-slider:hover {
+            animation-play-state: paused;
+        }
+
+        /* Even larger width for each slide */
+        .slide {
+            flex: 0 0 48%; /* Increase width of each slide to nearly half the container */
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .slide:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .no-images-message {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
         @keyframes slide {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%); /* Move only half the width to loop seamlessly */
+            }
+        }
+
+        /* Responsive adjustments for PC */
+        @media (min-width: 1024px) {
+            .slide {
+                flex: 0 0 45%; /* Slightly smaller for larger screens */
+            }
+
+            .slide-image {
+                height: 450px; /* Slightly taller for larger screens */
+            }
+        }
+
+        @media (min-width: 1440px) {
+            .slide {
+                flex: 0 0 40%; /* Smaller for very large screens */
+            }
+
+            .slide-image {
+                height: 500px; /* Taller images for very large screens */
+            }
         }
     </style>
     <?php
@@ -149,7 +244,7 @@ public function displayTopbar() {
     $userController = new UserController();
     $userId = htmlspecialchars(SessionHelper::get('user_id') ?? '');
 
-    $profilePicture = $userController->getUserProfilePicture($userId) ?? BASE_URL . '/uploads/default/default.jpg';
+    $profilePicture = $userController->getUserProfilePicture($userId) ?? BASE_URL . '/uploads/default.jpg';
 
     ?>
     <!-- Main topbar container -->

@@ -43,6 +43,19 @@ class AidView {
         $tableView = new TableView();
         $tableView->displayTable($flattenedAidRequests, $columns, $actions);
         echo '</div>';
+
+        echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+        echo '<script src="' . BASE_URL . '/public/js/filterTable.js"></script>';
+        echo '<script>
+            $(document).ready(function() {
+                initializeTableFilters(".aid-request-table-container", [
+                    { label: "Type d\'Aide", columnIndex: 3 },
+                    { label: "Statut", columnIndex: 4 },
+                    { label: "Date de Demande", columnIndex: 5 }
+                    
+                ]);
+            });
+        </script>';
     }
 }
 ?>

@@ -39,7 +39,7 @@ class partnerModel {
         LEFT JOIN PartnerCategory pc ON p.category_id = pc.id
         LEFT JOIN discount d ON p.id = d.partner_id
         LEFT JOIN offer o ON p.id = o.partner_id
-        ORDER BY pc.name, p.name
+        ORDER BY pc.name,p.city
     ";
 
     $stmt = $this->db->request($c, $sql);

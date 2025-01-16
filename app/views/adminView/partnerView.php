@@ -11,7 +11,7 @@ class partnerView {
     }
 
     public function displayPartners() {
-
+        // Add Partner Button
         echo '<div class="mb-6">';
         echo '<a href="' . BASE_URL . '/admin/partenaires?action=create" 
                 class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
@@ -21,13 +21,15 @@ class partnerView {
                 Ajouter un partenaire
             </a>';
         echo '</div>';
+
+        // Get and transform data
         $categorizedPartners = $this->partnerController->getPartnersByCategory();
         
         // Transform data
         $flattenedPartners = [];
         foreach ($categorizedPartners as $categoryId => $categoryData) {
             foreach ($categoryData['partners'] as $partner) {
-                //  discounts
+                // Process discounts
                 $discountStr = '';
                 if (!empty($partner['discounts'])) {
                     $discountItems = array_map(function($discount) {
@@ -46,7 +48,7 @@ class partnerView {
             }
         }
 
-        //  columns
+        // Define columns
         $columns = [
             ['label' => 'Nom', 'field' => 'name'],
             ['label' => 'Ville', 'field' => 'city'],
@@ -54,7 +56,7 @@ class partnerView {
             ['label' => 'Réductions', 'field' => 'discounts']
         ];
 
-        // actions
+        // Define actions
         $actions = [
             function($row) {
                 return sprintf(
@@ -65,22 +67,23 @@ class partnerView {
             }
         ];
 
+        // Display table
         echo '<div class="partner-table-container">';
         $tableView = new TableView();
         $tableView->displayTable($flattenedPartners, $columns, $actions);
         echo '</div>';
 
-        //  for filters
-        ?>
-        <script>
+        // Output required scripts
+        echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+        echo '<script src="' . BASE_URL . '/public/js/filterTable.js"></script>';
+        echo '<script>
             $(document).ready(function() {
-                initializeTableFilters('.partner-table-container', [
-                    { label: 'Ville', columnIndex: 2 },
-                    { label: 'Catégorie', columnIndex: 3 }
+                initializeTableFilters(".partner-table-container", [
+                    { label: "Ville", columnIndex: 2 },
+                    { label: "Catégorie", columnIndex: 3 }
                 ]);
             });
-        </script>
-        <?php
+        </script>';
     }
 
     

@@ -1,35 +1,34 @@
-
 function initializeTableFilters(tableContainerSelector, filterColumns) {
-    // filter container
+    // Création du conteneur de filtres
     const filterContainer = $('<div>').addClass('mb-4 p-4 bg-white rounded shadow');
-    const filterWrapper = $('<div>').addClass('flex gap-4');
+    const filterWrapper = $('<div>').addClass('flex gap-4 flex-wrap');
     
-    //  filter dropdown for each  column
+    // Créer un filtre pour chaque colonne spécifiée
     filterColumns.forEach(column => {
-        //  unique values from the specified column
+        // Récupérer les valeurs uniques de la colonne
         const uniqueValues = new Set();
         $(`${tableContainerSelector} table tbody tr td:nth-child(${column.columnIndex})`).each(function() {
             const value = $(this).text().trim();
             if (value) uniqueValues.add(value);
         });
         
-        //  filter group
+        // Groupe de filtres pour une colonne
         const filterGroup = $('<div>').addClass('flex-1');
         
-        // label
+        // Étiquette
         const label = $('<label>')
             .addClass('block text-sm font-medium text-gray-700 mb-1')
             .text(column.label);
         
-        //  select
+        // Sélecteur
         const select = $('<select>')
             .addClass('w-full p-2 border rounded')
             .attr('data-column-index', column.columnIndex);
-            
-        // default option (tt les options)
+        
+        // Ajouter une option par défaut
         select.append($('<option>').val('').text(`Tous les ${column.label.toLowerCase()}`));
         
-        // Add sorted options
+        // Ajouter les options triées
         [...uniqueValues].sort().forEach(value => {
             select.append($('<option>').val(value).text(value));
         });
@@ -38,7 +37,7 @@ function initializeTableFilters(tableContainerSelector, filterColumns) {
         filterWrapper.append(filterGroup);
     });
     
-    //  reset button
+    // Ajouter un bouton de réinitialisation
     const resetButton = $('<button>')
         .addClass('px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600')
         .text('Réinitialiser')
@@ -53,10 +52,10 @@ function initializeTableFilters(tableContainerSelector, filterColumns) {
     
     filterContainer.append(filterWrapper);
     
-    // Insert filters before table
+    // Insérer les filtres avant la table
     $(tableContainerSelector).before(filterContainer);
     
-    // Filter function
+    // Fonction pour appliquer les filtres
     function applyFilters() {
         const activeFilters = {};
         filterContainer.find('select').each(function() {
@@ -67,7 +66,7 @@ function initializeTableFilters(tableContainerSelector, filterColumns) {
             }
         });
         
-        // Show/hide rows based on filters
+        // Afficher/masquer les lignes en fonction des filtres actifs
         $(`${tableContainerSelector} table tbody tr`).each(function() {
             const row = $(this);
             let showRow = true;
@@ -83,6 +82,6 @@ function initializeTableFilters(tableContainerSelector, filterColumns) {
         });
     }
     
-    //change event to all filter dropdowns
+    // Ajouter un événement `change` à tous les sélecteurs
     filterContainer.find('select').on('change', applyFilters);
 }

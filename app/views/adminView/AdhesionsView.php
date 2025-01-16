@@ -43,6 +43,18 @@ class MembershipTableView {
         $tableView = new TableView();
         $tableView->displayTable($flattenedApplications, $columns, $actions);
         echo '</div>';
+
+        echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+        echo '<script src="' . BASE_URL . '/public/js/filterTable.js"></script>';
+        echo '<script>
+            $(document).ready(function() {
+                initializeTableFilters(".membership-table-container", [
+                    { label: "Type de Carte", columnIndex: 2 },
+                    { label: "Statut", columnIndex: 3 },
+                    { label: "application_date", columnIndex: 4 } 
+                ]);
+            });
+        </script>';
     }
 }
 

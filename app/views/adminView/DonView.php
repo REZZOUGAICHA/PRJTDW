@@ -34,5 +34,16 @@ class DonView {
         $tableView = new TableView();
         $tableView->displayTable($dons, $columns, $actions);
         echo '</div>';
+
+        echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+        echo '<script src="' . BASE_URL . '/public/js/filterTable.js"></script>';
+        echo '<script>
+            $(document).ready(function() {
+                initializeTableFilters(".don-table-container", [
+                    { label: "Montant", columnIndex: 2 },
+                    { label: "Statut", columnIndex: 5 }
+                ]);
+            });
+        </script>';
     }
 }

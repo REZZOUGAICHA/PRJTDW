@@ -46,6 +46,17 @@ public function displayUsers() {
         $tableView = new TableView();
         $tableView->displayTable($flattenedUsers, $columns, $actions);
         echo '</div>';
+        echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+        echo '<script src="' . BASE_URL . '/public/js/filterTable.js"></script>';
+        echo '<script>
+            $(document).ready(function() {
+                initializeTableFilters(".users-table-container", [
+                    { label: "Type de carte", columnIndex: 2 },
+                    { label: "Type d\'utilisateur", columnIndex: 3 },
+                    { label: "Statut", columnIndex: 4 }
+                ]);
+            });
+        </script>';
     }
 
 }
